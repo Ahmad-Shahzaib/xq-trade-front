@@ -1,0 +1,645 @@
+{
+  "Registration": "تسجيل",
+  "Login": "تسجيل الدخول",
+  "Enter Password": "أدخل كلمة المرور",
+  "Enter Email": "أدخل البريد الإلكتروني",
+  "Forgot Password?": "هل نسيت كلمة المرور؟",
+  "Reset Password": "إعادة تعيين كلمة المرور",
+  "Enter current password": "أدخل كلمة المرور الحالية",
+  "Enter new password": "أدخل كلمة مرور جديدة",
+  "Confirm new password": "تأكيد كلمة المرور الجديدة",
+  "Please Enter Your Email": "يرجى إدخال بريدك الإلكتروني",
+  "Please Enter Your Password": "يرجى إدخال كلمة المرور الخاصة بك",
+  "The password field must be at least 6 characters.": "يجب أن يتكون حقل كلمة المرور من 6 أحرف على الأقل.",
+  "Enter Referral Code (optional)": "أدخل رمز الإحالة (اختياري)",
+  "Current password is required": "كلمة المرور الحالية مطلوبة",
+  "New password is required": "كلمة مرور جديدة مطلوبة",
+  "Confirm password is required": "تأكيد كلمة المرور مطلوبة",
+  "Password must be at least 8 characters": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
+  "Must contain at least one uppercase letter": "يجب أن تحتوي على حرف كبير واحد على الأقل",
+  "Must contain at least one number": "يجب أن تحتوي على رقم واحد على الأقل",
+  "Must contain at least one special character": "يجب أن تحتوي على حرف خاص واحد على الأقل",
+  "Enter your email and instructions will be sent to you!": "أدخل بريدك الإلكتروني وسيتم إرسال التعليمات إليك!",
+  "Send Reset Link": "إرسال رابط إعادة التعيين",
+  "Wait, I remember my password": "انتظر ، أتذكر كلمة المرور الخاصة بي",
+  "Click here": "انقر هنا",
+  "Payments": "المدفوعات",
+  "Payment": "دفع",
+  "Deposit": "إيداع",
+  "Withdrawal": "سحب",
+  "Transfer": "نقل",
+  "Transaction": "معاملة",
+  "Withdraw": "انسحب",
+  "IB Comission": "عمولة IB",
+  "Create Account": "إنشاء حساب",
+  "Referral Program": "برنامج الإحالة",
+  "Boost Cubes": "تعزيز المكعبات",
+  "Settings": "إعدادات",
+  "days": "أيام",
+  "Level": "مستوى",
+  "Loading your wallets": "جارٍ تحميل محافظك",
+  "Your Wallet List": "قائمة المحفظة الخاصة بك",
+  "No wallets found.": "لم يتم العثور على محافظ.",
+  "Add a wallet to get started.": "أضف محفظة للبدء.",
+  "Apply for IB": "تقدم بطلب للحصول على IB",
+  "Manage and track your digital assets": "إدارة وتتبع أصولك الرقمية",
+  "Wallets": "المحافظ",
+  "Current Balance": "الرصيد الحالي",
+  "Confirm IB Application": "تأكيد طلب IB",
+  "Are you sure you want to apply for IB?": "هل أنت متأكد أنك تريد التقدم بطلب للحصول على IB؟",
+  "User ID copied to clipboard!": "تم نسخ معرف المستخدم إلى الحافظة!",
+  "Total Balance": "الرصيد الإجمالي",
+  "Pending": "قيد الانتظار",
+  "Approved": "معتمد",
+  "Rejected": "مرفوض",
+  "Trade with confidence": "تداول بثقة",
+  "No": "لا",
+  "Yes": "نعم",
+  "Verification": "رمز التحقق",
+  "CONTACTS": "جهات الاتصال",
+  "Confirm Email": "تأكيد البريد الإلكتروني",
+  "Confirm Phone Number": "تأكيد رقم الهاتف",
+  "Connect Facebook": "ربط فيسبوك",
+  "Withdraw History": "تاريخ السحب",
+  "Withdraw Now": "انسحب الآن",
+  "No data found": "لا توجد بيانات",
+  "Failed to fetch data": "فشل في جلب البيانات",
+  "Transaction ID": "معرف المعاملة",
+  "Final Amount": "المبلغ النهائي",
+  "View Details": "عرض التفاصيل",
+  "Failed to fetch data": "فشل في جلب البيانات",
+  "Previous": "السابق",
+  "Request for IB": "طلب IB",
+  "Your IB request has been sent, you will get the referral link once it's approved by the Admin.": "تم إرسال طلب IB الخاص بك ، وستحصل على رابط الإحالة بمجرد الموافقة عليه من قبل المسؤول.",
+
+  "Personal Information": "معلومات شخصية",
+  "Account Verification": "التحقق من الحساب",
+  "Password": "كلمة المرور",
+  "Two-factor Authentication": "المصادقة الثنائية",
+  "Security": "رمز الأمان",
+  "App PIN": "رمز تعريف التطبيق",
+  "General": "عام",
+  "Trading Platform": "منصة التداول",
+  "Appearance & Sound": "المظهر والصوت",
+  "Notifications": "الإشعارات",
+  "Log out": "تسجيل خروج",
+  "Delete Profile": "حذف الملف الشخصي",
+  "You don't need to get verified for now": "لا تحتاج إلى التحقق في الوقت الحالي",
+  "We'll let you know once you need to get verified. Verification is a mandatory process for financial market participants. With its help, we're able to create a safe space for trading where you can be sure that your funds are secure.": "سنخبرك عندما تحتاج إلى التحقق. التحقق هو عملية إلزامية لمتداولي الأسواق المالية. بمساعدته ، يمكننا إنشاء مساحة آمنة للتداول حيث يمكنك أن تكون متأكدًا من أن أموالك آمنة.",
+  "Learn More": "أعرف أكثر",
+  "Connected": "متصل",
+  "Events": "الأحداث",
+  "Loading events": "جارٍ تحميل الأحداث",
+  "HAPPENING NOW": "يحدث الآن",
+  "Go Back": "عد",
+  "Back": "عودة",
+  "Help": "مساعدة",
+  "Market": "سوق",
+  "Loading markets": "جارٍ تحميل الأسواق",
+  "Track all markets on TradingView": "تتبع جميع الأسواق على TradingView",
+  "Accounts": "الحسابات",
+  "Loading": "جارٍ التحميل",
+  "BUY": "شراء",
+  "SELL": "بيع",
+  "App Lock": "قفل التطبيق",
+  "Set Your PIN": "قم بتعيين رمز التعريف الشخصي الخاص بك",
+  "Change PIN": "تغيير الرقم السري",
+  "Please enter your PIN to unlock the app": "يرجى إدخال الرقم السري الخاص بك لإلغاء قفل التطبيق",
+  "Enter PIN": "أدخل الرقم السري",
+  "Symbol": "رمز",
+  "Bid": "عرض",
+  "Ask": "اسأل",
+  "All Symbols": "جميع الرموز",
+  "Select All": "اختر الكل",
+  "Close": "اغلاق",
+  "Cancel": "إلغاء",
+  "Support": "دعم",
+  "New Ticket": "تذكرة جديدة",
+  "Want to get in touch? Here's how you can reach us.": "هل تريد التواصل؟ إليك كيفية الوصول إلينا.",
+  "Last updated": "آخر تحديث",
+  "View Details": "عرض التفاصيل",
+  "No tickets found.": "لم يتم العثور على تذاكر.",
+  "Trades": "تجارة",
+  "XQ Trades": "تجارة XQ",
+  "History": "تاريخ",
+  "Active Trades": "التداولات النشطة",
+  "You have no open trades on this account": "ليس لديك أي صفقات مفتوحة على هذا الحساب.",
+  "Terminal": "محطات",
+  "Helps": "يساعد",
+  "We’re here for you 24/7": "نحن هنا من أجلك على مدار 24 ساعة في اليوم",
+  "Help Center": "مركز المساعدة",
+  "Get to know the platform": "تعرف على المنصة",
+  "Expand your knowledge": "توسيع معرفتك",
+  "Education": "تعليم",
+  "Trading Tutorials": "دروس التداول",
+  "Learn how to open a trade": "تعلم كيفية فتح صفقة",
+  "New Support Ticket": "تذكرة دعم جديدة",
+  "Subject": "موضوع",
+  "Name": "اسم",
+  "Priority": "أولوية",
+  "Message": "رسالة",
+  "Max 5 files can be uploaded. Maximum upload size is 3MB.": "يمكن تحميل 5 ملفات كحد أقصى. الحد الأقصى لحجم التحميل هو 3 ميغابايت.",
+  "Attachments": "المرفقات",
+  "Add File": "إضافة ملف",
+  "Allowed File Extensions, .jpg, .jpeg, .png, .pdf, .doc, .docx": "امتدادات الملفات المسموح بها: .jpg و .jpeg و .png و .pdf و .doc و .docx",
+
+  "Ticket submitted successfully!": "تم إرسال التذكرة بنجاح!",
+  "something went wrong": "حدث خطأ ما",
+  "Submit": "إرسال",
+  "High": "عالي",
+  "Medium": "متوسط",
+  "Low": "منخفض",
+  "Select Gateway": "حدد البوابة",
+  "Trade Account": "حساب التجارة",
+  "Select Account": "حدد حساب",
+  "Wallet": "محفظة",
+  "Deposit Funds": "إيداع الأموال",
+  "Add funds using our system's gateway. The deposited amount will be credited to the account balance.": "أضف الأموال باستخدام بوابة نظامنا. سيتم إضافة المبلغ المودع إلى رصيد الحساب.",
+  "deposit history": "تاريخ الإيداع",
+  "Next": "التالى",
+  "Amount": "كمية",
+  "USD": "دولار أمريكي",
+  "Deposit History": "تاريخ الإيداع",
+  "Deposit Now": "إيداع الآن",
+  "TRX": "TRX",
+  "Date": "تاريخ",
+  "Currency": "رمز العملة",
+  "Charges": "رسوم",
+  "Rate": "معدل",
+  "Final Amount": "المبلغ النهائي",
+  "Status": "حالة",
+  "Invoice": "فاتورة",
+  "No Deposit History Available": "لا يوجد تاريخ إيداع متاح",
+  "Charge": "شحن",
+  "The funds will be withdrawal from your account balance. So make sure you have sufficient balance to the account.": "سيتم سحب الأموال من رصيد حسابك. لذا تأكد من أن لديك رصيدًا كافيًا في الحساب.",
+  "Request Status": "حالة الطلب",
+  "New Transfer": "نقل جديد",
+  "Referrals": "الإحالات",
+  "Created": "تم الإنشاء",
+  "Balance": "توازن",
+  "Equity": "الأسهم",
+  "ID": "معرف",
+  "Post Balance": "توازن ما بعد",
+  "No transactions found.": "لم يتم العثور على معاملات.",
+  "Select an account": "حدد حسابًا",
+  "Username": "اسم المستخدم",
+  "Trade Account Balance": "رصيد حساب التداول",
+  "IB": "IB",
+  "Join Date": "تاريخ الانضمام",
+  "Enter amount": "أدخل المبلغ",
+  "From": "من",
+  "To": "إلى",
+  "Transfer Funds": "نقل الأموال",
+  "Account Type": "نوع الحساب",
+  "DEMO ": "تجريبي",
+  "Demo Balance": "الرصيد التجريبي",
+  "Leverage": "رافعة مالية",
+  "Create Account": "إنشاء حساب",
+  "Delete": "حذف",
+  "Edit": "تعديل",
+  "Demo Account": "حساب تجريبي",
+  "Pending Sell": "بيع معلق",
+  "Sell": "بيع",
+  "Pending Buy": "شراء معلق",
+  "Buy": "شراء",
+  "Add Your Account": "أضف حسابك",
+  "Use the QR code or setup key on your Google Authenticator app to add your account.": "استخدم رمز الاستجابة السريعة أو مفتاح الإعداد على تطبيق Google Authenticator لإضافة حسابك.",
+  "Google Authenticator is a multifactor app for mobile devices. It generates timed codes used during the 2-step verification process. To use Google Authenticator, install the Google Authenticator application on your mobile device.": "Google Authenticator هو تطبيق متعدد العوامل للأجهزة المحمولة. يقوم بإنشاء رموز مؤقتة تستخدم أثناء عملية التحقق من خطوتين. لاستخدام Google Authenticator ، قم بتثبيت تطبيق Google Authenticator على جهازك المحمول.",
+  "Download": "تحميل",
+  "Setup Key": "مفتاح الإعداد",
+  "Enable 2FA Security": "تمكين 2FA رمز الأمان",
+  "OTP submitted successfully!": "تم إرسال OTP بنجاح!",
+  "Success": "نجاح",
+  "Google Authenticator OTP": "Google Authenticator OTP",
+
+  "Password does not match": "كلمة المرور غير متطابقة",
+  "Password changed successfully": "تم تغيير كلمة المرور بنجاح",
+  "Password reset link sent to your email": "تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني",
+  "Password reset link has been sent to your email": "تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني",
+  "Please check your email": "يرجى التحقق من بريدك الإلكتروني",
+  "Please check your spam folder": "يرجى التحقق من مجلد البريد العشوائي الخاص بك",
+
+  "Menu": "قائمة الطعام",
+  "Dashboards": "لوحات القيادة",
+  "Analytics": "تحليلات",
+  "CRM": "CRM",
+  "Ecommerce": "التجارة الإلكترونية",
+  "Crypto": "تشفير",
+  "Projects": "المشاريع",
+  "NFT": "NFT",
+  "Apps": "تطبيقات",
+  "Calendar": "تقويم",
+  "Main Calender": "التقويم الرئيسي",
+  "Month Grid": "شبكة الشهر",
+  "Chat": "دردشة",
+  "Email": "البريد الإلكتروني",
+  "Mailbox": "صندوق بريد",
+  "Email Templates": "قوالب البريد الإلكتروني",
+  "Basic Action": "الإجراء الأساسي",
+  "Ecommerce Action": "إجراء التجارة الإلكترونية",
+  "Products": "منتجات",
+  "Product Details": "تفاصيل المنتج",
+  "Create Product": "إنشاء منتج",
+  "Orders": "الطلب #٪ s",
+  "Order Details": "تفاصيل الطلب",
+  "Customers": "عملاء",
+  "Shopping Cart": "عربة التسوق",
+  "Checkout": "الدفع",
+  "Sellers": "الباعة",
+  "Seller Details": "تفاصيل البائع",
+  "List": "قائمة",
+  "Overview": "ملخص",
+  "Create Project": "أنشئ مشروعًا",
+  "Tasks": "مهام",
+  "Kanban Board": "مجلس كانبان",
+  "List View": "عرض القائمة",
+  "Task Details": "تفاصيل المهمة",
+  "Contacts": "جهات الاتصال",
+  "Companies": "شركات",
+  "Deals": "صفقات",
+  "Leads": "يؤدي",
+  "Transactions": "المعاملات",
+  "Buy & Sell": "شراء بيع",
+  "My Wallet": "محفظتى",
+  "ICO List": "قائمة ICO",
+  "KYC Application": "تطبيق KYC",
+  "Invoices": "الفواتير",
+  "Details": "تفاصيل",
+  "Create Invoice": "إنشاء فاتورة",
+  "Support Tickets": "تذاكر الدعم الفني",
+  "Ticket Details": "تفاصيل التذكرة",
+  "NFT Marketplace": "سوق NFT",
+  "Marketplace": "المتجر",
+  "Explore Now": "استكشف الآن",
+  "Live Auction": "المزاد الحي",
+  "Item Details": "تفاصيل العنصر",
+  "Collections": "المجموعات",
+  "Creators": "المبدعين",
+  "Ranking": "تصنيف",
+  "Wallet Connect": "ربط المحفظة",
+  "Create NFT": "إنشاء NFT",
+  "File Manager": "مدير الملفات",
+  "To Do": "لكى يفعل",
+  "Layouts": "التخطيطات",
+  "Horizontal": "أفقي",
+  "Detached": "منفصل",
+  "Two Column": "عمودان",
+  "Hovered": "حلق",
+  "Pages": "الصفحات",
+  "Authentication": "المصادقة",
+  "Sign In": "تسجيل الدخول",
+  "Basic": "أساسي",
+  "Cover": "التغطية",
+  "Sign Up": "اشتراك",
+  "Password Reset": "إعادة تعيين كلمة المرور",
+  "Password Create": "إنشاء كلمة المرور",
+  "Lock Screen": "اقفل الشاشة",
+  "Logout": "تسجيل خروج",
+  "Success Message": "نجاح رسالة",
+  "Two Step Verification": "التحقق بخطوتين",
+  "Errors": "أخطاء",
+  "404 Basic": "404 أساسي",
+  "404 Cover": "غلاف 404",
+  "404 Alt": "404 بديل",
+  "500": "500",
+  "Offline Page": "الصفحة غير المتصلة",
+  "Starter": "بداية",
+  "Profile": "الملف الشخصي",
+  "Simple Page": "صفحة بسيطة",
+  "Settings": "إعدادات",
+  "Team": "فريق",
+  "Timeline": "الجدول الزمني",
+  "FAQs": "أسئلة وأجوبة",
+  "Pricing": "التسعير",
+  "Gallery": "صالة عرض",
+  "Maintenance": "اعمال صيانة",
+  "Coming Soon": "قريبا",
+  "Sitemap": "خريطة الموقع",
+  "Search Results": "نتائج البحث",
+  "Landing": "الهبوط",
+  "One Page": "صفحة واحدة",
+  "NFT Landing": "NFT الهبوط",
+  "Components": "عناصر",
+  "Base UI": "واجهة المستخدم الأساسية",
+  "Alerts": "تنبيهات",
+  "Badges": "شارات",
+  "Buttons": "أزرار",
+  "Colors": "الألوان",
+  "Cards": "البطاقات",
+  "Carousel": "دائري",
+  "Dropdowns": "هبوط قطرة",
+  "Grid": "جريد",
+  "Images": "الصور",
+  "Tabs": "نوافذ التبويب",
+  "Accordion & Collapse": "الأكورديون والانهيار",
+  "Modals": "الوسائط",
+  "Offcanvas": "أوفاكانفاس",
+  "Placeholders": "العناصر النائبة",
+  "Progress": "تقدم",
+  "Notifications": "إشعارات",
+  "Media object": "كائن الوسائط",
+  "Embed Video": "تضمين الفيديو",
+  "Typography": "الطباعة",
+  "Lists": "القوائم",
+  "General": "عام",
+  "Ribbons": "شرائط",
+  "Utilities": "خدمات",
+  "Advance UI": "واجهة المستخدم المتقدمة",
+  "New": "جديد",
+  "Sweet Alerts": "تنبيهات حلوة",
+  "Nestable List": "قائمة عش",
+  "Scrollbar": "شريط التمرير",
+  "Animation": "الرسوم المتحركة",
+  "Tour": "رحلة",
+  "Swiper Slider": "سويبر سلايدر",
+  "Ratings": "التقييمات",
+  "Highlight": "تسليط الضوء",
+  "ScrollSpy": "التمرير",
+  "Widgets": "الحاجيات",
+  "Forms": "نماذج",
+  "Basic Elements": "العناصر الأساسية",
+  "Form Select": "حدد النموذج",
+  "Checkboxs & Radios": "مربعات الاختيار وأجهزة الراديو",
+  "Pickers": "جامعي",
+  "Input Masks": "أقنعة الإدخال",
+  "Advanced": "متقدم",
+  "Range Slider": "نطاق المنزلق",
+  "Validation": "تصديق",
+  "Wizard": "ساحر",
+  "Editors": "المحررين",
+  "File Uploads": "تحميلات الملف",
+  "Form Layouts": "تخطيطات النموذج",
+  "Select2": "حدد 2",
+  "Tables": "الجداول",
+  "Basic Tables": "الجداول الأساسية",
+  "Grid Js": "شبكة شبيبة",
+  "List Js": "قائمة شبيبة",
+  "Datatables": "جداول البيانات",
+  "Charts": "الرسوم البيانية",
+  "Apexcharts": "أبكسشارتس",
+  "Line": "خط",
+  "Area": "منطقة",
+  "Column": "عمودي",
+  "Bar": "شريط",
+  "Mixed": "مختلط",
+  "Candlstick": "شمعدان",
+  "Boxplot": "مربع مؤامرة",
+  "Bubble": "فقاعة",
+  "Scatter": "مبعثر",
+  "Heatmap": "خريطة الحرارة",
+  "Treemap": "مخطط Treemap",
+  "Pie": "فطيرة",
+  "Radialbar": "شعاعي",
+  "Radar": "رادار",
+  "Polar Area": "المنطقة القطبية",
+  "Chartjs": "تشارتجس",
+  "Echarts": "الصدى",
+  "Icons": "أيقونات",
+  "Remix": "ريمكس",
+  "Boxicons": "بوكسيكونس",
+  "Material Design": "تصميم المواد",
+  "Line Awesome": "خط رائع",
+  "Feather": "ريشة",
+  "Crypto SVG": "تشفير SVG",
+  "Maps": "خرائط",
+  "Google": "جوجل",
+  "Vector": "المتجه",
+  "Leaflet": "منشور",
+  "Multi Level": "متعدد المستويات",
+  "Level 1.1": "المستوى 1.1",
+  "Level 1.2": "المستوى 1.2",
+  "Level 2.1": "المستوى 2.1",
+  "Level 2.2": "المستوى 2.1",
+  "Level 3.1": "المستوى 3.1",
+  "Level 3.2": "المستوى 3.2",
+  "Job": "مهنة",
+  "jobs": "وظائف",
+  "Statistics": "إحصائيات",
+  "Job Lists": "قوائم الوظائف",
+  "candidate Lists": "قائمة المرشحين",
+  "Grid View": "عرض شبكي",
+  "Application": "طلب",
+  "New Job": "وظيفة جديدة",
+  "Companies List": "قائمة الشركات",
+  "Job Categories": "فئات الوظائف",
+  "API Key": "مفتاح API",
+  "Privacy Policy": "سياسة الخصوصية",
+  "Terms Condition": "شروط الشرط",
+  "pages": "الصفحات",
+  "React Datatables": "تفاعل جداول البيانات",
+  "Welcome to XQ Trade": "مرحبًا بك في XQ Trader",
+  "Get all the trading basics! From trading fundamentals, market analysis, and easy deposits and withdrawals to charting tools and indicators — maximize your potential with a full range of resources.Make sure to get the next guide once you’ve made your first deposit into a live trading account.": "احصل على جميع أساسيات التداول! من أساسيات التداول، وتحليل السوق، والودائع والسحوبات السهلة إلى أدوات التخطيط والمؤشرات — عزز إمكانياتك باستخدام مجموعة كاملة من الموارد. تأكد من الحصول على الدليل التالي بمجرد إيداعك الأول في حساب تداول مباشر.",
+  "Want to get in touch? Here’s how you can reach us.": "هل تريد التواصل؟ إليك كيفية الوصول إلينا.",
+  "No tickets found.": "لم يتم العثور على أي تذاكر.",
+
+  "What is XQ Trade?": "ما هو XQ Trade؟",
+  "Is XQ Trade safe and legitimate?": "هل XQ Trade آمن وشرعي؟",
+  "How do I register an account?": "كيف يمكنني تسجيل حساب؟",
+  "What is the minimum deposit?": "ما هو الحد الأدنى للإيداع؟",
+  "What is the minimum trade amount?": "ما هو الحد الأدنى لمبلغ الصفقة؟",
+  "How do I place a trade?": "كيف يمكنني فتح صفقة؟",
+  "Can I practice before trading with real money?": "هل يمكنني التدرب قبل التداول بأموال حقيقية؟",
+  "How can I withdraw my profits?": "كيف يمكنني سحب أرباحي؟",
+  "Are there any fees?": "هل توجد أي رسوم؟",
+  "What support options are available?": "ما هي خيارات الدعم المتاحة؟",
+  "Is XQ Trade available on iOS or Play Store?": "هل XQ Trade متاح على iOS أو متجر Play؟",
+  "How do I verify my account?": "كيف يمكنني توثيق حسابي؟",
+  "I forgot my password. What should I do?": "نسيت كلمة المرور. ماذا يجب أن أفعل؟",
+  "Is binary options trading legal?": "هل تداول الخيارات الثنائية قانوني؟",
+  "Do you offer trading bonuses?": "هل تقدمون مكافآت تداول؟",
+
+  "XQ Trade is a binary options trading platform that allows users to trade digital options on currencies, crypto, commodities, and more. With fast execution and potential returns of up to 98%, it offers a seamless experience for both new and experienced traders.": "XQ Trade هي منصة لتداول الخيارات الثنائية تتيح للمستخدمين تداول الخيارات الرقمية على العملات والعملات المشفرة والسلع والمزيد. مع تنفيذ سريع وأرباح محتملة تصل إلى 98٪، تقدم تجربة سلسة لكل من المتداولين الجدد وذوي الخبرة",
+  "Yes. XQ Trade uses secure technology and encryption to ensure all user data and transactions are protected. We are committed to maintaining a fair and transparent trading environment.": "نعم. تستخدم XQ Trade تقنية آمنة وتشفيرًا لضمان حماية جميع بيانات المستخدمين والمعاملات. نحن ملتزمون بالحفاظ على بيئة تداول عادلة وشفافة",
+  "Visit our official website.": "قم بزيارة موقعنا الرسمي.",
+  "Download the XQ Trade Android APK.": "قم بتنزيل تطبيق XQ Trade بصيغة APK لنظام أندرويد.",
+  "Install the app on your Android device.": "قم بتثبيت التطبيق على جهاز الأندرويد الخاص بك.",
+  "Open the app and tap Registration.": "افتح التطبيق واضغط على “تسجيل”.",
+  "Fill in your email, password, and select your account currency.": "أدخل بريدك الإلكتروني وكلمة المرور واختر عملة حسابك.",
+  "Confirm your email and start trading.": "أكد بريدك الإلكتروني وابدأ التداول.",
+  "Bank Cards (Visa/MasterCard)": "بطاقات مصرفية (فيزا/ماستركارد)",
+  "USDT (TRC20 Network)": "تيثر (شبكة TRC20)",
+  "Open the XQ Trade app.": ". افتح تطبيق XQ Trade.",
+  "Choose a trading asset (e.g., ETH/USD).": ". اختر الأصل الذي تريد التداول عليه (مثل ETH/USD).",
+  "Set the trade amount and duration.": ". حدد مبلغ الصفقة والمدة الزمنية.",
+  "Predict Up or Down.": "اختر التوقع: صعود أو هبوط",
+  "Confirm your trade and track the outcome in real time.": "أكد الصفقة وتابع النتيجة مباشرةً في الوقت الحقيقي",
+  "Yes. XQ Trade provides a free demo account with virtual funds. You can switch between demo and live accounts easily in the app.": "نعم، توفر XQ Trade حساب تجريبي مجاني بأموال وهمية. يمكنك التبديل بسهولة بين الحساب التجريبي والحساب الحقيقي من داخل التطبيق",
+  "Open the app and go to Withdraw.": "افتح التطبيق وانتقل إلى قسم السحب.",
+  "Enter the amount and your TRC20 wallet address.": "أدخل المبلغ وعنوان محفظتك على شبكة TRC20.",
+  "Confirm your request.": "قم بتأكيد طلبك.",
+  "XQ Trade does not charge trading commissions. However, TRC20 network fees may apply when withdrawing via USDT.": "منصة XQ Trade لا تفرض عمولات على التداول. ومع ذلك، قد تُطبق رسوم شبكة TRC20 عند السحب باستخدام USDT.",
+  "In-app live chat": "الدردشة المباشرة داخل التطبيق",
+  "Email. support@xqtrades.com": "البريد الإلكتروني. support@xqtrades.com",
+  "Help articles inside the app": "مقالات المساعدة داخل التطبيق",
+  "No. XQ Trade is only available for Android via APK download from our official website. It is not listed on the Google Play Store or the iOS App Store.": "لا. يتوفر XQ Trade فقط لأجهزة أندرويد عبر تحميل ملف APK من موقعنا الرسمي. وهو غير مدرج في متجر Google Play أو متجر تطبيقات iOS.",
+  "Open the app and go to Profile &gt; Verification": "افتح التطبيق واذهب إلى “الملف الشخصي” ثم “التحقق”",
+  "Upload a valid government-issued ID and proof of address": "قم بتحميل هوية حكومية سارية وإثبات عنوان",
+  "Follow the KYC steps to unlock full features and faster withdrawals": "اتبع خطوات التحقق (KYC) لفتح كافة الميزات وتسريع عمليات السحب",
+  "On the login screen, tap “Forgot Password?” and follow the instructions to reset it via your registered email.": "في شاشة تسجيل الدخول، اضغط على “نسيت كلمة المرور؟” واتبع التعليمات لإعادة تعيينها عبر بريدك الإلكتروني المسجل",
+  "Binary options trading is legal in many countries. Please check the laws in your local jurisdiction. XQ Trade does not operate in countries where such trading is restricted or prohibited.": "تداول الخيارات الثنائية قانوني في العديد من الدول. يرجى التحقق من القوانين في نطاق سلطتك القضائية المحلية. لا تعمل XQ Trade في الدول التي يُقيد أو يُحظر فيها هذا النوع من التداول",
+  "Yes. Bonuses may be offered on certain deposits or during promotions. Bonus funds come with specific terms and conditions. Be sure to read the Bonus Policy inside the app before accepting.": "نعم. قد تُمنح المكافآت على بعض الإيداعات أو أثناء العروض الترويجية. تأتي أموال المكافآت مع شروط وأحكام محددة. تأكد من قراءة سياسة المكافآت داخل التطبيق قبل قبولها",
+  "XQ Trade – Education Center": "مركز XQ Trade التعليمي",
+  "Learn. Practice. Trade with Confidence.": "تعلم. تدرّب. تداول بثقة.",
+  "At XQ Trade, we believe that knowledge is the key to successful trading.Whether you're new to binary options or looking to sharpen your strategies,our Education Center offers the tools and guidance you need to trade smarter and more confidently.": "في XQ Trade، نؤمن بأن المعرفة هي مفتاح التداول الناجح. سواء كنت جديدًا في الخيارات الثنائية أو تسعى لتطوير استراتيجياتك، فإن مركزنا التعليمي يوفر لك الأدوات والإرشادات اللازمة للتداول بشكل أذكى وأكثر ثقة.",
+  "Trading Basics": "أساسيات التداول",
+  "How to Use the XQ Trade App (APK)": "كيفية استخدام تطبيق XQ Trade (APK)",
+  "Market Analysis Tools": "أدوات تحليل السوق",
+  "Trading Strategies": "استراتيجيات التداول",
+  "Risk Management": "إدارة المخاطر",
+  "Frequently Asked Questions (FAQs)": "الأسئلة الشائعة",
+  "Start Learning Now": "ابدأ التعلم الآن",
+  "Installing the app via APK from our website": "تثبيت التطبيق عبر ملف APK من موقعنا الإلكتروني",
+  "Creating and verifying your account": "إنشاء حسابك والتحقق منه",
+  "Making deposits using Bank Cards or USDT (TRC20)": "إجراء الإيداعات باستخدام البطاقات البنكية أو USDT (شبكة TRC20)",
+  "Placing your first trade": "تنفيذ أول عملية تداول لك",
+  "Withdrawing profits via USDT (TRC20)": "سحب الأرباح عبر USDT (شبكة TRC20)",
+  "Trend Following Strategy": "استراتيجية تتبع الاتجاه",
+  "Breakout Strategy": "استراتيجية الاختراق",
+  "Reversal Trading": "التداول المعاكس (عكس الاتجاه)",
+  "News-Based Trading": "التداول المعتمد على الأخبار",
+  "Support & Resistance Strategy": "استراتيجية الدعم والمقاومة",
+  "Each strategy includes, Explanation, Setup in XQ Trade, and Risk Tips": "كل استراتيجية تتضمن: شرح، إعداد داخل منصة XQ Trade، ونصائح لإدارة المخاطر",
+  "Setting trade limits": "تحديد حدود التداول",
+  "Using stop-loss rules": "استخدام قواعد وقف الخسارة",
+  "Managing your balance responsibly": "إدارة رصيدك بمسؤولية",
+  "Avoiding emotional trading": "تجنب التداول العاطفي",
+  "Quick answers to the most common trading and platform-related questions.": "إجابات سريعة على أكثر الأسئلة شيوعًا حول التداول والمنصة",
+  "Demo Account, Practice with virtual funds before using real money.": "الحساب التجريبي: تدرّب باستخدام أموال افتراضية قبل استخدام المال الحقيقي.",
+  "Interactive Lessons, In-app modules and visual guides.": "دروس تفاعلية: وحدات داخل التطبيق وأدلة مرئية.",
+  "24/7 Support, Get help any time as you learn.": "دعم متاح 24/7: احصل على المساعدة في أي وقت أثناء تعلمك.",
+  "Coming Soon, Live Webinars, Daily Market Analysis, One-on-One Coaching": "قريبًا: ندوات مباشرة، تحليل يومي للأسواق، تدريب فردي مخصص",
+  "What is Binary Options?": "ما هي الخيارات الثنائية؟",
+  "How XQ Trade works": "كيف تعمل XQ Trade",
+  "Understanding “Up” and “Down” predictions": "فهم توقعات \"الصعود\" و\"الهبوط\"",
+  "Demo vs. Real account trading": "التداول بالحساب التجريبي مقابل الحساب الحقيقي",
+  "Price charts": "مخططات الأسعار",
+  "Indicators (Moving Averages, RSI, Bollinger Bands)": "المؤشرات (المتوسطات المتحركة، RSI، نطاقات بولينجر)",
+  "Market trends": "اتجاهات السوق",
+  "Candlestick patterns": "أنماط الشموع اليابانية",
+  "Income": "الدخل",
+  "Duration": "المدة",
+  "Opening quote": "سعر الافتتاح",
+  "Closing quote": "سعر الإغلاق",
+  "Trade ID": "معرّف الصفقة",
+  "Trade opened": "تم فتح الصفقة",
+  "Trade Closed": "تم إغلاق الصفقة",
+  "All Trades": "جميع الصفقات",
+  "Winning Trades": "الصفقات الرابحة",
+  "Losing Trades": "الصفقات الخاسرة",
+  "Pending Orders": "الأوامر المعلقة",
+  "Closed": "مغلق",
+  "early": "مبكر",
+  "Update Profile": "تحديث الملف الشخصي",
+  "Profile updated successfully! 🎉": "تم تحديث الملف الشخصي بنجاح! 🎉",
+  "Reply": "الرد",
+  "No messages yet.": "لا توجد رسائل حتى الآن.",
+  "Ticket #": "تذكرة رقم",
+  "Loading ticket details...": "جاري تحميل تفاصيل التذكرة...",
+  "Profit": "الربح",
+  "Hidden balances": "الأرصدة المخفية",
+  "Hide your balances by flipping your phone": "أخفِ أرصدتك عن طريق قلب هاتفك",
+  "XQ Trade – Trading Tutorial": "XQ Trade – دليل التداول",
+  "Welcome to XQ Trade!": "مرحبًا بك في XQ Trade!",
+  "Start your journey to becoming a confident trader with this simple guide. Follow the steps below to learn how to trade binary options on our platform.": "ابدأ رحلتك لتصبح متداولًا واثقًا من خلال هذا الدليل البسيط. اتبع الخطوات أدناه لتتعلم كيفية تداول الخيارات الثنائية على منصتنا.",
+  "Register and Install the App": "سجل وقم بتثبيت التطبيق",
+  "Fund Your Account": "قم بتمويل حسابك",
+  "Explore the Trading Interface": "استكشف واجهة التداول",
+  "Choose an Asset to Trade": "اختر أصلًا للتداول",
+  "Set Your Trade Parameters": "قم بتحديد معايير الصفقة",
+  "Make Your Prediction": "قم بتوقعك",
+  "Monitor Your Trade": "راقب صفقتك",
+  "Check the Outcome": "تحقق من النتيجة",
+  "Practice with a Demo Account": "تدرّب باستخدام حساب تجريبي",
+  "Withdraw Your Profits": "اسحب أرباحك",
+  "Tips for Successful Trading": "نصائح للتداول الناجح",
+  "Visit the official XQ Trade website.": "قم بزيارة الموقع الرسمي لـ XQ Trade.",
+  "Download the XQ Trade APK for Android devices.": "حمّل ملف APK لتطبيق XQ Trade لأجهزة Android.",
+  "Install the app and complete the registration form.": "قم بتثبيت التطبيق وأكمل نموذج التسجيل.",
+  "Deposit a minimum of $10 to start trading.": "أودع 10 دولارات كحد أدنى لبدء التداول.",
+  "Available payment methods": "طرق الدفع المتاحة:",
+  "Bank Card (Visa, MasterCard)": "بطاقة بنكية (Visa، MasterCard)",
+  "USDT (TRC20)": "USDT (TRC20)",
+  "Your funds will appear shortly after the transaction is completed.": "ستظهر أموالك بعد إتمام المعاملة مباشرة.",
+  "Asset selection panel (currencies, cryptocurrencies, commodities)": "لوحة اختيار الأصول (عملات، عملات رقمية، سلع)",
+  "Price charts and technical indicators": "مخططات الأسعار والمؤشرات الفنية",
+  "Trade amount and expiry time settings": "إعدادات مبلغ الصفقة ووقت الانتهاء",
+  "Trade direction buttons Up and Down": "أزرار اتجاه الصفقة: صعود وهبوط",
+  "Select an asset (e.g., BTC/USD or EUR/USD).": "اختر أصلًا (مثل BTC/USD أو EUR/USD).",
+  "Study price charts and trends to make informed predictions.": "ادرس مخططات الأسعار والاتجاهات لاتخاذ توقعات مستنيرة.",
+  "Minimum trade amount is $1": "الحد الأدنى لمبلغ الصفقة: 1 دولار",
+  "Choose expiry time (1 min, 5 min, 1 hour)": "اختر وقت الانتهاء (1 دقيقة، 5 دقائق، 1 ساعة)",
+  "Predict whether the price will go Up or Down by expiry time. Tap the button to confirm.": "توقع ما إذا كان السعر سيرتفع أو ينخفض قبل وقت الانتهاء. اضغط على الزر للتأكيد.",
+  "Watch the live chart to track progress. You’ll see potential payout and profit during the trade.": "راقب المخطط المباشر لتتبع التقدم. سترى العائد المحتمل والأرباح أثناء الصفقة.",
+  "Once expired, your profit (up to 98%) will be added if correct. Otherwise, the invested amount will be deducted.": "عند الانتهاء، سيتم إضافة أرباحك (حتى 98٪) إذا كان التوقع صحيحًا، وإلا فسيتم خصم المبلغ المستثمر.",
+  "Use the Demo Account to practice without risk. Easily switch between demo and live modes in the app.": "استخدم الحساب التجريبي للتدريب دون مخاطرة. يمكنك التبديل بسهولة بين الوضع التجريبي والحقيقي في التطبيق.",
+  "Only via USDT (TRC20)": "فقط عبر USDT (TRC20)",
+  "Enter amount and TRC20 wallet address": "أدخل المبلغ وعنوان محفظة TRC20",
+  "Withdrawals process within 1–3 business days": "تُعالج عمليات السحب خلال 1–3 أيام عمل",
+  "Start small and scale gradually": "ابدأ بمبالغ صغيرة وتدرّج تدريجيًا",
+  "Use technical analysis tools": "استخدم أدوات التحليل الفني",
+  "Set limits and avoid emotional decisions": "حدد حدودًا وتجنب القرارات العاطفية",
+  "Learn through the XQ Trade Education Center": "تعلّم من خلال مركز التعليم الخاص بـ XQ Trade",
+  "Predict whether the price will go": "توقع ما إذا كان السعر سيرتفع",
+  "Up": "صعود",
+  "or": "أو",
+  "Down": "هبوط",
+  "by expiry time. Tap the button to confirm.": "قبل وقت الانتهاء. اضغط على الزر للتأكيد.",
+  "Trading Conditions": "شروط التداول",
+  "Features that provide more beneficial trading conditions from XQ TRADES": "ميزات توفر شروط تداول أكثر فائدة من XQ TRADES",
+  "Affiliate Comission": "عمولة الإحالة",
+  "Transaction Proof": "دليل المعاملة",
+  "usdt_transfer_instruction": "يرجى تحويل USDT إلى عنوان المحفظة الرسمي الخاص بنا:",
+  "No accounts available": "لا توجد حسابات متاحة",
+  "Select Wallet": "اختر المحفظة",
+  "No wallets available": "لا توجد محافظ متاحة",
+  "Withdrawal Method": "طريقة السحب",
+  "Withdrawal method is required.": "طريقة السحب مطلوبة.",
+  "Account selection is required.": "اختيار الحساب مطلوب.",
+  "Selected account has no margin free.": "الحساب المحدد لا يحتوي على هامش متاح.",
+  "Wallet selection is required.": "اختيار المحفظة مطلوب.",
+  "Selected wallet has no balance.": "المحفظة المحددة لا تحتوي على رصيد.",
+  "Amount is required.": "المبلغ مطلوب.",
+  "Amount must be greater than 0.": "يجب أن يكون المبلغ أكبر من 0.",
+  "Amount must be less than or equal to available balance.": "يجب أن يكون المبلغ أقل من أو يساوي الرصيد المتاح.",
+  "Withdraw history": "سجل السحب",
+  "Loading transactions...": "جاري تحميل المعاملات...",
+  "No transactions found.": "لم يتم العثور على معاملات.",
+  "CONNECTIONS": "الاتصالات",
+  "TRADES": "الصفقات",
+  "MARKET" : "السوق",
+  "EVENTS": "الأحداث",
+  "HELP" : "مساعدة  ",
+  "WALLET": "محفظة ",
+  "TIME": "الوقت",
+  "AMOUNT": "المبلغ",
+  "BY TIME & DATE": "حسب الوقت والتاريخ",
+  "BUY": "شراء",
+  "SELL": "بيع",
+  "BUY(Pending)": "شراء (معلق)",
+  "SELL(Pending)": "بيع (معلق)",
+  "PAYOUT": "العائد",
+  "PROFIT": "الربح",
+  "STATUS": "الحالة",
+  "Open live account": "افتح حسابًا حقيقيًا",
+  "Trade": "تجارة",
+  "Name": "اسم",
+  "Group": "مجموعة ",
+  "Balance": "توازن",
+  "Action": "عمل " ,
+  "DEMO ": "تجريبي ",
+  "USD": "حي ",
+  "Currency" :"رمز العملة",
+  "Create Account": "إنشاء حساب",
+  "No accounts found.": "لم يتم العثور على حسابات.",
+  "Account created successfully!": "تم إنشاء الحساب بنجاح! 🎉",
+  "Crearing Account....": "جارٍ إنشاء الحساب...",
+  "Switch Account": "تبديل الحساب",
+  "Withdraw Funds": "سحب الأموال",
+  "Withdraw History": "تاريخ السحب ",
+  "Reff Link": "رابط الإحالة",
+  "open demo account": "افتح حسابًا تجريبيًا",
+  "Select Account Type": "حدد نوع الحساب"
+
+
+  
+}

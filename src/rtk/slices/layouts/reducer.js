@@ -1,0 +1,91 @@
+import { createSlice } from "@reduxjs/toolkit";
+//constants
+import {
+  layoutTypes,
+  leftSidebarTypes,
+  layoutModeTypes,
+  layoutWidthTypes,
+  layoutPositionTypes,
+  topbarThemeTypes,
+  leftsidbarSizeTypes,
+  leftSidebarViewTypes,
+  leftSidebarImageTypes,
+  preloaderTypes,
+  sidebarVisibilitytypes
+} from "../../../Components/constants/layout";
+
+
+// Check localStorage for stored layout mode, otherwise fallback to initial value
+const savedLayoutMode = localStorage.getItem('layoutMode') || layoutModeTypes.LIGHTMODE;
+
+export const initialState = {
+  layoutType: layoutTypes.VERTICAL,
+  leftSidebarType: leftSidebarTypes.DARK,
+  layoutModeType: layoutModeTypes.DARKMODE, // Set initial layout mode from localStorage
+  layoutWidthType: layoutWidthTypes.FLUID,
+  layoutPositionType: layoutPositionTypes.FIXED,
+  topbarThemeType: topbarThemeTypes.LIGHT,
+  leftsidbarSizeType: leftsidbarSizeTypes.SMALLHOVER,
+  leftSidebarViewType: leftSidebarViewTypes.DEFAULT,
+  leftSidebarImageType: leftSidebarImageTypes.NONE,
+  preloader: preloaderTypes.DISABLE,
+  sidebarVisibilitytype: sidebarVisibilitytypes.SHOW
+};
+
+const LayoutSlice = createSlice({
+  name: 'LayoutSlice',
+  initialState,
+  reducers: {
+    changeLayoutAction(state, action) {
+      state.layoutType = action.payload;
+    },
+    changeLayoutModeAction(state, action) {
+      state.layoutModeType = action.payload;
+     // Save the layout mode to localStorage
+     localStorage.setItem('layoutMode', action.payload);
+    },
+    changeSidebarThemeAction(state, action) {
+      state.leftSidebarType = action.payload;
+    },
+    changeLayoutWidthAction(state, action) {
+      state.layoutWidthType = action.payload;
+    },
+    changeLayoutPositionAction(state, action) {
+      state.layoutPositionType = action.payload;
+    },
+    changeTopbarThemeAction(state, action) {
+      state.topbarThemeType = action.payload;
+    },
+    changeLeftsidebarSizeTypeAction(state, action) {
+      state.leftsidbarSizeType = action.payload;
+    },
+    changeLeftsidebarViewTypeAction(state, action) {
+      state.leftSidebarViewType = action.payload;
+    },
+    changeSidebarImageTypeAction(state, action) {
+      state.leftSidebarImageType = action.payload;
+    },
+    changePreLoaderAction(state, action) {
+      state.preloader = action.payload;
+    },
+    changeSidebarVisibilityAction(state, action) {
+      state.sidebarVisibilitytype = action.payload;
+    },
+  }
+});
+
+export const {
+  changeLayoutAction,
+  changeLayoutModeAction,
+  changeSidebarThemeAction,
+  changeLayoutWidthAction,
+  changeLayoutPositionAction,
+  changeTopbarThemeAction,
+  changeLeftsidebarSizeTypeAction,
+  changeLeftsidebarViewTypeAction,
+  changeSidebarImageTypeAction,
+  changePreLoaderAction,
+  changeSidebarVisibilityAction
+} = LayoutSlice.actions;
+
+export default LayoutSlice.reducer;

@@ -1,0 +1,22 @@
+/* Modal base styles */
+.custom-header-modal {
+  max-width: 250px;
+  width: 250px;
+  border-radius: 20px;
+  position: fixed;
+  left: 124px;
+  bottom: 64px;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+
+  .custom-header-modal {
+    left: 27% !important;
+    bottom: 47% !important;
+    top: auto !important;
+    right: auto !important;
+    transform: translate(-50%, 50%) !important;
+    margin: 0 !important;
+  }
+}

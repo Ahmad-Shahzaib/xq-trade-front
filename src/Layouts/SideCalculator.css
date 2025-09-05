@@ -1,0 +1,154 @@
+.side-calculator-container {
+  background: linear-gradient(180deg, #2a0036 0%, #1a0022 100%);
+  border-radius: 20px;
+  padding: 24px 16px;
+  width: 260px;
+  height: 100vh;
+  color: #fff;
+  font-family: 'Montserrat', Arial, sans-serif;
+  box-shadow: 0 2px 16px 0 #00000055;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.side-calculator-title {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+  width: 100%;
+  position: absolute;
+  top: 32px;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+.side-calculator-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+}
+.side-calculator-section {
+  margin-bottom: 18px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border: 2px solid #b48be0;
+  border-radius: 12px;
+  box-shadow: 0 0 8px 0 #b48be033;
+  background: #1a0022;
+}
+.side-calculator-label {
+  font-size: 0.85rem;
+  color: #b48be0;
+  margin-bottom: 0;
+  margin-left: 0;
+  align-self: flex-start;
+  text-align: left;
+  padding-left: 16px;
+  padding-top: 8px;
+}
+.side-calculator-box {
+  background: #1a0022;
+  border-radius: 12px;
+  padding: 18px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0;
+  width: 100%;
+  max-width: 100%;
+
+  margin-top: 0;
+}
+.side-calculator-time, .side-calculator-amount {
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border: 2px solid #b48be0;
+  border-radius: 8px;
+  padding: 6px 12px;
+  background: #1a0022;
+}
+.side-calculator-controls {
+  display: flex;
+  gap: 8px;
+}
+.side-calculator-btn {
+  background: #3a0050;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.side-calculator-btn:hover {
+  background: #b48be0;
+  color: #2a0036;
+}
+.side-calculator-date-btn {
+  width: 90%;
+  background: linear-gradient(90deg, #b048e0 0%, #e048b0 100%);
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 12px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 18px 0 16px 0;
+  cursor: pointer;
+  box-shadow: 0 2px 8px 0 #b048e055;
+  transition: background 0.2s;
+  display: block;
+}
+.side-calculator-date-btn:hover {
+  background: linear-gradient(90deg, #e048b0 0%, #b048e0 100%);
+}
+.side-calculator-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 8px;
+  width: 100%;
+}
+.side-calculator-buy {
+  background: linear-gradient(90deg, #1ed760 0%, #1fa463 100%);
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px 0 #1ed76055;
+  transition: background 0.2s;
+}
+.side-calculator-buy:hover {
+  background: linear-gradient(90deg, #1fa463 0%, #1ed760 100%);
+}
+.side-calculator-sell {
+  background: linear-gradient(90deg, #ff3c3c 0%, #ff6a3c 100%);
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 12px 32px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px 0 #ff3c3c55;
+  transition: background 0.2s;
+}
+.side-calculator-sell:hover {
+  background: linear-gradient(90deg, #ff6a3c 0%, #ff3c3c 100%);
+}

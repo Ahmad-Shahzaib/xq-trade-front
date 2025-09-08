@@ -6,6 +6,7 @@ import { changeSidebarVisibility } from "../rtk/slices/thunks";
 import { selectOpenPositions } from "../rtk/slices/openPositionsSlice/openPositionsSlice";
 import LightDark from "../Components/Common/LightDark";
 import { setSelectedAccount, toggleModal } from "../rtk/slices/accountTypeSlice/accountTypeSlice";
+import { HiOutlineWallet } from "react-icons/hi2";
 
 
 import { logoSm } from "../utils/config";
@@ -54,7 +55,7 @@ const Header = ({ onChangeLayoutMode, layoutModeType, headerClass }) => {
   // console.log('selected account  in redux', tradeAccontsSelected);
   // console.log('localSelectedAccount', localSelectedAccount);
   // console.log('all trade accounts ', tradeAccounts);
-  
+
 
   const appSettings = JSON.parse(localStorage.getItem('appSettings')) || {};
   const isHiddenBalance = appSettings.hiddenBalances ?? false;
@@ -261,9 +262,10 @@ const Header = ({ onChangeLayoutMode, layoutModeType, headerClass }) => {
               style={{ background: "none", border: "none", padding: 0 }}
             >
               <div className="e9cau5CvLL">
-                <div style={{ backgroundColor: "transparent"
-                  , padding : isMobile ? "0px" : "10px"
-                 }}>
+                <div style={{
+                  backgroundColor: "transparent"
+                  , padding: isMobile ? "0px" : "10px"
+                }}>
                   {isMobile ? (
                     <img
                       src={xqlogomobile}
@@ -371,17 +373,33 @@ const Header = ({ onChangeLayoutMode, layoutModeType, headerClass }) => {
               )}
             </div>
 
-            <div className="d-flex align-items-center ">
+            <div className="d-flex align-items-center mr-3 ">
 
 
               <button
+                style={{
+                  background: "linear-gradient(90deg, #c41a6b, #390452)",
+                  border: "none",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  padding: "8px 12px",
+                  borderRadius: "8px",
+                  cursor: "pointer",
+                  fontWeight: "600",
+                  color: "#fff",
+                  marginRight: "10px"
+
+                }}
                 className=""
                 data-test="recharge-tooltip-toggle-button-icon"
                 type="button"
                 onClick={() => setIsPanelOpen(true)}
 
               >
-                <img src={wallet} alt="wallet" style={{ width: "180px", background: "transparent" }} />
+                <HiOutlineWallet size={20} />
+                <span>{t("WALLET")}</span>
+
 
 
 

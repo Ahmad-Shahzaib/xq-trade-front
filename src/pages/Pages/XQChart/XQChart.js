@@ -722,7 +722,7 @@ const XQChart = () => {
               onClick={() => {
                 chartRef.current.timeScale().scrollToRealTime();
               }}
-              className="btn btn-outline-light p-2 px-3"
+              className="p-2 px-3"
               title="Go to realtime"
             >
               <i className="ri-rfid-line"></i>

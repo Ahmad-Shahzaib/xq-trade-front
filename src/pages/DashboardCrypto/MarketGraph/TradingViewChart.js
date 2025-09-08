@@ -207,19 +207,19 @@ function calculateDonchianChannel(data, period = 20) {
   // Upper line: Highest high over the period
   // Lower line: Lowest low over the period  
   // Middle line: Average of upper and lower lines
-  
+
   const upper = [];
   const middle = [];
   const lower = [];
-  
+
   for (let i = period - 1; i < data.length; i++) {
     // Get the slice of data for the current period
     const periodData = data.slice(i - period + 1, i + 1);
-    
+
     // Find highest high and lowest low in the period
     let highestHigh = periodData[0].high;
     let lowestLow = periodData[0].low;
-    
+
     for (let j = 1; j < periodData.length; j++) {
       if (periodData[j].high > highestHigh) {
         highestHigh = periodData[j].high;
@@ -228,14 +228,14 @@ function calculateDonchianChannel(data, period = 20) {
         lowestLow = periodData[j].low;
       }
     }
-    
+
     const middleValue = (highestHigh + lowestLow) / 2;
-    
+
     upper.push({ time: data[i].time, value: parseFloat(highestHigh.toFixed(4)) });
     middle.push({ time: data[i].time, value: parseFloat(middleValue.toFixed(4)) });
     lower.push({ time: data[i].time, value: parseFloat(lowestLow.toFixed(4)) });
   }
-  
+
   return { upper, middle, lower };
 }
 
@@ -753,13 +753,13 @@ const TradingViewChart2 = () => {
     const stored = localStorage.getItem('parabolicStep');
     return stored ? parseFloat(stored) : 0.02;
   });
-  
+
 
   const [parabolicLineColor, setParabolicLineColor] = useState(() => {
     const stored = localStorage.getItem('parabolicLineColor');
     return stored ? stored : '#FF6600';
   });
-    const [ichimokuKijunColor, setIchimokuKijunColor] = useState(() => {
+  const [ichimokuKijunColor, setIchimokuKijunColor] = useState(() => {
     const stored = localStorage.getItem('ichimokuKijunColor');
     return stored ? stored : '#4ECDC4';
   });
@@ -1698,13 +1698,13 @@ const TradingViewChart2 = () => {
   };
 
 
-   const closeIndicatorSettings = () => {
+  const closeIndicatorSettings = () => {
     setIndicatorSettingsModal(false);
     setSelectedIndicatorForSettings(null);
   };
 
 
-    const openIndicatorSettings = (indicator) => {
+  const openIndicatorSettings = (indicator) => {
     setSelectedIndicatorForSettings(indicator);
     setIndicatorSettingsModal(true);
   };
@@ -3411,13 +3411,13 @@ const TradingViewChart2 = () => {
     if (smaSeriesRef.current) { chartRef.current.removeSeries(smaSeriesRef.current); smaSeriesRef.current = null; }
     if (wmaSeriesRef.current) { chartRef.current.removeSeries(wmaSeriesRef.current); wmaSeriesRef.current = null; }
     if (zigzagSeriesRef.current) { chartRef.current.removeSeries(zigzagSeriesRef.current); zigzagSeriesRef.current = null; }
-    if (rsiSeriesRef.current) { 
+    if (rsiSeriesRef.current) {
       try {
-        chartRef.current.removeSeries(rsiSeriesRef.current); 
+        chartRef.current.removeSeries(rsiSeriesRef.current);
       } catch (error) {
         console.error("Error removing RSI series:", error);
       }
-      rsiSeriesRef.current = null; 
+      rsiSeriesRef.current = null;
     }
     // Remove RSI reference lines
     if (rsiOverBoughtLineRef.current) {
@@ -3502,11 +3502,11 @@ const TradingViewChart2 = () => {
         donchianUpperSeriesRef.current = chartRef.current.addLineSeries({ color: donchianUpperColor, lineWidth: 2 });
         donchianMiddleSeriesRef.current = chartRef.current.addLineSeries({ color: donchianMiddleColor, lineWidth: 1, lineStyle: 2 });
         donchianLowerSeriesRef.current = chartRef.current.addLineSeries({ color: donchianLowerColor, lineWidth: 2 });
-        
+
         donchianUpperSeriesRef.current.setData(upper);
         donchianMiddleSeriesRef.current.setData(middle);
         donchianLowerSeriesRef.current.setData(lower);
-        
+
         // Create fill area using area series with upper line data
         donchianFillSeriesRef.current = chartRef.current.addAreaSeries({
           topColor: donchianFillColor.includes('rgba') ? donchianFillColor.replace(/[\d\.]+\)$/, '0.2)') : donchianFillColor + '33',
@@ -3514,7 +3514,7 @@ const TradingViewChart2 = () => {
           lineColor: 'transparent',
           lineWidth: 0
         });
-        
+
         // Use upper line data for the fill area
         donchianFillSeriesRef.current.setData(upper);
       }
@@ -3531,10 +3531,10 @@ const TradingViewChart2 = () => {
       if (indicator === 'ZigZag') {
         // Create ZigZag series with separate price scale for better visibility
         zigzagSeriesRef.current = chartRef.current.addLineSeries({
-          color: zigzagLineColor, 
+          color: zigzagLineColor,
           lineWidth: 3, // Thicker line for better visibility
         });
-        
+
         const zigzagData = calculateZigZag(mappedData, zigzagDeviation, zigzagDepth, zigzagBackStep);
         console.log('ZigZag data points:', zigzagData.length, zigzagData);
         if (zigzagData.length > 0) {
@@ -3544,7 +3544,7 @@ const TradingViewChart2 = () => {
       if (indicator === 'RSI') {
         // Create RSI series on main chart with separate price scale
         rsiSeriesRef.current = chartRef.current.addLineSeries({
-          color: rsiLineColor, 
+          color: rsiLineColor,
           lineWidth: 2,
           priceFormat: {
             type: 'price',
@@ -3553,63 +3553,63 @@ const TradingViewChart2 = () => {
           },
           priceScaleId: 'rsi', // Use separate price scale for RSI
         });
-        
+
         // Configure RSI price scale (0-100 range)
-          chartRef.current.priceScale('rsi').applyOptions({
-            scaleMargins: {
-              top: 0.8, // Push RSI to bottom 20% of chart (reduced height)
-              bottom: 0.0,
-            },
-            autoScale: false,
-            mode: 0,
-            invertScale: false,
-            alignLabels: true,
-            borderVisible: false,
-            visible: true,
-            ticksVisible: false,
-            minimumWidth: 50,
-            entireTextOnly: false,
-          });
-          
-          // Add RSI reference lines at 30, 50, and 70
-          rsiOverBoughtLineRef.current = chartRef.current.addLineSeries({
-            color: 'rgba(255, 0, 0, 0.5)',
-            lineWidth: 1,
-            lineStyle: 2, // Dashed line
-            priceScaleId: 'rsi',
-            lastValueVisible: false,
-            priceLineVisible: false,
-          });
-          
-          rsiCenterLineRef.current = chartRef.current.addLineSeries({
-            color: 'rgba(128, 128, 128, 0.5)',
-            lineWidth: 1,
-            lineStyle: 2, // Dashed line
-            priceScaleId: 'rsi',
-            lastValueVisible: false,
-            priceLineVisible: false,
-          });
-          
-          rsiOverSoldLineRef.current = chartRef.current.addLineSeries({
-            color: 'rgba(0, 255, 0, 0.5)',
-            lineWidth: 1,
-            lineStyle: 2, // Dashed line
-            priceScaleId: 'rsi',
-            lastValueVisible: false,
-            priceLineVisible: false,
-          });
-          
-          // Set reference line data
-          const timeData70 = mappedData.map(item => ({ time: item.time, value: 70 }));
-          const timeData50 = mappedData.map(item => ({ time: item.time, value: 50 }));
-          const timeData30 = mappedData.map(item => ({ time: item.time, value: 30 }));
-          rsiOverBoughtLineRef.current.setData(timeData70);
-          rsiCenterLineRef.current.setData(timeData50);
-          rsiOverSoldLineRef.current.setData(timeData30);
-         
-         const rsiData = calculateRSI(mappedData, rsiPeriod);
-         rsiSeriesRef.current.setData(rsiData);
-        
+        chartRef.current.priceScale('rsi').applyOptions({
+          scaleMargins: {
+            top: 0.8, // Push RSI to bottom 20% of chart (reduced height)
+            bottom: 0.0,
+          },
+          autoScale: false,
+          mode: 0,
+          invertScale: false,
+          alignLabels: true,
+          borderVisible: false,
+          visible: true,
+          ticksVisible: false,
+          minimumWidth: 50,
+          entireTextOnly: false,
+        });
+
+        // Add RSI reference lines at 30, 50, and 70
+        rsiOverBoughtLineRef.current = chartRef.current.addLineSeries({
+          color: 'rgba(255, 0, 0, 0.5)',
+          lineWidth: 1,
+          lineStyle: 2, // Dashed line
+          priceScaleId: 'rsi',
+          lastValueVisible: false,
+          priceLineVisible: false,
+        });
+
+        rsiCenterLineRef.current = chartRef.current.addLineSeries({
+          color: 'rgba(128, 128, 128, 0.5)',
+          lineWidth: 1,
+          lineStyle: 2, // Dashed line
+          priceScaleId: 'rsi',
+          lastValueVisible: false,
+          priceLineVisible: false,
+        });
+
+        rsiOverSoldLineRef.current = chartRef.current.addLineSeries({
+          color: 'rgba(0, 255, 0, 0.5)',
+          lineWidth: 1,
+          lineStyle: 2, // Dashed line
+          priceScaleId: 'rsi',
+          lastValueVisible: false,
+          priceLineVisible: false,
+        });
+
+        // Set reference line data
+        const timeData70 = mappedData.map(item => ({ time: item.time, value: 70 }));
+        const timeData50 = mappedData.map(item => ({ time: item.time, value: 50 }));
+        const timeData30 = mappedData.map(item => ({ time: item.time, value: 30 }));
+        rsiOverBoughtLineRef.current.setData(timeData70);
+        rsiCenterLineRef.current.setData(timeData50);
+        rsiOverSoldLineRef.current.setData(timeData30);
+
+        const rsiData = calculateRSI(mappedData, rsiPeriod);
+        rsiSeriesRef.current.setData(rsiData);
+
         try {
           // Add horizontal reference lines at 30 and 70
           rsiSeriesRef.current.createPriceLine({
@@ -3620,7 +3620,7 @@ const TradingViewChart2 = () => {
             axisLabelVisible: true,
             title: "Overbought (70)",
           });
-          
+
           rsiSeriesRef.current.createPriceLine({
             price: 30,
             color: layoutMode === "dark" ? "#4ecdc4" : "#2ecc71",
@@ -3644,7 +3644,7 @@ const TradingViewChart2 = () => {
           priceLineVisible: false,
           lastValueVisible: false,
         });
-        
+
         // Configure Volume price scale
         chartRef.current.priceScale('volume').applyOptions({
           scaleMargins: {
@@ -3659,13 +3659,13 @@ const TradingViewChart2 = () => {
           visible: true,
           ticksVisible: false,
         });
-         
+
         const volumeData = calculateVolume(mappedData, volumeColor1, volumeColor2);
         volumeSeriesRef.current.setData(volumeData);
       }
       if (indicator === 'parabolic') {
-        parabolicSeriesRef.current = chartRef.current.addLineSeries({ 
-          color: parabolicLineColor, 
+        parabolicSeriesRef.current = chartRef.current.addLineSeries({
+          color: parabolicLineColor,
           lineWidth: 0, // Hide the line
           pointMarkersVisible: true, // Show dots
           pointMarkersRadius: 3 // Dot size
@@ -3687,7 +3687,7 @@ const TradingViewChart2 = () => {
             priceScaleId: 'macd', // Use separate price scale for MACD
           });
         }
-        
+
         if (showSignalLine) {
           macdSignalSeriesRef.current = chartRef.current.addLineSeries({
             color: macdSignalColor,
@@ -3700,7 +3700,7 @@ const TradingViewChart2 = () => {
             priceScaleId: 'macd',
           });
         }
-        
+
         if (showHistogramLine) {
           macdHistogramSeriesRef.current = chartRef.current.addHistogramSeries({
             color: macdHistogramColor,
@@ -3714,7 +3714,7 @@ const TradingViewChart2 = () => {
             lastValueVisible: false,
           });
         }
-        
+
         // Configure MACD price scale (positioned above RSI if both are active)
         const isRsiActive = activeIndicators.includes('RSI');
         chartRef.current.priceScale('macd').applyOptions({
@@ -3730,7 +3730,7 @@ const TradingViewChart2 = () => {
           visible: true,
           ticksVisible: false,
         });
-        
+
         const { macdLine, signalLine, histogram } = calculateMACD(mappedData, macdFastPeriod, macdSlowPeriod, macdSignalPeriod, macdLineColor, macdSignalColor, macdHistogramColor);
         if (showMacdLine && macdSeriesRef.current) {
           macdSeriesRef.current.setData(macdLine);
@@ -3744,42 +3744,42 @@ const TradingViewChart2 = () => {
       }
       if (indicator === 'IchimokuCloud') {
         const { tenkanSen, kijunSen, chikouSpan, senkouSpanA, senkouSpanB } = calculateIchimoku(mappedData, ichimokuTenkanPeriod, ichimokuKijunPeriod, ichimokuSenkouBPeriod);
-        
+
         // Create Tenkan Sen (Conversion Line)
         ichimokuTenkanSeriesRef.current = chartRef.current.addLineSeries({
           color: ichimokuTenkanColor,
           lineWidth: 1
         });
         ichimokuTenkanSeriesRef.current.setData(tenkanSen);
-        
+
         // Create Kijun Sen (Base Line)
         ichimokuKijunSeriesRef.current = chartRef.current.addLineSeries({
           color: ichimokuKijunColor,
           lineWidth: 1
         });
         ichimokuKijunSeriesRef.current.setData(kijunSen);
-        
+
         // Create Chikou Span (Lagging Span)
         ichimokuChikouSeriesRef.current = chartRef.current.addLineSeries({
           color: ichimokuChikouColor,
           lineWidth: 1
         });
         ichimokuChikouSeriesRef.current.setData(chikouSpan);
-        
+
         // Create Senkou Span A (Leading Span A)
         ichimokuSenkouASeriesRef.current = chartRef.current.addLineSeries({
           color: ichimokuSenkouAColor,
           lineWidth: 1
         });
         ichimokuSenkouASeriesRef.current.setData(senkouSpanA);
-        
+
         // Create Senkou Span B (Leading Span B)
         ichimokuSenkouBSeriesRef.current = chartRef.current.addLineSeries({
           color: ichimokuSenkouBColor,
           lineWidth: 1
         });
         ichimokuSenkouBSeriesRef.current.setData(senkouSpanB);
-        
+
         // Create fill area between Senkou Span A and B (Kumo/Cloud) if enabled
         if (ichimokuShowFill) {
           ichimokuFillSeriesRef.current = chartRef.current.addAreaSeries({
@@ -3788,7 +3788,7 @@ const TradingViewChart2 = () => {
             lineColor: 'transparent',
             lineWidth: 0
           });
-          
+
           // Use Senkou Span A data for the fill area
           ichimokuFillSeriesRef.current.setData(senkouSpanA);
         }
@@ -3819,13 +3819,13 @@ const TradingViewChart2 = () => {
         }
       }
     }
-  }, [data, status, selectedSeriesType, bars, activeIndicators, autoScrollEnabled, mappedData, 
-    alligatorJawColor, alligatorTeethColor, alligatorLipsColor, 
-    alligatorJawPeriod, alligatorJawShift, alligatorTeethPeriod, alligatorTeethShift, 
-    alligatorLipsPeriod, alligatorLipsShift, 
-    emaLineColor, emaPeriod, smaLineColor, smaPeriod, wmaLineColor, wmaPeriod, 
-    bbLineColor, bbPeriod, zigzagLineColor, zigzagDeviation, zigzagDepth, zigzagBackStep, 
-    rsiLineColor, rsiPeriod, volumeColor, volumeColor1, volumeColor2, 
+  }, [data, status, selectedSeriesType, bars, activeIndicators, autoScrollEnabled, mappedData,
+    alligatorJawColor, alligatorTeethColor, alligatorLipsColor,
+    alligatorJawPeriod, alligatorJawShift, alligatorTeethPeriod, alligatorTeethShift,
+    alligatorLipsPeriod, alligatorLipsShift,
+    emaLineColor, emaPeriod, smaLineColor, smaPeriod, wmaLineColor, wmaPeriod,
+    bbLineColor, bbPeriod, zigzagLineColor, zigzagDeviation, zigzagDepth, zigzagBackStep,
+    rsiLineColor, rsiPeriod, volumeColor, volumeColor1, volumeColor2,
     parabolicLineColor, parabolicStep,
     ichimokuTenkanPeriod, ichimokuKijunPeriod, ichimokuSenkouBPeriod,
     ichimokuTenkanColor, ichimokuKijunColor, ichimokuChikouColor,
@@ -5336,109 +5336,124 @@ const TradingViewChart2 = () => {
             */}
 
           <Dropdown isOpen={indicatorDropdownOpen} toggle={() => setIndicatorDropdownOpen(!indicatorDropdownOpen)} className="btn btn-outline-light p-0 border-0">
-          {/* <DropdownToggle tag="i" className="ri-router-line" style={{ cursor: 'pointer' }} /> */}
-          <DropdownToggle className="btn btn-outline-light">
-            <i className="ri-router-line" />
-          </DropdownToggle>
-          <DropdownMenu style={{ backgroundColor: "#010e1c", borderColor: "#6c757d" }}>
-            <DropdownItem onClick={() => toggleModal('EMA')}
-              style={{ color: activeIndicators.includes('EMA') ? '#3f87ff' : '#fff' }} className="d-flex align-items-center justify-content-between">
-              EMA  {activeIndicators.includes('EMA') && <i className="ri-check-line text-success"></i>}
-            </DropdownItem>
-            <DropdownItem onClick={() => toggleModal('SMA')}
-              style={{ color: activeIndicators.includes('SMA') ? '#3f87ff' : '#fff' }}
-              className="d-flex align-items-center justify-content-between">
-              SMA {activeIndicators.includes('SMA') && <i className="ri-check-line text-success"></i>}
-            </DropdownItem>
-            <DropdownItem onClick={() => toggleModal('WMA')}
-              style={{ color: activeIndicators.includes('WMA') ? '#3f87ff' : '#fff' }}
-              className="d-flex align-items-center justify-content-between">
-              WMA {activeIndicators.includes('WMA') && <i className="ri-check-line text-success"></i>}
-            </DropdownItem>
-            <DropdownItem onClick={() => toggleModal('ZigZag')}
-              style={{ color: activeIndicators.includes('ZigZag') ? '#3f87ff' : '#fff' }}
-              className="d-flex align-items-center justify-content-between">
-              ZigZag {activeIndicators.includes('ZigZag') && <i className="ri-check-line text-success"></i>}
-            </DropdownItem>
-            <DropdownItem onClick={() => toggleModal('Alligator')}
-              style={{ color: activeIndicators.includes('Alligator') ? '#3f87ff' : '#fff' }}
-              className="d-flex align-items-center justify-content-between">
-              Alligator {activeIndicators.includes('Alligator') && <i className="ri-check-line text-success"></i>}
-            </DropdownItem>
-            <DropdownItem onClick={() => toggleModal('parabolic')}
-              style={{ color: activeIndicators.includes('parabolic') ? '#3f87ff' : '#fff' }}
-              className="d-flex align-items-center justify-content-between">
-              Parabolic SAR {activeIndicators.includes('parabolic') && <i className="ri-check-line text-success"></i>}
-            </DropdownItem>
-            <DropdownItem onClick={() => toggleModal('BB')}
-              style={{ color: activeIndicators.includes('BB') ? '#3f87ff' : '#fff' }}
-              className="d-flex align-items-center justify-content-between">
-              Bollinger Band {activeIndicators.includes('BB') && <i className="ri-check-line text-success"></i>}
-            </DropdownItem>
-            <DropdownItem onClick={() => toggleModal('DonchianChannel')}
-              style={{ color: activeIndicators.includes('DonchianChannel') ? '#3f87ff' : '#fff' }}
-              className="d-flex align-items-center justify-content-between">
-              Donchian Channel {activeIndicators.includes('DonchianChannel') && <i className="ri-check-line text-success"></i>}
-            </DropdownItem>
-            <DropdownItem onClick={() => toggleModal('IchimokuCloud')}
-              style={{ color: activeIndicators.includes('IchimokuCloud') ? '#3f87ff' : '#fff' }}
-              className="d-flex align-items-center justify-content-between">
-              Ichimoku Cloud {activeIndicators.includes('IchimokuCloud') && <i className="ri-check-line text-success"></i>}
-            </DropdownItem>
-            <DropdownItem divider />
-            <DropdownItem onClick={() => toggleModal('RSI')}
-              style={{ color: activeIndicators.includes('RSI') ? '#3f87ff' : '#fff' }}
-              className="d-flex align-items-center justify-content-between">
-              RSI {activeIndicators.includes('RSI') && <i className="ri-check-line text-success"></i>}
-            </DropdownItem>
-            <DropdownItem onClick={() => toggleModal('MACD')}
-              style={{ color: activeIndicators.includes('MACD') ? '#3f87ff' : '#fff' }}
-              className="d-flex align-items-center justify-content-between">
-              MACD {activeIndicators.includes('MACD') && <i className="ri-check-line text-success"></i>}
-            </DropdownItem>
-            <DropdownItem onClick={() => toggleModal('Volume')}
-              style={{ color: activeIndicators.includes('Volume') ? '#3f87ff' : '#fff' }}
-              className="d-flex align-items-center justify-content-between">
-              Volume {activeIndicators.includes('Volume') && <i className="ri-check-line text-success"></i>}
-            </DropdownItem>
-            <DropdownItem divider />
-            <DropdownItem onClick={clearAllIndicators} style={{ color: 'red' }}>Clear All Indicators</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
-
-
-
-
-
-               <Modal isOpen={modal} toggle={toggleModal} className='invoice-modal' backdrop="static" keyboard={false}>
-          <ModalBody>
-            <IndicatorsSettings onInputChange={handleSettings} indicatorName={selectedIndicator} />
-          </ModalBody>
-          <ModalFooter>
-            <Button color="default" onClick={() => toggleModal()}>{t('Close')}</Button>
-            <Button color="secondary" onClick={() => { editIndicators(); toggleIndicator(selectedIndicator); toggleModal(); }}>
-              {activeIndicators.includes(selectedIndicator) ? t('Hide') : t('Apply')}
-            </Button>
-            {/* <Button color="success" onClick={() => { editIndicators(); toggleIndicator(selectedIndicator); toggleModal(); }}>{t('Apply')}</Button> */}
-          </ModalFooter>
-        </Modal>
+            {/* <DropdownToggle tag="i" className="ri-router-line" style={{ cursor: 'pointer' }} /> */}
+            <DropdownToggle className="btn btn-outline-light">
+              <i className="ri-router-line" />
+            </DropdownToggle>
+            <DropdownMenu style={{
+              backgroundColor: "transparent",
+              backdropFilter: "blur(20px)",
+              borderColor: "#6c757d"
+            }}>
+              <DropdownItem onClick={() => toggleModal('EMA')}
+                style={{
+                  color: activeIndicators.includes('EMA') ? '#fff' : '#fff',
+                  background: "transparent",
+                  backdropFilter: "blur(20px)",
+                }} className="d-flex align-items-center justify-content-between">
+                EMA  {activeIndicators.includes('EMA') && <i className="ri-check-line text-success"></i>}
+              </DropdownItem>
+              <DropdownItem onClick={() => toggleModal('SMA')}
+                style={{ color: activeIndicators.includes('SMA') ? '#fff' : '#fff' }}
+                className="d-flex align-items-center justify-content-between">
+                SMA {activeIndicators.includes('SMA') && <i className="ri-check-line text-success"></i>}
+              </DropdownItem>
+              <DropdownItem onClick={() => toggleModal('WMA')}
+                style={{ color: activeIndicators.includes('WMA') ? '#fff' : '#fff' }}
+                className="d-flex align-items-center justify-content-between">
+                WMA {activeIndicators.includes('WMA') && <i className="ri-check-line text-success"></i>}
+              </DropdownItem>
+              <DropdownItem onClick={() => toggleModal('ZigZag')}
+                style={{ color: activeIndicators.includes('ZigZag') ? '#fff' : '#fff' }}
+                className="d-flex align-items-center justify-content-between">
+                ZigZag {activeIndicators.includes('ZigZag') && <i className="ri-check-line text-success"></i>}
+              </DropdownItem>
+              <DropdownItem onClick={() => toggleModal('Alligator')}
+                style={{ color: activeIndicators.includes('Alligator') ? '#fff' : '#fff' }}
+                className="d-flex align-items-center justify-content-between">
+                Alligator {activeIndicators.includes('Alligator') && <i className="ri-check-line text-success"></i>}
+              </DropdownItem>
+              <DropdownItem onClick={() => toggleModal('parabolic')}
+                style={{ color: activeIndicators.includes('parabolic') ? '#fff' : '#fff' }}
+                className="d-flex align-items-center justify-content-between">
+                Parabolic SAR {activeIndicators.includes('parabolic') && <i className="ri-check-line text-success"></i>}
+              </DropdownItem>
+              <DropdownItem onClick={() => toggleModal('BB')}
+                style={{ color: activeIndicators.includes('BB') ? '#fff' : '#fff' }}
+                className="d-flex align-items-center justify-content-between">
+                Bollinger Band {activeIndicators.includes('BB') && <i className="ri-check-line text-success"></i>}
+              </DropdownItem>
+              <DropdownItem onClick={() => toggleModal('DonchianChannel')}
+                style={{ color: activeIndicators.includes('DonchianChannel') ? '#fff' : '#fff' }}
+                className="d-flex align-items-center justify-content-between">
+                Donchian Channel {activeIndicators.includes('DonchianChannel') && <i className="ri-check-line text-success"></i>}
+              </DropdownItem>
+              <DropdownItem onClick={() => toggleModal('IchimokuCloud')}
+                style={{ color: activeIndicators.includes('IchimokuCloud') ? '#fff' : '#fff' }}
+                className="d-flex align-items-center justify-content-between">
+                Ichimoku Cloud {activeIndicators.includes('IchimokuCloud') && <i className="ri-check-line text-success"></i>}
+              </DropdownItem>
+              <DropdownItem divider />
+              <DropdownItem onClick={() => toggleModal('RSI')}
+                style={{ color: activeIndicators.includes('RSI') ? '#fff' : '#fff' }}
+                className="d-flex align-items-center justify-content-between">
+                RSI {activeIndicators.includes('RSI') && <i className="ri-check-line text-success"></i>}
+              </DropdownItem>
+              <DropdownItem onClick={() => toggleModal('MACD')}
+                style={{ color: activeIndicators.includes('MACD') ? '#fff' : '#fff' }}
+                className="d-flex align-items-center justify-content-between">
+                MACD {activeIndicators.includes('MACD') && <i className="ri-check-line text-success"></i>}
+              </DropdownItem>
+              <DropdownItem onClick={() => toggleModal('Volume')}
+                style={{ color: activeIndicators.includes('Volume') ? '#fff' : '#fff' }}
+                className="d-flex align-items-center justify-content-between">
+                Volume {activeIndicators.includes('Volume') && <i className="ri-check-line text-success"></i>}
+              </DropdownItem>
+              <DropdownItem divider />
+              <DropdownItem onClick={clearAllIndicators} >Clear All Indicators</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+          <Modal isOpen={modal} toggle={toggleModal} className='invoice-modal' backdrop="static" keyboard={false}>
+            <ModalBody style={{
+              background: "transparent",
+              backdropFilter: "blur(15px)",
+            }}>
+              <IndicatorsSettings onInputChange={handleSettings} indicatorName={selectedIndicator} />
+            </ModalBody>
+            <ModalFooter style={{
+              background: "transparent",
+              backdropFilter: "blur(15px)",
+            }} >
+              <Button color="default" onClick={() => toggleModal()}>{t('Close')}</Button>
+              <Button color="default" style={{ border: "1px solid white" }} onClick={() => { editIndicators(); toggleIndicator(selectedIndicator); toggleModal(); }}>
+                {activeIndicators.includes(selectedIndicator) ? t('Hide') : t('Apply')}
+              </Button>
+              {/* <Button color="success" onClick={() => { editIndicators(); toggleIndicator(selectedIndicator); toggleModal(); }}>{t('Apply')}</Button> */}
+            </ModalFooter>
+          </Modal>
         </div>
 
 
- <Modal isOpen={indicatorSettingsModal} toggle={closeIndicatorSettings} className='invoice-modal' backdrop="static" keyboard={false}>
+        <Modal isOpen={indicatorSettingsModal} toggle={closeIndicatorSettings} className='invoice-modal' backdrop="static" keyboard={false}>
           <ModalHeader toggle={closeIndicatorSettings}>
             {selectedIndicatorForSettings} Settings for {selectedSymbol}
           </ModalHeader>
-          <ModalBody>
+          <ModalBody style={{
+            background: "transparent",
+            backdropFilter: "blur(15px)",
+          }}>
             <IndicatorsSettings onInputChange={handleSettings} indicatorName={selectedIndicatorForSettings} />
           </ModalBody>
-          <ModalFooter>
+          <ModalFooter style={{
+            background: "transparent",
+            backdropFilter: "blur(15px)",
+          }}>
             <Button color="default" onClick={closeIndicatorSettings}>{t('Close')}</Button>
-            <Button color="success" onClick={() => { editIndicators(); closeIndicatorSettings(); }}>{t('Apply')}</Button>
+            <Button color="default" style={{ border: "1px solid white" }} onClick={() => { editIndicators(); closeIndicatorSettings(); }}>{t('Apply')}</Button>
           </ModalFooter>
         </Modal>
 
-         {/* Active Indicators Panel for Current Symbol */}
+        {/* Active Indicators Panel for Current Symbol */}
         {false && (
           <div className="active-indicators-panel position-absolute"
             style={{
@@ -5466,16 +5481,16 @@ const TradingViewChart2 = () => {
                 }}>
                 <span>{indicator}</span>
                 <div>
-                  <button 
-                    className="btn btn-sm btn-outline-primary me-1" 
+                  <button
+                    className="btn btn-sm btn-outline-primary me-1"
                     style={{ padding: '2px 6px', fontSize: '10px' }}
                     onClick={() => openIndicatorSettings(indicator)}
                     title={`Settings for ${indicator}`}
                   >
                     <i className="ri-settings-3-line"></i>
                   </button>
-                  <button 
-                    className="btn btn-sm btn-outline-danger" 
+                  <button
+                    className="btn btn-sm btn-outline-danger"
                     style={{ padding: '2px 6px', fontSize: '10px' }}
                     onClick={() => toggleIndicator(indicator)}
                     title={`Remove ${indicator}`}

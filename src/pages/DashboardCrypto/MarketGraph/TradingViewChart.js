@@ -620,6 +620,7 @@ const TradingViewChart2 = () => {
   const [zigzagDepth, setZigzagDepth] = useState(12);
   const [zigzagBackStep, setZigzagBackStep] = useState(3);
   const [rsiPeriod, setRsiPeriod] = useState(14);
+  const [selectedIndicatorForSettings, setSelectedIndicatorForSettings] = useState(null);
 
   const [zigzagLineColor, setZigzagLineColor] = useState();
   const [rsiLineColor, setRsiLineColor] = useState();
@@ -668,6 +669,7 @@ const TradingViewChart2 = () => {
   const latestOrderResult = useSelector((state) => state.accountType.latestOrderResult);
   const latestClosedOrder = useSelector((state) => state.accountType.latestClosedOrder);
   const closedOrder = useSelector((state) => state.accountType.closedOrder);
+  const [indicatorSettingsModal, setIndicatorSettingsModal] = useState(false);
 
   const [alertVisible, setAlertVisible] = useState(false);
   const [alerts, setAlerts] = useState([]);
@@ -1693,6 +1695,18 @@ const TradingViewChart2 = () => {
     if (price === "" || isNaN(price) || price < 1) {
       setPrice(1); // Reset to 1 if empty or invalid
     }
+  };
+
+
+   const closeIndicatorSettings = () => {
+    setIndicatorSettingsModal(false);
+    setSelectedIndicatorForSettings(null);
+  };
+
+
+    const openIndicatorSettings = (indicator) => {
+    setSelectedIndicatorForSettings(indicator);
+    setIndicatorSettingsModal(true);
   };
 
   const handleScreenshot = () => {
@@ -5321,110 +5335,158 @@ const TradingViewChart2 = () => {
             
             */}
 
-          <Dropdown isOpen={indicatorDropdownOpen} toggle={() => setIndicatorDropdownOpen(!indicatorDropdownOpen)} className="btn  p-0 border-0"
-          >
-            {/* <DropdownToggle tag="i" className="ri-router-line" style={{ cursor: 'pointer' }} /> */}
-            <DropdownToggle className="btn btn-outline-light">
-              <i className="ri-router-line" />
-            </DropdownToggle>
-            <DropdownMenu style={{ backgroundColor: 'transparent', backdropFilter: 'blur(20px)', border: '1px solid #420633ff', zIndex: 20000, position: 'absolute', left: 0, right: 0 }}>
-              <DropdownItem onClick={() => toggleModal('EMA')}
-                style={{ color: activeIndicators.includes('EMA') ? '#fff' : '#fff' }} className="d-flex align-items-center justify-content-between">
-                EMA  {activeIndicators.includes('EMA') && <i className="ri-check-line text-success"></i>}
-              </DropdownItem>
-              <DropdownItem onClick={() => toggleModal('SMA')}
-                style={{ color: activeIndicators.includes('SMA') ? '#fff' : '#fff' }}
-                className="d-flex align-items-center justify-content-between">
-                SMA {activeIndicators.includes('SMA') && <i className="ri-check-line text-success"></i>}
-              </DropdownItem>
-              <DropdownItem onClick={() => toggleModal('WMA')}
-                style={{ color: activeIndicators.includes('WMA') ? '#fff' : '#fff' }}
-                className="d-flex align-items-center justify-content-between">
-                WMA {activeIndicators.includes('WMA') && <i className="ri-check-line text-success"></i>}
-              </DropdownItem>
-              <DropdownItem onClick={() => toggleModal('ZigZag')}
-                style={{ color: activeIndicators.includes('ZigZag') ? '#fff' : '#fff' }}
-                className="d-flex align-items-center justify-content-between">
-                ZigZag {activeIndicators.includes('ZigZag') && <i className="ri-check-line text-success"></i>}
-              </DropdownItem>
-              <DropdownItem onClick={() => toggleModal('Alligator')}
-                style={{ color: activeIndicators.includes('Alligator') ? '#fff' : '#fff' }}
-                className="d-flex align-items-center justify-content-between">
-                Alligator {activeIndicators.includes('Alligator') && <i className="ri-check-line text-success"></i>}
-              </DropdownItem>
-       
+          <Dropdown isOpen={indicatorDropdownOpen} toggle={() => setIndicatorDropdownOpen(!indicatorDropdownOpen)} className="btn btn-outline-light p-0 border-0">
+          {/* <DropdownToggle tag="i" className="ri-router-line" style={{ cursor: 'pointer' }} /> */}
+          <DropdownToggle className="btn btn-outline-light">
+            <i className="ri-router-line" />
+          </DropdownToggle>
+          <DropdownMenu style={{ backgroundColor: "#010e1c", borderColor: "#6c757d" }}>
+            <DropdownItem onClick={() => toggleModal('EMA')}
+              style={{ color: activeIndicators.includes('EMA') ? '#3f87ff' : '#fff' }} className="d-flex align-items-center justify-content-between">
+              EMA  {activeIndicators.includes('EMA') && <i className="ri-check-line text-success"></i>}
+            </DropdownItem>
+            <DropdownItem onClick={() => toggleModal('SMA')}
+              style={{ color: activeIndicators.includes('SMA') ? '#3f87ff' : '#fff' }}
+              className="d-flex align-items-center justify-content-between">
+              SMA {activeIndicators.includes('SMA') && <i className="ri-check-line text-success"></i>}
+            </DropdownItem>
+            <DropdownItem onClick={() => toggleModal('WMA')}
+              style={{ color: activeIndicators.includes('WMA') ? '#3f87ff' : '#fff' }}
+              className="d-flex align-items-center justify-content-between">
+              WMA {activeIndicators.includes('WMA') && <i className="ri-check-line text-success"></i>}
+            </DropdownItem>
+            <DropdownItem onClick={() => toggleModal('ZigZag')}
+              style={{ color: activeIndicators.includes('ZigZag') ? '#3f87ff' : '#fff' }}
+              className="d-flex align-items-center justify-content-between">
+              ZigZag {activeIndicators.includes('ZigZag') && <i className="ri-check-line text-success"></i>}
+            </DropdownItem>
+            <DropdownItem onClick={() => toggleModal('Alligator')}
+              style={{ color: activeIndicators.includes('Alligator') ? '#3f87ff' : '#fff' }}
+              className="d-flex align-items-center justify-content-between">
+              Alligator {activeIndicators.includes('Alligator') && <i className="ri-check-line text-success"></i>}
+            </DropdownItem>
+            <DropdownItem onClick={() => toggleModal('parabolic')}
+              style={{ color: activeIndicators.includes('parabolic') ? '#3f87ff' : '#fff' }}
+              className="d-flex align-items-center justify-content-between">
+              Parabolic SAR {activeIndicators.includes('parabolic') && <i className="ri-check-line text-success"></i>}
+            </DropdownItem>
+            <DropdownItem onClick={() => toggleModal('BB')}
+              style={{ color: activeIndicators.includes('BB') ? '#3f87ff' : '#fff' }}
+              className="d-flex align-items-center justify-content-between">
+              Bollinger Band {activeIndicators.includes('BB') && <i className="ri-check-line text-success"></i>}
+            </DropdownItem>
             <DropdownItem onClick={() => toggleModal('DonchianChannel')}
-             style={{ color: activeIndicators.includes('Alligator') ? '#fff' : '#fff' }}
+              style={{ color: activeIndicators.includes('DonchianChannel') ? '#3f87ff' : '#fff' }}
               className="d-flex align-items-center justify-content-between">
               Donchian Channel {activeIndicators.includes('DonchianChannel') && <i className="ri-check-line text-success"></i>}
             </DropdownItem>
             <DropdownItem onClick={() => toggleModal('IchimokuCloud')}
-              style={{ color: activeIndicators.includes('Alligator') ? '#fff' : '#fff' }}
+              style={{ color: activeIndicators.includes('IchimokuCloud') ? '#3f87ff' : '#fff' }}
               className="d-flex align-items-center justify-content-between">
               Ichimoku Cloud {activeIndicators.includes('IchimokuCloud') && <i className="ri-check-line text-success"></i>}
             </DropdownItem>
-              <DropdownItem onClick={() => toggleModal('parabolic')}
-                style={{ color: activeIndicators.includes('parabolic') ? '#fff' : '#fff' }}
-                className="d-flex align-items-center justify-content-between">
-                Parabolic SAR {activeIndicators.includes('parabolic') && <i className="ri-check-line text-success"></i>}
-              </DropdownItem>
-              <DropdownItem onClick={() => toggleModal('BB')}
-                style={{ color: activeIndicators.includes('BB') ? '#fff' : '#fff' }}
-                className="d-flex align-items-center justify-content-between">
-                Bollinger Band {activeIndicators.includes('BB') && <i className="ri-check-line text-success"></i>}
-              </DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem onClick={() => toggleModal('RSI')}
-                style={{ color: activeIndicators.includes('RSI') ? '#fff' : '#fff' }}
-                className="d-flex align-items-center justify-content-between">
-                RSI {activeIndicators.includes('RSI') && <i className="ri-check-line text-success"></i>}
-              </DropdownItem>
-              <DropdownItem onClick={() => toggleModal('MACD')}
-                style={{ color: activeIndicators.includes('MACD') ? '#fff' : '#fff' }}
-                className="d-flex align-items-center justify-content-between">
-                MACD {activeIndicators.includes('MACD') && <i className="ri-check-line text-success"></i>}
-              </DropdownItem>
-              <DropdownItem onClick={() => toggleModal('Volume')}
-                style={{ color: activeIndicators.includes('Volume') ? '#fff' : '#fff' }}
-                className="d-flex align-items-center justify-content-between">
-                Volume {activeIndicators.includes('Volume') && <i className="ri-check-line text-success"></i>}
-              </DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem onClick={clearAllIndicators} style={{ color: 'white' }}>Clear All Indicators</DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
+            <DropdownItem divider />
+            <DropdownItem onClick={() => toggleModal('RSI')}
+              style={{ color: activeIndicators.includes('RSI') ? '#3f87ff' : '#fff' }}
+              className="d-flex align-items-center justify-content-between">
+              RSI {activeIndicators.includes('RSI') && <i className="ri-check-line text-success"></i>}
+            </DropdownItem>
+            <DropdownItem onClick={() => toggleModal('MACD')}
+              style={{ color: activeIndicators.includes('MACD') ? '#3f87ff' : '#fff' }}
+              className="d-flex align-items-center justify-content-between">
+              MACD {activeIndicators.includes('MACD') && <i className="ri-check-line text-success"></i>}
+            </DropdownItem>
+            <DropdownItem onClick={() => toggleModal('Volume')}
+              style={{ color: activeIndicators.includes('Volume') ? '#3f87ff' : '#fff' }}
+              className="d-flex align-items-center justify-content-between">
+              Volume {activeIndicators.includes('Volume') && <i className="ri-check-line text-success"></i>}
+            </DropdownItem>
+            <DropdownItem divider />
+            <DropdownItem onClick={clearAllIndicators} style={{ color: 'red' }}>Clear All Indicators</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
 
 
 
 
 
-
-          <Modal isOpen={modal} toggle={toggleModal} className='invoice-modal'
-            style={{
-              backgroundColor: 'transparent',
-              backdropFilter: "blur(20px)",
-              color: '#fff',
-              zIndex: 99999, // Make sure modal is above everything
-              position: 'fixed', // Ensure it's fixed on top
-              top: isMobile ? '20%' : '0',
-              left: isMobile ? '0' : '40%',
-              width: '100vw',
-              height: isMobile ? '30vh' : 'auto',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}>
-            <ModalBody >
-              <IndicatorsSettings indicatorName={selectedIndicator} onInputChange={handleSettings} />
-            </ModalBody>
-            <ModalFooter>
-              <Button color="default" onClick={() => toggleModal()}>{t('Close')}</Button>
-              {/* <Button color="secondary" onClick={() => {toggleIndicator("EMA")}}>{t('Remove')}</Button> */}
-              <Button color="success" onClick={() => { toggleIndicator(selectedIndicator); toggleModal() }}>{t('Apply')}</Button>
-            </ModalFooter>
-          </Modal>
+               <Modal isOpen={modal} toggle={toggleModal} className='invoice-modal' backdrop="static" keyboard={false}>
+          <ModalBody>
+            <IndicatorsSettings onInputChange={handleSettings} indicatorName={selectedIndicator} />
+          </ModalBody>
+          <ModalFooter>
+            <Button color="default" onClick={() => toggleModal()}>{t('Close')}</Button>
+            <Button color="secondary" onClick={() => { editIndicators(); toggleIndicator(selectedIndicator); toggleModal(); }}>
+              {activeIndicators.includes(selectedIndicator) ? t('Hide') : t('Apply')}
+            </Button>
+            {/* <Button color="success" onClick={() => { editIndicators(); toggleIndicator(selectedIndicator); toggleModal(); }}>{t('Apply')}</Button> */}
+          </ModalFooter>
+        </Modal>
         </div>
 
+
+ <Modal isOpen={indicatorSettingsModal} toggle={closeIndicatorSettings} className='invoice-modal' backdrop="static" keyboard={false}>
+          <ModalHeader toggle={closeIndicatorSettings}>
+            {selectedIndicatorForSettings} Settings for {selectedSymbol}
+          </ModalHeader>
+          <ModalBody>
+            <IndicatorsSettings onInputChange={handleSettings} indicatorName={selectedIndicatorForSettings} />
+          </ModalBody>
+          <ModalFooter>
+            <Button color="default" onClick={closeIndicatorSettings}>{t('Close')}</Button>
+            <Button color="success" onClick={() => { editIndicators(); closeIndicatorSettings(); }}>{t('Apply')}</Button>
+          </ModalFooter>
+        </Modal>
+
+         {/* Active Indicators Panel for Current Symbol */}
+        {false && (
+          <div className="active-indicators-panel position-absolute"
+            style={{
+              top: '85px',
+              right: '10px',
+              zIndex: 9,
+              backgroundColor: layoutMode === "dark" ? 'rgba(90,90,90,0.9)' : 'rgba(255,255,255,0.9)',
+              border: `1px solid ${layoutMode === "dark" ? '#333' : '#ddd'}`,
+              borderRadius: '4px',
+              padding: '8px',
+              maxHeight: '200px',
+              overflowY: 'auto',
+              color: layoutMode === "dark" ? '#fff' : '#000',
+              minWidth: '200px'
+            }}>
+            <div className="d-flex justify-content-between align-items-center mb-2">
+              <h6 className="m-0">Indicators - {selectedSymbol}</h6>
+            </div>
+            {activeIndicators.map(indicator => (
+              <div key={indicator} className="indicator-item mb-1 p-1 d-flex justify-content-between align-items-center"
+                style={{
+                  backgroundColor: layoutMode === "dark" ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)',
+                  borderRadius: '3px',
+                  fontSize: '12px'
+                }}>
+                <span>{indicator}</span>
+                <div>
+                  <button 
+                    className="btn btn-sm btn-outline-primary me-1" 
+                    style={{ padding: '2px 6px', fontSize: '10px' }}
+                    onClick={() => openIndicatorSettings(indicator)}
+                    title={`Settings for ${indicator}`}
+                  >
+                    <i className="ri-settings-3-line"></i>
+                  </button>
+                  <button 
+                    className="btn btn-sm btn-outline-danger" 
+                    style={{ padding: '2px 6px', fontSize: '10px' }}
+                    onClick={() => toggleIndicator(indicator)}
+                    title={`Remove ${indicator}`}
+                  >
+                    <i className="ri-close-line"></i>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* {activeOrders?.length > 0 && (
         <div className="active-orders-panel position-absolute"

@@ -5413,16 +5413,21 @@ const TradingViewChart2 = () => {
               <DropdownItem onClick={clearAllIndicators} >Clear All Indicators</DropdownItem>
             </DropdownMenu>
           </Dropdown>
-          <Modal isOpen={modal} toggle={toggleModal} className='invoice-modal' backdrop="static" keyboard={false}>
+          <Modal style={{
+            top: isMobile ? '80px' : '',
+          }} isOpen={modal} toggle={toggleModal} className='invoice-modal' backdrop="static" keyboard={false}>
             <ModalBody style={{
               background: "transparent",
               backdropFilter: "blur(15px)",
+              height: isMobile ? '250px' : 'auto',
+              overflowY: isMobile ? 'scroll' : 'hidden'
             }}>
               <IndicatorsSettings onInputChange={handleSettings} indicatorName={selectedIndicator} />
             </ModalBody>
             <ModalFooter style={{
               background: "transparent",
               backdropFilter: "blur(15px)",
+
             }} >
               <Button color="default" onClick={() => toggleModal()}>{t('Close')}</Button>
               <Button color="default" style={{ border: "1px solid white" }} onClick={() => { editIndicators(); toggleIndicator(selectedIndicator); toggleModal(); }}>
@@ -5434,13 +5439,17 @@ const TradingViewChart2 = () => {
         </div>
 
 
-        <Modal isOpen={indicatorSettingsModal} toggle={closeIndicatorSettings} className='invoice-modal' backdrop="static" keyboard={false}>
+        <Modal isOpen={indicatorSettingsModal} toggle={closeIndicatorSettings} className='invoice-modal' backdrop="static" keyboard={false} style={{
+          top: isMobile ? '80px' : '',
+        }}>
           <ModalHeader toggle={closeIndicatorSettings}>
             {selectedIndicatorForSettings} Settings for {selectedSymbol}
           </ModalHeader>
           <ModalBody style={{
             background: "transparent",
             backdropFilter: "blur(15px)",
+            height: isMobile ? '250px' : 'auto',
+            overflowY: isMobile ? 'scroll' : 'hidden'
           }}>
             <IndicatorsSettings onInputChange={handleSettings} indicatorName={selectedIndicatorForSettings} />
           </ModalBody>

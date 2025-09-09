@@ -438,8 +438,7 @@ const IndicatorsSettings = ({ indicatorName, onInputChange }) => {
 
 
   return (
-    <div
-      style={{}}>
+    <div>
       {(indiName === 'bb') ? <div className="d-flex align-items-center bd-highlight mb-3">
         <label className="me-auto p-2 bd-highlight" style={{ color: '#fff' }}> Standard Deviation :</label>
         <Input

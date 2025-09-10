@@ -5603,7 +5603,7 @@ const TradingViewChart2 = () => {
             zIndex: 10000,
             pointerEvents: 'none'
           }}>
-            Markers: {customMarkersRef.current?.length || 0}
+
           </div>
 
 

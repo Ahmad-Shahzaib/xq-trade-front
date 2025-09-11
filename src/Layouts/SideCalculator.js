@@ -897,15 +897,15 @@ const SideCalculator = ({ handlePlacePendingOrder, handlePlaceOrder, symbolMarke
                     <div className="custom-time-calculator" style={{
                       minWidth: 120,
                       background: isMobile ? "transparent " : 'tranasparent',
-                      backdropFilter: 'blur(30px)',
                       minHeight: 130,
                       borderRadius: 18,
                       boxShadow: '0 8px 32px rgba(0,0,0,0.7)',
                       padding: 12,
                       zIndex: 4010,
-                      backdropFilter: isMobile ? 'blur(3px)' : 'blur(8px)',
-                      WebkitBackdropFilter: isMobile ? 'blur(3px)' : 'blur(8px)',
-                      border: '2px solid rgb(63 9 68)', borderRadius: 18,
+                      backdropFilter: isMobile ? 'blur(3px)' : 'blur(15px)',
+                      WebkitBackdropFilter: isMobile ? 'blur(3px)' : 'blur(15px)',
+                      border: '2px solid rgb(63 9 68)',
+
 
                     }} onClick={e => e.stopPropagation()}>
                       <button

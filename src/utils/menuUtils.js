@@ -44,6 +44,9 @@ const cleanUpAndRedirect = (dispatch, navigate) => {
     localStorage.removeItem("token");
     localStorage.removeItem("crm-user");
     localStorage.removeItem("selectedAccount");
+    localStorage.removeItem("persist:root");
+    localStorage.removeItem("persist:login");
+    localStorage.removeItem("persist:tradeAccountsList");
 
     dispatch(resetLoginFlag());
     // window.location.reload();

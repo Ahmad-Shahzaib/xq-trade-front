@@ -1907,11 +1907,13 @@ const TradingViewChart2 = () => {
         };
 
         if (chartRef.current && seriesRef.current) {
+          // Use the order's strike price (if available) so the marker sticks to the entry price
+          const markerPrice = (real && (real.strike_price !== undefined && real.strike_price !== null)) ? real.strike_price : bid;
           addCustomMarker(
             chartRef.current,
             seriesRef.current,
             candleTime, // Use candleTime instead of currentTime
-            bid,
+            markerPrice,
             finalMarkerOptions
           );
         }
@@ -2085,7 +2087,7 @@ const TradingViewChart2 = () => {
         result: latestOrderResult,
         symbol: closedOrder.symbol,
         stake: closedOrder.stake,
-        payout: closedOrder.profit || closedOrder.payout,
+        payout: closedOrder.profit ?? closedOrder?.win_amount,
         direction: closedOrder.direction,
         duration: closedOrder.expiry_seconds,
         timestamp: new Date().toISOString()
@@ -2147,7 +2149,7 @@ const TradingViewChart2 = () => {
       // Still create the order in state but don't show marker visually
       const orderType = type === 'call' ? 'BUY' : 'SELL';
       const bid = symbols[testResponse.symbol]?.bid || 0;
-      const placedAt = new Date(testResponse.placed_time).getTime();
+      const placedAt = new Date(testResponse.placed_time).getTime() - 7 * 3600 * 1000; // Adjust for UTC+7
       const expiryAt = new Date(testResponse.expiry_time).getTime();
       const remainingTime = getExpirySeconds(testResponse.placed_time, testResponse.expiry_time);
       
@@ -2419,12 +2421,10 @@ const TradingViewChart2 = () => {
       localStorage.setItem("orderMarkers", JSON.stringify(localMarkers));
     }
 
-    console.log(`✅ Completely removed marker and horizontal line for order ${orderId}`);
   };
 
   // ✅ Helper function to remove markers that don't belong to current symbol
   const removeMarkersForOtherSymbols = (currentSymbol) => {
-    console.log(`🧹 Removing markers that don't belong to symbol ${currentSymbol}`);
     
     const storedOrders = JSON.parse(localStorage.getItem("activeTrades") || "[]");
     const otherSymbolOrders = storedOrders.filter(order => order.symbol !== currentSymbol);
@@ -2433,7 +2433,6 @@ const TradingViewChart2 = () => {
       const markerId = `marker-${order.id}`;
       const existingMarker = customMarkersRef.current.find(m => m.id === markerId);
       if (existingMarker) {
-        console.log(`🗑️ Removing marker ${markerId} for symbol ${order.symbol}`);
         removeCustomMarker(markerId);
       }
     });
@@ -3343,7 +3342,6 @@ const TradingViewChart2 = () => {
     }
 
     // ✅ First, clear all existing custom markers to prevent showing markers from other symbols
-    console.log(`🧹 Clearing all existing markers before restoring for symbol ${selectedSymbol}`);
     clearAllCustomMarkers();
     
     // ✅ Also remove any markers that might belong to other symbols
@@ -3362,9 +3360,6 @@ const TradingViewChart2 = () => {
     const relevantOrders = validOrders.filter(order => order.symbol === selectedSymbol);
     const otherSymbolOrders = validOrders.filter(order => order.symbol !== selectedSymbol);
     
-    console.log(`🔄 Total active orders: ${validOrders.length}`);
-    console.log(`🎯 Restoring ${relevantOrders.length} markers for current symbol: ${selectedSymbol}`);
-    console.log(`🚫 Hiding ${otherSymbolOrders.length} markers from other symbols:`, otherSymbolOrders.map(o => o.symbol));
 
     // ✅ Now recreate visual DOM markers when symbol changes to ensure they persist
     relevantOrders.forEach(order => {
@@ -3389,7 +3384,14 @@ const TradingViewChart2 = () => {
           const placedTime = Math.floor(order.createdAt / 1000);
           const timeframeSeconds = timeframes[selectedTimeframe];
           const alignedTime = Math.floor(placedTime / timeframeSeconds) * timeframeSeconds;
-          const currentPrice = symbols[order.symbol]?.bid || order.initialPrice;
+          // Use the stored initialPrice (strike price when order was placed) so restored markers
+          // remain fixed at the original trade price instead of following the live bid.
+          const currentPriceFromSymbols = symbols[order.symbol]?.bid;
+          const markerPrice = (order.initialPrice !== undefined && order.initialPrice !== null)
+            ? order.initialPrice
+            : (order.price !== undefined && order.price !== null)
+              ? order.price
+              : (currentPriceFromSymbols || 0);
 
           // Check if marker already exists to avoid duplicates
           const existingMarker = customMarkersRef.current.find(m => m.id === `marker-${order.id}`);
@@ -3411,7 +3413,7 @@ const TradingViewChart2 = () => {
               chartRef.current,
               seriesRef.current,
               alignedTime,
-              currentPrice,
+              markerPrice,
               markerOptions
             );
           }
@@ -4714,6 +4716,7 @@ const TradingViewChart2 = () => {
                     : "Loss"
                 }
                 isOpen={true}
+                amount={alert.payout}
                 finalResult={alert.result == "win" ? true : false}
                 title={
                   // Ensure alert.result is converted to a string before calling toUpperCase

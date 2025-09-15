@@ -28,7 +28,6 @@ const SideCalculator = ({ handlePlacePendingOrder, handlePlaceOrder, symbolMarke
   timePickerModel,
   setTimePickerModel
 }) => {
-
   const [isCustomModalOpen, setIsCustomModalOpen] = useState(false);
   const [modalData, setModalData] = useState({ pair: '', forecast: '', amount: '' });
   const [buy, setBuy] = useState(true);
@@ -204,7 +203,7 @@ const SideCalculator = ({ handlePlacePendingOrder, handlePlaceOrder, symbolMarke
       <CustomHeaderModal
         isOpen={isCustomModalOpen}
         toggle={() => setIsCustomModalOpen(false)}
-        pair={symbolMarketActive?.symbol}
+        pair={selectedSymbol}
         forecast={modalData.forecast}
         amount={modalData.amount}
         buy={buy}

@@ -2080,7 +2080,7 @@ const TradingViewChart2 = () => {
 
 
   useEffect(() => {
-
+    console.log("Latest Order Result or Closed Order changed:", { latestOrderResult, closedOrder });
     if (latestOrderResult && closedOrder) {
       const notification = {
         id: Date.now(),
@@ -3432,9 +3432,7 @@ const TradingViewChart2 = () => {
 
         // Set up automatic removal after remaining time expires
         if (order.remainingTime && order.remainingTime > 0) {
-          console.log(`⏰ Setting up marker removal for order ${order.id} in ${order.remainingTime} seconds`);
           markerHideTimersRef.current[order.id] = setTimeout(() => {
-            console.log(`⏰ Timer expired - removing marker for order ${order.id}`);
             removeMarker(order.id);
           }, order.remainingTime * 1000);
         }
@@ -4731,7 +4729,7 @@ const TradingViewChart2 = () => {
         </div>
 
         {/* Notification System */}
-        <NotificationManager />
+        {/* <NotificationManager /> */}
 
         <div className="chart-topbar   d-flex align-items-center gap-2 p-2"
           style={{
@@ -4852,7 +4850,7 @@ const TradingViewChart2 = () => {
                     )}
                     <span style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: 8, width: '100%' }}>
                       <i className="ri-bit-coin-line" style={{ background: activeTab === 'CRYPTOCURRENCIES' ? '#c41a6b' : 'transparent', color: '#fff', fontSize: 16, borderRadius: 6, padding: 2 }}></i>
-                      CRYPTOCURRENCIES
+                      CRYPTO
                     </span>
                   </div>
                   <div
@@ -5543,7 +5541,10 @@ const TradingViewChart2 = () => {
 
           <Dropdown isOpen={indicatorDropdownOpen} toggle={() => setIndicatorDropdownOpen(!indicatorDropdownOpen)} className="btn btn-outline-light p-0 border-0">
             {/* <DropdownToggle tag="i" className="ri-router-line" style={{ cursor: 'pointer' }} /> */}
-            <DropdownToggle className="btn btn-outline-light">
+            <DropdownToggle className="btn btn-outline-light" style={{
+                background: indicatorDropdownOpen ? 'linear-gradient(90deg, #c41a6b, #390452)' : '#160318',
+                border: '1px solid #160318', padding: "6px"
+              }}>
               <i className="ri-router-line" />
             </DropdownToggle>
             <DropdownMenu style={{
@@ -5589,11 +5590,11 @@ const TradingViewChart2 = () => {
                 className="d-flex align-items-center justify-content-between">
                 Bollinger Band {activeIndicators.includes('BB') && <i className="ri-check-line text-success"></i>}
               </DropdownItem>
-              <DropdownItem onClick={() => toggleModal('DonchianChannel')}
+              {/* <DropdownItem onClick={() => toggleModal('DonchianChannel')}
                 style={{ color: activeIndicators.includes('DonchianChannel') ? '#fff' : '#fff' }}
                 className="d-flex align-items-center justify-content-between">
                 Donchian Channel {activeIndicators.includes('DonchianChannel') && <i className="ri-check-line text-success"></i>}
-              </DropdownItem>
+              </DropdownItem> */}
               <DropdownItem onClick={() => toggleModal('IchimokuCloud')}
                 style={{ color: activeIndicators.includes('IchimokuCloud') ? '#fff' : '#fff' }}
                 className="d-flex align-items-center justify-content-between">
@@ -5610,11 +5611,11 @@ const TradingViewChart2 = () => {
                 className="d-flex align-items-center justify-content-between">
                 MACD {activeIndicators.includes('MACD') && <i className="ri-check-line text-success"></i>}
               </DropdownItem>
-              <DropdownItem onClick={() => toggleModal('Volume')}
+              {/* <DropdownItem onClick={() => toggleModal('Volume')}
                 style={{ color: activeIndicators.includes('Volume') ? '#fff' : '#fff' }}
                 className="d-flex align-items-center justify-content-between">
                 Volume {activeIndicators.includes('Volume') && <i className="ri-check-line text-success"></i>}
-              </DropdownItem>
+              </DropdownItem> */}
               <DropdownItem divider />
               <DropdownItem onClick={clearAllIndicators} >Clear All Indicators</DropdownItem>
             </DropdownMenu>

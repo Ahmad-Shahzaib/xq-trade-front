@@ -1558,7 +1558,7 @@ const TradingViewChart2 = () => {
     // ✅ Clear all custom markers immediately to prevent showing wrong symbol markers
     console.log(`🧹 Symbol changed to ${newSymbol} - clearing all markers`);
     clearAllCustomMarkers();
-    
+
     // Debug marker state after clearing
     setTimeout(() => {
       debugMarkerState();
@@ -1886,7 +1886,7 @@ const TradingViewChart2 = () => {
 
         const placedTime = new Date(real.placed_time).getTime();
         const expiryTime = new Date(real.expiry_time).getTime();
- updateChartMarkers();
+        updateChartMarkers();
         // ✅ Replace temp custom marker with real marker
         removeCustomMarker(`marker-${tempId}`);
 
@@ -2152,7 +2152,7 @@ const TradingViewChart2 = () => {
       const placedAt = new Date(testResponse.placed_time).getTime() - 7 * 3600 * 1000; // Adjust for UTC+7
       const expiryAt = new Date(testResponse.expiry_time).getTime();
       const remainingTime = getExpirySeconds(testResponse.placed_time, testResponse.expiry_time);
-      
+
       const newOrder = {
         id: orderId,
         symbol: testResponse.symbol,
@@ -2260,7 +2260,7 @@ const TradingViewChart2 = () => {
     if (!isTemporary) {
       // Start the countdown timer
       startOrderTimer(orderId, remainingTime);
-      
+
       // ✅ Also set up a direct timeout as backup for marker removal
       setTimeout(() => {
         console.log(`⏰ Direct timeout expired - ensuring marker ${orderId} is removed`);
@@ -2273,7 +2273,7 @@ const TradingViewChart2 = () => {
 
 
 
-   const updateChartMarkers = () => {
+  const updateChartMarkers = () => {
     try {
       if (
         !isChartMountedRef.current ||
@@ -2314,7 +2314,7 @@ const TradingViewChart2 = () => {
 
   const startOrderTimer = (orderId, duration) => {
     console.log(`⏰ Starting order timer for ${orderId} with ${duration} seconds remaining`);
-    
+
     if (duration <= 0) {
       console.log(`⏰ Order ${orderId} already expired - removing immediately`);
       removeMarker(orderId); // remove expired marker
@@ -2425,10 +2425,10 @@ const TradingViewChart2 = () => {
 
   // ✅ Helper function to remove markers that don't belong to current symbol
   const removeMarkersForOtherSymbols = (currentSymbol) => {
-    
+
     const storedOrders = JSON.parse(localStorage.getItem("activeTrades") || "[]");
     const otherSymbolOrders = storedOrders.filter(order => order.symbol !== currentSymbol);
-    
+
     otherSymbolOrders.forEach(order => {
       const markerId = `marker-${order.id}`;
       const existingMarker = customMarkersRef.current.find(m => m.id === markerId);
@@ -2442,18 +2442,18 @@ const TradingViewChart2 = () => {
   const debugMarkerState = () => {
     const activeOrders = JSON.parse(localStorage.getItem('activeTrades') || '[]');
     const visibleMarkers = customMarkersRef.current;
-    
+
     console.log('=== MARKER DEBUG STATE ===');
     console.log(`Current Symbol: ${selectedSymbol}`);
     console.log(`Active Orders Total: ${activeOrders.length}`);
     console.log(`Visible Markers in Memory: ${visibleMarkers.length}`);
-    
+
     activeOrders.forEach(order => {
       const markerExists = customMarkersRef.current.find(m => m.id === `marker-${order.id}`);
       const shouldShow = order.symbol === selectedSymbol;
       console.log(`Order ${order.id} (${order.symbol}): Memory=${!!markerExists}, Should Show=${shouldShow}`);
     });
-    
+
     console.log('========================');
   };
 
@@ -3291,7 +3291,7 @@ const TradingViewChart2 = () => {
       parsedOrders.forEach(order => {
         if (!orderTimersRef.current[order.id]) {
           startOrderTimer(order.id, order.remainingTime);
-          
+
           // ✅ Also set up direct timeout for guaranteed removal
           setTimeout(() => {
             console.log(`⏰ Direct initial timeout expired - ensuring order ${order.id} is removed`);
@@ -3343,7 +3343,7 @@ const TradingViewChart2 = () => {
 
     // ✅ First, clear all existing custom markers to prevent showing markers from other symbols
     clearAllCustomMarkers();
-    
+
     // ✅ Also remove any markers that might belong to other symbols
     removeMarkersForOtherSymbols(selectedSymbol);
 
@@ -3359,7 +3359,7 @@ const TradingViewChart2 = () => {
     // ✅ Load markers for the selectedSymbol - but now restore visual markers
     const relevantOrders = validOrders.filter(order => order.symbol === selectedSymbol);
     const otherSymbolOrders = validOrders.filter(order => order.symbol !== selectedSymbol);
-    
+
 
     // ✅ Now recreate visual DOM markers when symbol changes to ensure they persist
     relevantOrders.forEach(order => {
@@ -3367,7 +3367,7 @@ const TradingViewChart2 = () => {
       try {
         if (!orderTimersRef.current[order.id]) {
           startOrderTimer(order.id, order.remainingTime);
-          
+
           // ✅ Set up guaranteed removal after exact remaining time
           setTimeout(() => {
             console.log(`⏰ Guaranteed removal timeout expired for restored order ${order.id}`);
@@ -3449,7 +3449,7 @@ const TradingViewChart2 = () => {
     setTimeout(() => {
       updateCustomMarkerPositions();
     }, 300);
-    
+
     // Additional update after chart data loads
     setTimeout(() => {
       updateCustomMarkerPositions();
@@ -5779,7 +5779,6 @@ const TradingViewChart2 = () => {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                backgroundColor: 'rgba(0,0,0, 0.4)',
                 zIndex: 10000,
               }}
               onClick={() => { setShowTimePicker(false); setShowAmountCalculator(false); setTimePickerModel(false); }}

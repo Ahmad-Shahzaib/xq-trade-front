@@ -32,7 +32,48 @@ const getAllSymbolsSlice = createSlice({
         getAllSymbols: [
            { 
             profit_percentage: 0,
-            symbol: "BTCUSD"
+            symbol: "BTCUSD",
+            category: "Cryptocurrencies"
+         },
+         { 
+            profit_percentage: 2.5,
+            symbol: "ETHUSD",
+            category: "Cryptocurrencies"
+         },
+         { 
+            profit_percentage: -1.2,
+            symbol: "EURUSD",
+            category: "Currencies"
+         },
+         { 
+            profit_percentage: 0.8,
+            symbol: "GBPUSD",
+            category: "Currencies"
+         },
+         { 
+            profit_percentage: 1.5,
+            symbol: "AAPL",
+            category: "Stocks"
+         },
+         { 
+            profit_percentage: -0.3,
+            symbol: "GOOGL",
+            category: "Stocks"
+         },
+         { 
+            profit_percentage: 3.2,
+            symbol: "XAUUSD",
+            category: "Commodities"
+         },
+         { 
+            profit_percentage: -2.1,
+            symbol: "CRUDE",
+            category: "Commodities"
+         },
+         { 
+            profit_percentage: 0.5,
+            symbol: "SPX500",
+            category: "Indices"
          }
         ],
         status: 'idle',

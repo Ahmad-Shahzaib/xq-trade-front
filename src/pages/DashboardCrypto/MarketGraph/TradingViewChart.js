@@ -1574,6 +1574,15 @@ const TradingViewChart2 = () => {
       seriesRef.current.setData([]);
     }
 
+    // ✅ Clear all custom markers immediately to prevent showing wrong symbol markers
+    console.log(`🧹 Symbol changed to ${newSymbol} - clearing all markers`);
+    clearAllCustomMarkers();
+
+    // Debug marker state after clearing
+    setTimeout(() => {
+      debugMarkerState();
+    }, 100);
+
     socket.disconnect();                    // Close existing connection
     socket.symbols = [newSymbol];           // Set only the selected symbol
     socket.connect();
@@ -1896,7 +1905,7 @@ const TradingViewChart2 = () => {
 
         const placedTime = new Date(real.placed_time).getTime();
         const expiryTime = new Date(real.expiry_time).getTime();
-
+        updateChartMarkers();
         // ✅ Replace temp custom marker with real marker
         removeCustomMarker(`marker-${tempId}`);
 
@@ -1917,11 +1926,13 @@ const TradingViewChart2 = () => {
         };
 
         if (chartRef.current && seriesRef.current) {
+          // Use the order's strike price (if available) so the marker sticks to the entry price
+          const markerPrice = (real && (real.strike_price !== undefined && real.strike_price !== null)) ? real.strike_price : bid;
           addCustomMarker(
             chartRef.current,
             seriesRef.current,
             candleTime, // Use candleTime instead of currentTime
-            bid,
+            markerPrice,
             finalMarkerOptions
           );
         }
@@ -1957,6 +1968,7 @@ const TradingViewChart2 = () => {
 
         startOrderTimer(realId, getExpirySeconds(real.placed_time, real.expiry_time));
       } else {
+        updateChartMarkers();
         // ❌ Cleanup if API fails
         removeCustomMarker(`marker-${tempId}`);
 
@@ -2087,14 +2099,14 @@ const TradingViewChart2 = () => {
 
 
   useEffect(() => {
-
+    console.log("Latest Order Result or Closed Order changed:", { latestOrderResult, closedOrder });
     if (latestOrderResult && closedOrder) {
       const notification = {
         id: Date.now(),
         result: latestOrderResult,
         symbol: closedOrder.symbol,
         stake: closedOrder.stake,
-        payout: closedOrder.profit || closedOrder.payout,
+        payout: closedOrder.profit ?? closedOrder?.win_amount,
         direction: closedOrder.direction,
         duration: closedOrder.expiry_seconds,
         timestamp: new Date().toISOString()
@@ -2150,7 +2162,49 @@ const TradingViewChart2 = () => {
       return;
     }
 
-    console.log('🎯 Adding pointer for order:', { type, orderId, isTemporary });
+    // ✅ Only create visual marker if the order is for the currently selected symbol
+    if (testResponse.symbol !== selectedSymbol) {
+      console.log(`🚫 Skipping marker creation for ${testResponse.symbol} - current symbol is ${selectedSymbol}`);
+      // Still create the order in state but don't show marker visually
+      const orderType = type === 'call' ? 'BUY' : 'SELL';
+      const bid = symbols[testResponse.symbol]?.bid || 0;
+      const placedAt = new Date(testResponse.placed_time).getTime() - 7 * 3600 * 1000; // Adjust for UTC+7
+      const expiryAt = new Date(testResponse.expiry_time).getTime();
+      const remainingTime = getExpirySeconds(testResponse.placed_time, testResponse.expiry_time);
+
+      const newOrder = {
+        id: orderId,
+        symbol: testResponse.symbol,
+        type: orderType,
+        price: testResponse.stake,
+        amount: testResponse.stake,
+        initialPrice: bid,
+        time: expiryAt,
+        createdAt: placedAt,
+        remainingTime,
+      };
+
+      setActiveOrders(prev => {
+        const existsIndex = prev.findIndex(o => o.id === orderId);
+        let updated;
+        if (existsIndex !== -1) {
+          updated = [...prev];
+          updated[existsIndex] = newOrder;
+        } else {
+          updated = [...prev, newOrder];
+        }
+        localStorage.setItem("activeTrades", JSON.stringify(updated));
+        setOrderCount(updated.length);
+        return updated;
+      });
+
+      if (!isTemporary) {
+        startOrderTimer(orderId, remainingTime);
+      }
+      return;
+    }
+
+    console.log('🎯 Adding pointer for order:', { type, orderId, isTemporary, symbol: testResponse.symbol });
 
     const orderType = type === 'call' ? 'BUY' : 'SELL';
     const bid = symbols[selectedSymbol]?.bid || 0;
@@ -2184,13 +2238,13 @@ const TradingViewChart2 = () => {
       };
 
       // Use aligned candle time so marker appears on the current candle
-      addCustomMarker(
-        chartRef.current,
-        seriesRef.current,
-        candleTime, // Use candleTime instead of currentTime
-        bid,
-        markerOptions
-      );
+      // addCustomMarker(
+      //   chartRef.current,
+      //   seriesRef.current,
+      //   candleTime, // Use candleTime instead of currentTime
+      //   bid,
+      //   markerOptions
+      // );
 
     }
 
@@ -2223,7 +2277,14 @@ const TradingViewChart2 = () => {
     });
 
     if (!isTemporary) {
+      // Start the countdown timer
       startOrderTimer(orderId, remainingTime);
+
+      // ✅ Also set up a direct timeout as backup for marker removal
+      setTimeout(() => {
+        console.log(`⏰ Direct timeout expired - ensuring marker ${orderId} is removed`);
+        removeMarker(orderId);
+      }, remainingTime * 1000);
     }
 
     showToastMessage(`${orderType} order placed at price: ${bid}`);
@@ -2232,33 +2293,36 @@ const TradingViewChart2 = () => {
 
 
   const updateChartMarkers = () => {
-    // Disabled - we now only use custom markers, not legacy markers
-    return;
-    // try {
-    //   if (
-    //     !isChartMountedRef.current ||
-    //     !seriesRef.current ||
-    //     !seriesRef.current.setMarkers
-    //   ) return;
+    try {
+      if (
+        !isChartMountedRef.current ||
+        !seriesRef.current ||
+        !seriesRef.current.setMarkers
+      ) return;
 
-    //   const sorted = [...markersRef.current].sort((a, b) => a.time - b.time);
-    //   seriesRef.current.setMarkers(sorted);
+      const sorted = [...markersRef.current].sort((a, b) => a.time - b.time);
+      seriesRef.current.setMarkers(sorted);
 
-    // } catch (error) {
-    //   if (error?.message?.includes("disposed")) {
-    //     console.warn("Chart disposed — skipping marker update.");
-    //   } else {
-    //     console.error("Marker update error:", error);
-    //   }
-    // }
+    } catch (error) {
+      if (error?.message?.includes("disposed")) {
+        console.warn("Chart disposed — skipping marker update.");
+      } else {
+        console.error("Marker update error:", error);
+      }
+    }
   };
 
   useEffect(() => {
     isChartMountedRef.current = true;
-    console.log('✅ Chart mounted and ready for markers');
     return () => {
       isChartMountedRef.current = false;
-      console.log('🔄 Chart unmounted');
+    };
+  }, []);
+
+  useEffect(() => {
+    isChartMountedRef.current = true;
+    return () => {
+      isChartMountedRef.current = false;
     };
   }, []);
 
@@ -2268,7 +2332,10 @@ const TradingViewChart2 = () => {
 
 
   const startOrderTimer = (orderId, duration) => {
+    console.log(`⏰ Starting order timer for ${orderId} with ${duration} seconds remaining`);
+
     if (duration <= 0) {
+      console.log(`⏰ Order ${orderId} already expired - removing immediately`);
       removeMarker(orderId); // remove expired marker
       setActiveOrders(prev => {
         const updated = prev.filter(o => o.id !== orderId);
@@ -2278,10 +2345,12 @@ const TradingViewChart2 = () => {
       return;
     }
 
+    // Clear existing timer if any
     if (orderTimersRef.current[orderId]) {
       clearInterval(orderTimersRef.current[orderId]);
     }
 
+    // Set up countdown timer that ticks every second
     orderTimersRef.current[orderId] = setInterval(() => {
       setActiveOrders(prev => {
         const updatedOrders = prev.map(order => {
@@ -2289,9 +2358,11 @@ const TradingViewChart2 = () => {
             const newRemainingTime = order.remainingTime - 1;
 
             if (newRemainingTime <= 0) {
+              console.log(`⏰ Order ${orderId} timer reached 0 - removing marker and calculating result`);
               clearInterval(orderTimersRef.current[orderId]);
               delete orderTimersRef.current[orderId];
 
+              // Calculate final result
               const currentBid = symbols[order.symbol]?.bid || 0;
               let result = "DRAW";
               if (order.type === "BUY") {
@@ -2300,21 +2371,24 @@ const TradingViewChart2 = () => {
                 result = currentBid < order.initialPrice ? "WIN" : (currentBid > order.initialPrice ? "LOSS" : "DRAW");
               }
 
+              // Remove marker and show completion message
               removeMarker(orderId);
               showToastMessage(`Order ${order.type} completed: ${result}`);
               return null; // Remove from state
             }
 
+            // Update remaining time
             return { ...order, remainingTime: newRemainingTime };
           }
           return order;
         }).filter(Boolean);
 
+        // Update localStorage with new remaining times
         localStorage.setItem("activeTrades", JSON.stringify(updatedOrders));
         setOrderCount(updatedOrders.length);
         return updatedOrders;
       });
-    }, 1000);
+    }, 1000); // Update every second
   };
 
 
@@ -2328,6 +2402,7 @@ const TradingViewChart2 = () => {
       if (markerHideTimersRef.current && markerHideTimersRef.current[orderId]) {
         clearTimeout(markerHideTimersRef.current[orderId]);
         delete markerHideTimersRef.current[orderId];
+        console.log(`✅ Cleared hide timeout for marker ${orderId}`);
       }
     } catch (e) {
       console.warn('Failed to clear marker hide timeout for', orderId, e);
@@ -2335,11 +2410,13 @@ const TradingViewChart2 = () => {
 
     // 1. Remove custom marker (which will also remove its horizontal line)
     removeCustomMarker(`marker-${orderId}`);
+    console.log(`✅ Removed custom marker for order ${orderId}`);
 
-    // 2. Clear timer
+    // 2. Clear countdown timer
     if (orderTimersRef.current[orderId]) {
       clearInterval(orderTimersRef.current[orderId]);
       delete orderTimersRef.current[orderId];
+      console.log(`✅ Cleared countdown timer for order ${orderId}`);
     }
 
     // 3. Remove from activeOrders state AND localStorage
@@ -2347,6 +2424,7 @@ const TradingViewChart2 = () => {
       const updated = prev.filter(order => order.id !== orderId);
       setOrderCount(updated.length);
       localStorage.setItem("activeTrades", JSON.stringify(updated));
+      console.log(`✅ Removed order ${orderId} from state and localStorage`);
       return updated;
     });
 
@@ -2362,9 +2440,49 @@ const TradingViewChart2 = () => {
       localStorage.setItem("orderMarkers", JSON.stringify(localMarkers));
     }
 
-    console.log(`✅ Completely removed marker and horizontal line for order ${orderId}`);
   };
 
+  // ✅ Helper function to remove markers that don't belong to current symbol
+  const removeMarkersForOtherSymbols = (currentSymbol) => {
+
+    const storedOrders = JSON.parse(localStorage.getItem("activeTrades") || "[]");
+    const otherSymbolOrders = storedOrders.filter(order => order.symbol !== currentSymbol);
+
+    otherSymbolOrders.forEach(order => {
+      const markerId = `marker-${order.id}`;
+      const existingMarker = customMarkersRef.current.find(m => m.id === markerId);
+      if (existingMarker) {
+        removeCustomMarker(markerId);
+      }
+    });
+  };
+
+  // 🐛 Debug function to check current marker state
+  const debugMarkerState = () => {
+    const activeOrders = JSON.parse(localStorage.getItem('activeTrades') || '[]');
+    const visibleMarkers = customMarkersRef.current;
+
+    console.log('=== MARKER DEBUG STATE ===');
+    console.log(`Current Symbol: ${selectedSymbol}`);
+    console.log(`Active Orders Total: ${activeOrders.length}`);
+    console.log(`Visible Markers in Memory: ${visibleMarkers.length}`);
+
+    activeOrders.forEach(order => {
+      const markerExists = customMarkersRef.current.find(m => m.id === `marker-${order.id}`);
+      const shouldShow = order.symbol === selectedSymbol;
+      console.log(`Order ${order.id} (${order.symbol}): Memory=${!!markerExists}, Should Show=${shouldShow}`);
+    });
+
+    console.log('========================');
+  };
+
+  // Make debug function globally accessible
+  useEffect(() => {
+    window.debugMarkerState = debugMarkerState;
+    return () => {
+      delete window.debugMarkerState;
+    };
+  }, [selectedSymbol]);
 
   // Custom marker management system
   const customMarkersRef = useRef([]);
@@ -2474,6 +2592,9 @@ const TradingViewChart2 = () => {
     // Apply default and custom styles
     let defaultStyles;
 
+    // Start markers hidden to avoid briefly showing in the wrong place
+    // while the chart/timeScale is still initializing. We'll reveal and
+    // animate them only after positioning succeeds.
     if (markerType === 'betting-win') {
       defaultStyles = {
         position: 'absolute',
@@ -2482,7 +2603,7 @@ const TradingViewChart2 = () => {
         cursor: onClick ? 'pointer' : 'default',
         zIndex: 1000,
         transition: animate ? 'all 0.3s ease' : 'none',
-        display: 'flex',
+        display: 'none', // hidden until positioned
         ...styles
       };
     } else {
@@ -2504,7 +2625,7 @@ const TradingViewChart2 = () => {
         zIndex: 1000,
         minWidth: '24px',
         minHeight: '24px',
-        display: 'flex',
+        display: 'none', // hidden until positioned
         alignItems: 'center',
         justifyContent: 'center',
         transition: animate ? 'all 0.3s ease' : 'none',
@@ -2550,8 +2671,18 @@ const TradingViewChart2 = () => {
         if (priceCoord !== null && timeCoord !== null) {
           marker.style.left = `${timeCoord}px`;
           marker.style.top = `${priceCoord}px`;
+          // Reveal with entrance animation only when coordinates are ready
           marker.style.display = 'flex';
-          marker.style.opacity = '1';
+          marker.style.opacity = '0';
+          if (animate) {
+            marker.style.transform = 'translate(-50%, -100%) scale(0)';
+            requestAnimationFrame(() => {
+              marker.style.transform = 'translate(-50%, -100%) scale(1)';
+              marker.style.opacity = '1';
+            });
+          } else {
+            marker.style.opacity = '1';
+          }
           // success - reset attempts counter
           _positionAttempts = 0;
           return;
@@ -2583,7 +2714,16 @@ const TradingViewChart2 = () => {
           marker.style.left = `${fallbackX}px`;
           marker.style.top = `${fallbackY}px`;
           marker.style.display = 'flex';
-          marker.style.opacity = '1';
+          marker.style.opacity = '0';
+          if (animate) {
+            marker.style.transform = 'translate(-50%, -100%) scale(0)';
+            requestAnimationFrame(() => {
+              marker.style.transform = 'translate(-50%, -100%) scale(1)';
+              marker.style.opacity = '1';
+            });
+          } else {
+            marker.style.opacity = '1';
+          }
         } catch (e) {
           // final fallback
           marker.style.left = '100px';
@@ -3148,6 +3288,7 @@ const TradingViewChart2 = () => {
     if (storedOrders) {
       let parsedOrders = JSON.parse(storedOrders);
 
+      // ✅ Clean up expired orders and calculate precise remaining times
       parsedOrders = parsedOrders.map(order => {
         const elapsed = Math.floor((Date.now() - order?.createdAt) / 1000);
         const remaining = Math.floor((order.time - Date.now()) / 1000);
@@ -3156,13 +3297,25 @@ const TradingViewChart2 = () => {
           ...order,
           remainingTime: remaining > 0 ? remaining : 0
         };
-      }).filter(order => order.remainingTime > 0);
+      }).filter(order => {
+        if (order.remainingTime <= 0) {
+          console.log(`🧹 Cleaning up expired order ${order.id} on component mount`);
+          return false;
+        }
+        return true;
+      });
 
       setActiveOrders(parsedOrders);
-      // ✅ Recreate timers for each active order
+      // ✅ Recreate timers for each active order and ensure they expire correctly
       parsedOrders.forEach(order => {
         if (!orderTimersRef.current[order.id]) {
           startOrderTimer(order.id, order.remainingTime);
+
+          // ✅ Also set up direct timeout for guaranteed removal
+          setTimeout(() => {
+            console.log(`⏰ Direct initial timeout expired - ensuring order ${order.id} is removed`);
+            removeMarker(order.id);
+          }, order.remainingTime * 1000);
         }
       });
 
@@ -3199,8 +3352,20 @@ const TradingViewChart2 = () => {
 
     }
   }, []);
-
+  // ✅ MAIN FIX: This useEffect ensures custom markers persist across symbol/route changes
+  // When user switches symbols, we restore visual markers for that specific symbol based on stored orders
   useEffect(() => {
+    // Wait for chart to be mounted before restoring markers
+    if (!isChartMountedRef.current || !chartRef.current || !seriesRef.current) {
+      return;
+    }
+
+    // ✅ First, clear all existing custom markers to prevent showing markers from other symbols
+    clearAllCustomMarkers();
+
+    // ✅ Also remove any markers that might belong to other symbols
+    removeMarkersForOtherSymbols(selectedSymbol);
+
     const storedOrders = JSON.parse(localStorage.getItem("activeTrades") || "[]");
 
     const validOrders = storedOrders
@@ -3210,35 +3375,81 @@ const TradingViewChart2 = () => {
       }))
       .filter(order => order.remainingTime > 0);
 
-    // ✅ Clear existing custom markers before adding new ones
-    clearAllCustomMarkers();
-
-    // ✅ Only load markers for the selectedSymbol
+    // ✅ Load markers for the selectedSymbol - but now restore visual markers
     const relevantOrders = validOrders.filter(order => order.symbol === selectedSymbol);
+    const otherSymbolOrders = validOrders.filter(order => order.symbol !== selectedSymbol);
 
-    // IMPORTANT: Do not recreate visual DOM markers on page reload.
-    // Restoring visual markers after a full page refresh caused stale
-    // markers to appear. We still need to restore order state and timers
-    // so orders continue to count down, but avoid re-adding marker DOM
-    // elements here.
+
+    // ✅ Now recreate visual DOM markers when symbol changes to ensure they persist
     relevantOrders.forEach(order => {
       // Ensure the per-second order timer is running for this restored order
       try {
         if (!orderTimersRef.current[order.id]) {
           startOrderTimer(order.id, order.remainingTime);
+
+          // ✅ Set up guaranteed removal after exact remaining time
+          setTimeout(() => {
+            console.log(`⏰ Guaranteed removal timeout expired for restored order ${order.id}`);
+            removeMarker(order.id);
+          }, order.remainingTime * 1000);
         }
       } catch (err) {
         console.warn('Failed to start order timer for restored order', order.id, err);
       }
 
-      // Schedule a safety-net removal after remainingTime so state/localStorage
-      // cleanup still happens even without DOM markers
+      // ✅ Recreate the visual custom marker for this order
       try {
+        if (symbols[order.symbol]) {
+          const placedTime = Math.floor(order.createdAt / 1000);
+          const timeframeSeconds = timeframes[selectedTimeframe];
+          const alignedTime = Math.floor(placedTime / timeframeSeconds) * timeframeSeconds;
+          // Use the stored initialPrice (strike price when order was placed) so restored markers
+          // remain fixed at the original trade price instead of following the live bid.
+          const currentPriceFromSymbols = symbols[order.symbol]?.bid;
+          const markerPrice = (order.initialPrice !== undefined && order.initialPrice !== null)
+            ? order.initialPrice
+            : (order.price !== undefined && order.price !== null)
+              ? order.price
+              : (currentPriceFromSymbols || 0);
+
+          // Check if marker already exists to avoid duplicates
+          const existingMarker = customMarkersRef.current.find(m => m.id === `marker-${order.id}`);
+          if (!existingMarker) {
+            const markerOptions = {
+              content: `$${order.amount}`,
+              type: order.type,
+              id: `marker-${order.id}`,
+              markerType: 'betting-win',
+              customClass: `${order.type.toLowerCase()}-order confirmed`,
+              tooltip: `${order.type} Order: $${order.amount} | Remaining: ${formatTime(order.remainingTime)}`,
+              animate: false, // No animation for restored markers
+              drawPriceLine: true,
+              lineWidth: 2,
+              lineStyle: 1
+            };
+
+            addCustomMarker(
+              chartRef.current,
+              seriesRef.current,
+              alignedTime,
+              markerPrice,
+              markerOptions
+            );
+          }
+        }
+      } catch (err) {
+        console.warn('Failed to recreate custom marker for restored order', order.id, err);
+      }
+
+      // ✅ Ensure proper timer setup for marker removal after exact duration
+      try {
+        // Clear any existing timeout to prevent duplicates
         if (markerHideTimersRef.current[order.id]) {
           clearTimeout(markerHideTimersRef.current[order.id]);
           delete markerHideTimersRef.current[order.id];
         }
 
+        // Set up automatic removal after remaining time expires
         if (order.remainingTime && order.remainingTime > 0) {
           markerHideTimersRef.current[order.id] = setTimeout(() => {
             removeMarker(order.id);
@@ -3249,34 +3460,20 @@ const TradingViewChart2 = () => {
       }
     });
 
-    // Disable legacy marker system - only use custom markers
-    // markersRef.current = relevantOrders.map(order => {
-    //   const placedTime = Math.floor(order.createdAt / 1000);
-    //   const timeframeSeconds = timeframes[selectedTimeframe];
-    //   // ✅ Realign to current timeframe for consistency
-    //   const alignedTime = Math.floor(placedTime / timeframeSeconds) * timeframeSeconds;
-
-    //   return {
-    //     id: order.id,
-    //     time: alignedTime,
-    //     position: 'aboveBar',
-    //     color: order.type === "SELL" ? 'red' : 'green',
-    //     shape: order.type === "SELL" ? 'arrowDown' : 'arrowUp',
-    //     text: `${order.amount}`,
-    //   };
-    // });
-
-    // seriesRef.current?.setMarkers(markersRef.current);
-
     // Clear any existing legacy markers
     markersRef.current = [];
     seriesRef.current?.setMarkers([]);
 
-    // Force marker position update after timeframe change
+    // Force marker position update after symbol/timeframe change with additional delay
     setTimeout(() => {
       updateCustomMarkerPositions();
-    }, 100);
-  }, [selectedSymbol, selectedTimeframe, clearAllCustomMarkers]);
+    }, 300);
+
+    // Additional update after chart data loads
+    setTimeout(() => {
+      updateCustomMarkerPositions();
+    }, 1000);
+  }, [selectedSymbol, selectedTimeframe, clearAllCustomMarkers, symbols, addCustomMarker, updateCustomMarkerPositions]);
 
 
 
@@ -3838,6 +4035,12 @@ const TradingViewChart2 = () => {
         }
       }
     }
+
+    // ✅ Trigger marker restoration after data loads successfully
+    setTimeout(() => {
+      updateCustomMarkerPositions();
+      console.log('🔄 Data loaded - triggering marker position update');
+    }, 100);
   }, [data, status, selectedSeriesType, bars, activeIndicators, autoScrollEnabled, mappedData,
     alligatorJawColor, alligatorTeethColor, alligatorLipsColor,
     alligatorJawPeriod, alligatorJawShift, alligatorTeethPeriod, alligatorTeethShift,
@@ -4530,6 +4733,7 @@ const TradingViewChart2 = () => {
                     : "Loss"
                 }
                 isOpen={true}
+                amount={alert.payout}
                 finalResult={alert.result == "win" ? true : false}
                 title={
                   // Ensure alert.result is converted to a string before calling toUpperCase
@@ -4544,7 +4748,7 @@ const TradingViewChart2 = () => {
         </div>
 
         {/* Notification System */}
-        <NotificationManager />
+        {/* <NotificationManager /> */}
 
         <div className="chart-topbar   d-flex align-items-center gap-2 p-2"
           style={{
@@ -4665,7 +4869,7 @@ const TradingViewChart2 = () => {
                     )}
                     <span style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: 8, width: '100%' }}>
                       <i className="ri-bit-coin-line" style={{ background: activeTab === 'CRYPTOCURRENCIES' ? '#c41a6b' : 'transparent', color: '#fff', fontSize: 16, borderRadius: 6, padding: 2 }}></i>
-                      CRYPTOCURRENCIES
+                      CRYPTO
                     </span>
                   </div>
                   <div
@@ -5372,7 +5576,10 @@ const TradingViewChart2 = () => {
 
           <Dropdown isOpen={indicatorDropdownOpen} toggle={() => setIndicatorDropdownOpen(!indicatorDropdownOpen)} className="btn btn-outline-light p-0 border-0">
             {/* <DropdownToggle tag="i" className="ri-router-line" style={{ cursor: 'pointer' }} /> */}
-            <DropdownToggle className="btn btn-outline-light">
+            <DropdownToggle className="btn btn-outline-light" style={{
+                background: indicatorDropdownOpen ? 'linear-gradient(90deg, #c41a6b, #390452)' : '#160318',
+                border: '1px solid #160318', padding: "6px"
+              }}>
               <i className="ri-router-line" />
             </DropdownToggle>
             <DropdownMenu style={{
@@ -5418,11 +5625,11 @@ const TradingViewChart2 = () => {
                 className="d-flex align-items-center justify-content-between">
                 Bollinger Band {activeIndicators.includes('BB') && <i className="ri-check-line text-success"></i>}
               </DropdownItem>
-              <DropdownItem onClick={() => toggleModal('DonchianChannel')}
+              {/* <DropdownItem onClick={() => toggleModal('DonchianChannel')}
                 style={{ color: activeIndicators.includes('DonchianChannel') ? '#fff' : '#fff' }}
                 className="d-flex align-items-center justify-content-between">
                 Donchian Channel {activeIndicators.includes('DonchianChannel') && <i className="ri-check-line text-success"></i>}
-              </DropdownItem>
+              </DropdownItem> */}
               <DropdownItem onClick={() => toggleModal('IchimokuCloud')}
                 style={{ color: activeIndicators.includes('IchimokuCloud') ? '#fff' : '#fff' }}
                 className="d-flex align-items-center justify-content-between">
@@ -5439,11 +5646,11 @@ const TradingViewChart2 = () => {
                 className="d-flex align-items-center justify-content-between">
                 MACD {activeIndicators.includes('MACD') && <i className="ri-check-line text-success"></i>}
               </DropdownItem>
-              <DropdownItem onClick={() => toggleModal('Volume')}
+              {/* <DropdownItem onClick={() => toggleModal('Volume')}
                 style={{ color: activeIndicators.includes('Volume') ? '#fff' : '#fff' }}
                 className="d-flex align-items-center justify-content-between">
                 Volume {activeIndicators.includes('Volume') && <i className="ri-check-line text-success"></i>}
-              </DropdownItem>
+              </DropdownItem> */}
               <DropdownItem divider />
               <DropdownItem onClick={clearAllIndicators} >Clear All Indicators</DropdownItem>
             </DropdownMenu>

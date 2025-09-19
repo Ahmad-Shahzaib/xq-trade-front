@@ -248,7 +248,7 @@ const ProfileSidebar = ({ isOpen, toggle }) => {
                                                 toggle()
                                             }}
                                         >
-                                            <i class="ri-question-line"></i>
+                                            <i className="ri-question-line"></i>
                                             <span className="fw-bold">{t('Help')}</span>
                                             <span> </span>
                                         </Button>

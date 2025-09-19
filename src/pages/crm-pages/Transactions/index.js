@@ -56,7 +56,7 @@ const Index = () => {
 
     {loading && (
       <div className="text-center mt-5">
-        <Spinner color="light" size="lg" />
+        <Spinner color="light" size="sm" />
         <p className="mt-3 text-light fw-semibold">
           {t("Loading transactions...")}
         </p>

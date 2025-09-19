@@ -43,7 +43,7 @@ const Market = () => {
     dispatch(fetchMarkets());
   }, [dispatch]);
 
-  console.log('marketImages:', marketImages);
+  // console.log('marketImages:', marketImages); // Removed console.log
 
   // const { t } = useTranslation();
   return (
@@ -96,3 +96,4 @@ const Market = () => {
 };
 
 export default Market;
+

@@ -100,7 +100,7 @@ const NewTradingAccount = () => {
                 <Form onSubmit={formik.handleSubmit} className="mt-4">
                     {/* Account Type Select */}
                     <FormGroup>
-                        <Label for="accountType">{t("Currency")}</Label>
+                        <Label htmlFor="accountType">{t("Currency")}</Label>
                         <Input
                             type="select"
                             name="accountType"
@@ -124,7 +124,7 @@ const NewTradingAccount = () => {
 
                     {/* name Input */}
                     <FormGroup>
-                        <Label for="name">{t("Name")}</Label>
+                        <Label htmlFor="name">{t("Name")}</Label>
                         <Input
                             type="text"
                             name="name"
@@ -162,3 +162,4 @@ const NewTradingAccount = () => {
 };
 
 export default NewTradingAccount;
+

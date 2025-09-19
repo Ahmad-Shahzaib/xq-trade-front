@@ -19,7 +19,7 @@ export const subscribeToOrderChannel = (account, callback) => {
   const channel = pusher.subscribe(channelName);
 
   channel.bind('new-order', (data) => {
-    console.log('puser data',data);
+    // console.log('puser data',data); // Removed console.log
     
     if (callback) {
       callback(data); // Trigger the callback with the event data
@@ -38,3 +38,4 @@ export const unsubscribeFromOrderChannel = (account) => {
     channel.unsubscribe();
   }
 };
+

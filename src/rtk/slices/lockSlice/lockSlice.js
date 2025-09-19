@@ -11,12 +11,12 @@ const lockSlice = createSlice({
     initialState,
     reducers: {
         lockScreen: (state) => {
-            console.log('Locking screen...');
+            // console.log('Locking screen...'); // Removed console.log
             state.isLocked = true;
             localStorage.setItem('isLocked', 'true'); 
         },
         unlockScreen: (state) => {
-            console.log('Unlocking screen...');
+            // console.log('Unlocking screen...'); // Removed console.log
             state.isLocked = false;
             localStorage.setItem('isLocked', 'false'); 
         },
@@ -26,3 +26,4 @@ const lockSlice = createSlice({
 export const { lockScreen, unlockScreen } = lockSlice.actions;
 
 export default lockSlice.reducer;
+

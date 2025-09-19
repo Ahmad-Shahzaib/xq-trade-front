@@ -20,7 +20,7 @@ const DepositeForm = () => {
             <Form onSubmit={handleSubmit}>
                 {/* Select Gateway */}
                 <FormGroup>
-                    <Label for="gateway">{t('Select Gateway')}</Label>
+                    <Label htmlFor="gateway">{t('Select Gateway')}</Label>
                     <Input
                         type="select"
                         id="gateway"
@@ -36,7 +36,7 @@ const DepositeForm = () => {
 
                 {/* Select Trade Account */}
                 <FormGroup>
-                    <Label for="tradeAccount">{('Trade Account')}</Label>
+                    <Label htmlFor="tradeAccount">{('Trade Account')}</Label>
                     <Input
                         type="select"
                         id="tradeAccount"
@@ -52,7 +52,7 @@ const DepositeForm = () => {
 
                 {/* Input Number with USD */}
                 <FormGroup>
-                    <Label for="amount">{t('Amount')}</Label>
+                    <Label htmlFor="amount">{t('Amount')}</Label>
                     <Row className='align-items-stretch mx-0' style={{border:'1px solid #ced4da', borderRadius:'0.25rem'}}>
                         <Col xs={10} >
                             <Input

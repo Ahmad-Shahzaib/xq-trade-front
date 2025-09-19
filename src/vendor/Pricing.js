@@ -167,7 +167,7 @@ const Pricing = ({ toggleTab }) => {
                     ...prevState,
                     [symbol]:digits
                 }))
-                console.log(`digit for ${symbol} is ${digits}`);
+                // ... console.log(`digit for ${symbol} is ${digits}`); // Removed console.log
                 
             }
 
@@ -462,3 +462,4 @@ const Pricing = ({ toggleTab }) => {
 };
 
 export default Pricing;
+

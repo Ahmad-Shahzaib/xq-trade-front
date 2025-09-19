@@ -32,7 +32,7 @@ const ResetVerification = () => {
         if (verified) {
             // Redirect to the password reset form
             //   navigate(`/new-password?email=${email}&token=${token}`);
-            console.log('verified');
+            // console.log('verified'); // Removed console.log
             setTimeout(() => {
                 navigate(`/password-reset?email=${email}&code=${code}`);
             }, 1500);
@@ -83,3 +83,4 @@ const ResetVerification = () => {
 };
 
 export default ResetVerification;
+

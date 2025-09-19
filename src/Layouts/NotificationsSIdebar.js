@@ -38,7 +38,7 @@ const NotificationsSIdebar = ({ isOpen, toggle }) => {
             <Container>
                 <div style={styles.header}>
                     <button className='p-0' style={styles.closeBtn} onClick={toggle}>
-                        <i class="ri-arrow-left-s-line"></i>
+                        <i className="ri-arrow-left-s-line"></i>
                     </button>
                 </div>
                 <div>

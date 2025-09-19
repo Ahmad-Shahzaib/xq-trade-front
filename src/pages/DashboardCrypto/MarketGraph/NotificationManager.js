@@ -9,8 +9,8 @@ const NotificationManager = () => {
 
   useEffect(() => {
     if (latestOrderResult && closedOrder) {
-        console.log("Latest Order Result:", latestOrderResult);
-console.log("Closed Order:", closedOrder);
+        // console.log("Latest Order Result:", latestOrderResult); // Removed console.log
+        // console.log("Closed Order:", closedOrder); // Removed console.log
       // Create notification from closed order data
       const notification = {
         id: Date.now(),
@@ -54,5 +54,6 @@ console.log("Closed Order:", closedOrder);
 };
 
 export default NotificationManager;
+
 
 

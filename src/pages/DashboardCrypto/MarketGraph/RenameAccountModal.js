@@ -45,7 +45,7 @@ const RenameAccountModal = ({ isOpen, toggle, account,tradeAccounts }) => {
                     {localError && <Alert color="danger">{localError}</Alert>}
                     {renameError && <Alert color="danger">{renameError}</Alert>}
                     <FormGroup>
-                        <Label for="accountName">Account Name</Label>
+                        <Label htmlFor="accountName">Account Name</Label>
                         <Input
                             type="text"
                             id="accountName"

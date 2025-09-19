@@ -236,9 +236,8 @@ const Register = () => {
                                                         {loading ? t('Registering') + '...' : t('Registration')}
                                                     </Button>
                                                     <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-                                                        <button type="button" style={{
+                                                        <div style={{
                                                             background: 'linear-gradient(90deg, #c800a1 0%, #7f2ae8 100%)',
-                                                            border: 'none',
                                                             borderRadius: '50%',
                                                             width: 48,
                                                             height: 48,
@@ -248,7 +247,7 @@ const Register = () => {
                                                             boxShadow: '0 0 30px #c800a155',
                                                         }}>
                                                             <GoogleLoginButton />
-                                                        </button>
+                                                        </div>
                                                         <button type="button" style={{
                                                             background: 'linear-gradient(90deg, #c800a1 0%, #7f2ae8 100%)',
                                                             border: 'none',

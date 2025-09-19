@@ -66,7 +66,7 @@ const TawkChat = () => {
                         widgetId="1imp5d1m7"
                         ref={tawkMessengerRef}
                         onLoad={() => {
-                            console.log("Tawk loaded");
+                            // console.log("Tawk loaded"); // Removed console.log
                             setIsChatLoaded(true); // ✅ Set chat as loaded
                             window.Tawk_API.hideWidget(); // ✅ Hide initially
                         }}

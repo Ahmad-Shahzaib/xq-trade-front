@@ -72,7 +72,7 @@ const Index = () => {
                                     {loading ? (
                                         <tr>
                                             <td colSpan="6" className="text-center">
-                                                <Spinner color="white" /> Loading...
+                                                <Spinner color="light" /> Loading...
                                             </td>
                                         </tr>
                                     ) : tickets.length > 0 ? (

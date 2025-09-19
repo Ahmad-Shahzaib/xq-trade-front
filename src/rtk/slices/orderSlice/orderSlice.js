@@ -9,7 +9,7 @@ export const placeOrder = createAsyncThunk(
     'order/placeOrder',
     async ({ orderPayload, onBinaryResponse }, { rejectWithValue }) => {
 
-        console.log('🚀 Order Payload slice:', orderPayload);
+        // console.log('🚀 Order Payload slice:', orderPayload); // Removed console.log
 
         try {
             const storedToken = localStorage.getItem("token");
@@ -145,6 +145,7 @@ const orderSlice = createSlice({
 export const { updateBinaryResponse, addTrade, updateTradeTime, removeTrade, loadTrades } = orderSlice.actions;
 
 export default orderSlice.reducer;
+
 
 
 

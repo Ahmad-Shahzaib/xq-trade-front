@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">XQ Trader</string>
+    <string name="title_activity_main">XQ Trader</string>
+    <string name="package_name">com.xqtrade.app</string>
+    <string name="custom_url_scheme">com.xqtrade.app</string>
+</resources>

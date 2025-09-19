@@ -48,7 +48,7 @@ const Login = () => {
                 
                 // Assuming response returns user data if successful
                 if (response) {
-                    console.log("Login successful, navigating to dashboard...");
+                    // console.log("Login successful, navigating to dashboard..."); // Removed console.log
                     navigate('/dashboard'); // Navigate to the dashboard after successful login
                     dispatch(unlockScreen()); 
                 } else {

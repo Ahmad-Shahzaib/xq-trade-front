@@ -129,7 +129,7 @@ export const logBalanceUpdate = (updateData) => {
     timestamp = new Date().toISOString()
   } = updateData;
 
-  console.log('💰 Balance Update:', {
+  // console.log('💰 Balance Update:', { // Removed console.log
     timestamp,
     type,
     oldBalance: formatBalance(oldBalance),
@@ -228,3 +228,4 @@ export const retryOperation = async (operation, maxRetries = 3, delay = 1000) =>
     }
   }
 };
+

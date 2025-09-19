@@ -29,7 +29,7 @@ const TransactionTable = () => {
             <BackButton />
             <div className='container-fluid'>
                 <div>
-                    {loading && <Spinner color="white" />}
+                    {loading && <Spinner color="light" />}
                     {error && <Alert color="danger">{error}</Alert>}
 
                     {!loading && !error && data.length > 0 ? (

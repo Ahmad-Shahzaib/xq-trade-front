@@ -56,7 +56,7 @@ const TradeNotification = ({ notification, onClose }) => {
         setTimeout(() => playTone(audioContext, 440.00, 0.2, 0.2), 200); // A4
       }
     } catch (error) {
-      console.log('Audio not supported or blocked');
+      // console.log('Audio not supported or blocked'); // Removed console.log
     }
   };
 
@@ -155,5 +155,6 @@ const TradeNotification = ({ notification, onClose }) => {
 };
 
 export default TradeNotification;
+
 
 

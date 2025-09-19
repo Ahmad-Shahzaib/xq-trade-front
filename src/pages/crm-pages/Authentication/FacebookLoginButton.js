@@ -19,13 +19,13 @@ const FacebookLoginButton = () => {
         appId="1021545336104945" // 🔥 Replace with your Facebook App ID
         
         onSuccess={(response) => {
-          console.log('✅ Login Success!', response);
+          // console.log('✅ Login Success!', response); // Removed console.log
         }}
         onFail={(error) => {
-          console.log('❌ Login Failed!', error);
+          // console.log('❌ Login Failed!', error); // Removed console.log
         }}
         onProfileSuccess={(profile) => {
-          console.log('🧑‍💻 Profile:', profile);
+          // console.log('🧑‍💻 Profile:', profile); // Removed console.log
         }}
         style={{
           backgroundColor: '#4267B2',

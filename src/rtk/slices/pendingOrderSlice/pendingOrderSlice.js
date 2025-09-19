@@ -9,7 +9,7 @@ export const placePendingOrder = createAsyncThunk(
   "order/placePendingOrder",
   async ({ type, orderPayload }, { rejectWithValue }) => {
 
-    console.log("Placing pending order with type:", type, "and payload:", orderPayload);
+    // console.log("Placing pending order with type:", type, "and payload:", orderPayload); // Removed console.log
 
     try {
       const storedToken = localStorage.getItem("token");

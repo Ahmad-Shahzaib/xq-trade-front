@@ -98,7 +98,7 @@ const ResetPassword = () => {
                     }}
                     validationSchema={validationSchema}
                     onSubmit={(values) => {
-                      console.log("Passwords:", values);
+                      // console.log("Passwords:", values); // Removed console.log
                       dispatch(resetPasswordValues({
                         email,
                         code,

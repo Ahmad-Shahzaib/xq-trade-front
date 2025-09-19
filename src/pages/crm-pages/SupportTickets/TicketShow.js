@@ -28,7 +28,7 @@ const TicketShow = () => {
     const { ticket, messages, status, error } = useSelector((state) => state.ticketShow) || {};
     const { replyStatus } = useSelector((state) => state.replyTicket) || {};
 
-    console.log('replyStatus', replyStatus)
+    // console.log('replyStatus', replyStatus) // Removed console.log
 
     const validationSchema = Yup.object({
         message: Yup.string().required('Message is required'),
@@ -101,7 +101,7 @@ const TicketShow = () => {
             <Container fluid className="mt-4">
                 {status === "loading" && (
                     <div className="text-center my-4">
-                        <Spinner color="white" />
+                        <Spinner color="light" />
                         <p>{t("Loading ticket details...")}</p>
                     </div>
                 )}
@@ -133,7 +133,7 @@ const TicketShow = () => {
                                     <Row>
                                         <Col xs={12}>
                                             <FormGroup>
-                                                <Label for="message">{t("Message")}</Label>
+                                                <Label htmlFor="message">{t("Message")}</Label>
                                                 <Input
                                                     id="message"
                                                     name="message"
@@ -156,7 +156,7 @@ const TicketShow = () => {
                                                 <Col md={8}>
                                                     <div className="d-flex align-items-center gap-1">
                                                         <Label
-                                                            for="newTicketAttachment"
+                                                            htmlFor="newTicketAttachment"
                                                             className="text-muted mb-0"
                                                             style={{ fontSize: '13px' }}
                                                         >

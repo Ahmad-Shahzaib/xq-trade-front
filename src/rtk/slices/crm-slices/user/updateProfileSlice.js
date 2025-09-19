@@ -40,7 +40,7 @@ const updateProfileSlice = createSlice({
             .addCase(updateProfile.fulfilled, (state, action) => {
                 // Handle successful profile update
                 state.status = 'succeeded';
-                console.log('Profile updated successfully:',);
+                // console.log('Profile updated successfully:',); // Removed console.log
             })
             .addCase(updateProfile.rejected, (state, action) => {
                 state.status = 'failed';
@@ -51,3 +51,4 @@ const updateProfileSlice = createSlice({
 });
 
 export default updateProfileSlice.reducer;
+

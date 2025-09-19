@@ -31,7 +31,7 @@ const TawkChat = () => {
     const dispatch = useDispatch();
     const { tickets, loading, error } = useSelector((state) => state.tickets);
     const { t } = useTranslation();
-    console.log('support tickets,', tickets);
+    // console.log('support tickets,', tickets); // Removed console.log
 
 
     useEffect(() => {
@@ -74,7 +74,7 @@ const handleViewTicket = (ticketId) => {
 
                 {loading ? (
                     <div className="flex justify-center items-center">
-                        <Spinner color="white" /> <span className="ml-2" style={{ fontSize: '16px', fontWeight: 'bold' }}>{t('Loading')}...</span>
+                        <Spinner color="light" /> <span className="ml-2" style={{ fontSize: '16px', fontWeight: 'bold' }}>{t('Loading')}...</span>
                     </div>
                 ) : tickets.length > 0 ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -140,3 +140,5 @@ const handleViewTicket = (ticketId) => {
 };
 
 export default TawkChat;
+
+

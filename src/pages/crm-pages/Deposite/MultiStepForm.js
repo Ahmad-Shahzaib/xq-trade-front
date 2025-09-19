@@ -187,7 +187,7 @@ const MultiStepForm = () => {
     if (status === "loading") {
         return (
             <div className="d-flex justify-content-center align-items-center">
-                <Spinner color="white" />
+                <Spinner color="light" />
             </div>
         );
     }

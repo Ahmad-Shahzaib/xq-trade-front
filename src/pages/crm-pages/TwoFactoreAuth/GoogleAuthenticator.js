@@ -40,7 +40,7 @@ const GoogleAuthenticator = () => {
 
                     {/* Setup Key Input Field */}
                     <FormGroup>
-                        <Label for="amount">{t('Setup Key')}</Label>
+                        <Label htmlFor="amount">{t('Setup Key')}</Label>
                         <Row className='align-items-stretch mx-0' style={{ border: '1px solid #ced4da', borderRadius: '0.25rem' }}>
                             <Col xs={10} className='ps-0'>
                                 <Input
@@ -58,7 +58,7 @@ const GoogleAuthenticator = () => {
                         </Row>
                     </FormGroup>
                     <div className="message">
-                        <p className="text-muted"><i class="ri-error-warning-line me-1">{t('Help')}</i> </p>
+                        <p className="text-muted"><i className="ri-error-warning-line me-1">{t('Help')}</i> </p>
                         <p className='mb-0 '>
                             {t('Google Authenticator is a multifactor app for mobile devices. It generates timed codes used during the 2-step verification process. To use Google Authenticator, install the Google Authenticator application on your mobile device.')}
                             

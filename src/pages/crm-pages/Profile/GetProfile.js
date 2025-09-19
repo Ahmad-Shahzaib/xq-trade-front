@@ -21,7 +21,7 @@ const GetProfile = () => {
     if (status === 'loading') {
         return (
             <div className="text-center">
-                <Spinner color="white" />
+                <Spinner color="light" />
                 <p>Loading...</p>
             </div>
         );

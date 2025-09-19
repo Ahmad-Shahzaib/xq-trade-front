@@ -31,7 +31,7 @@ const ForgetPasswordPage = props => {
       email: Yup.string().required(t('Please Enter Your Email')),
     }),
     onSubmit: (values, { resetForm }) => {
-      console.log('forget password:', values);
+      // console.log('forget password:', values); // Removed console.log
       dispatch(resetPassword(values)).then((res) => {
         if (res.meta.requestStatus === 'fulfilled') {
           resetForm();

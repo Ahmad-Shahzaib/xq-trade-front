@@ -86,7 +86,7 @@ const Help = () => {
                 borderRadius: "12px",
               }}
             >
-              <Link to='/chat' className="_14NmGwfthK TS4-iVM2yH YZzfCAAheO _5iBZUy61LM" data-test="help-tab_support" tabindex="0" style={{
+              <Link to='/chat' className="_14NmGwfthK TS4-iVM2yH YZzfCAAheO _5iBZUy61LM" data-test="help-tab_support" tabIndex="0" style={{
                 padding: "0px",
                 borderRadius: "12px",
                 width: "100%",
@@ -139,7 +139,7 @@ const Help = () => {
                   </div>
                 </div>
               </Link>
-              <Link to="/faqs" className="_14NmGwfthK TS4-iVM2yH YZzfCAAheO _5iBZUy61LM" data-test="help-tab_help-center" tabindex="0"
+              <Link to="/faqs" className="_14NmGwfthK TS4-iVM2yH YZzfCAAheO _5iBZUy61LM" data-test="help-tab_help-center" tabIndex="0"
                 style={{
                   padding: "0px",
                   borderRadius: "12px",
@@ -194,7 +194,7 @@ const Help = () => {
                   </div>
                 </div>
               </Link>
-              <Link to="/education-center" className="_14NmGwfthK TS4-iVM2yH YZzfCAAheO _5iBZUy61LM" data-test="help-tab_education" tabindex="0" style={{
+              <Link to="/education-center" className="_14NmGwfthK TS4-iVM2yH YZzfCAAheO _5iBZUy61LM" data-test="help-tab_education" tabIndex="0" style={{
                 padding: "0px",
                 borderRadius: "12px",
                 width: "100%",
@@ -239,7 +239,7 @@ const Help = () => {
 
                 </div>
               </Link>
-              <Link to="/xq-trade-tutorial" className="_14NmGwfthK TS4-iVM2yH YZzfCAAheO _5iBZUy61LM" data-test="help-tab_trading-tutorials" tabindex="0" style={{
+              <Link to="/xq-trade-tutorial" className="_14NmGwfthK TS4-iVM2yH YZzfCAAheO _5iBZUy61LM" data-test="help-tab_trading-tutorials" tabIndex="0" style={{
                 padding: "0px",
                 borderRadius: "12px",
                 width: "100%",

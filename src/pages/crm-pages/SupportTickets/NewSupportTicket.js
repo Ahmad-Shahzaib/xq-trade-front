@@ -66,13 +66,13 @@ const NewSupportTicket = () => {
                 message: values.message
             }
 
-            console.log('payload st', payload);
+            // console.log('payload st', payload); // Removed console.log
 
 
             dispatch(createSupportTicket(payload)).then((response) => {
                 if (response.meta.requestStatus === "fulfilled") {
                     const windowWidth = window.innerWidth; // Get window width
-                    console.log("Window Width:", windowWidth); // Debugging
+                    console.log("Window Width:", windowWidth); // Debugging // Removed console.log
 
                     if (windowWidth > 768) {
                         navigate("/support-tickets");
@@ -149,7 +149,7 @@ const NewSupportTicket = () => {
                             <Row>
                                 <Col md={6}>
                                     <FormGroup>
-                                        <Label for="name" style={{ color: 'white' }}>{t('Name')}</Label>
+                                        <Label htmlFor="name" style={{ color: 'white' }}>{t('Name')}</Label>
                                         <Input
                                             id="name"
                                             name="name"
@@ -167,7 +167,7 @@ const NewSupportTicket = () => {
                                 </Col>
                                 <Col md={6}>
                                     <FormGroup>
-                                        <Label for="email" style={{ color: 'white' }}>{t('Email')}</Label>
+                                        <Label htmlFor="email" style={{ color: 'white' }}>{t('Email')}</Label>
                                         <Input
                                             id="email"
                                             name="email"
@@ -182,7 +182,7 @@ const NewSupportTicket = () => {
                             <Row>
                                 <Col md={6}>
                                     <FormGroup>
-                                        <Label for="subject" style={{ color: 'white' }}>{t('Subject')}</Label>
+                                        <Label htmlFor="subject" style={{ color: 'white' }}>{t('Subject')}</Label>
                                         <Input
                                             id="subject"
                                             name="subject"
@@ -200,7 +200,7 @@ const NewSupportTicket = () => {
                                 </Col>
                                 <Col md={6}>
                                     <FormGroup>
-                                        <Label for="priority" style={{ color: 'white' }}>{t('Priority')}</Label>
+                                        <Label htmlFor="priority" style={{ color: 'white' }}>{t('Priority')}</Label>
                                         <Input
                                             id="priority"
                                             name="priority"
@@ -224,7 +224,7 @@ const NewSupportTicket = () => {
                             <Row>
                                 <Col xs={12}>
                                     <FormGroup>
-                                        <Label for="message" style={{ color: 'white' }}>{t('Message')}</Label>
+                                        <Label htmlFor="message" style={{ color: 'white' }}>{t('Message')}</Label>
                                         <Input
                                             id="message"
                                             name="message"
@@ -248,7 +248,7 @@ const NewSupportTicket = () => {
                                         <Col md={8}>
                                             <div className="d-flex align-items-center gap-1">
                                                 <Label
-                                                    for="newTicketAttachment"
+                                                    htmlFor="newTicketAttachment"
                                                     className="mb-0"
                                                     style={{ fontSize: '13px', color: 'white' }}
                                                 >
@@ -338,3 +338,4 @@ const NewSupportTicket = () => {
 }
 
 export default NewSupportTicket
+

@@ -47,12 +47,12 @@ connect() {
     if (!url) return;
 
     this.connecting = true; // ⬅️ Mark as connecting
-    console.log('Attempting WebSocket connection to:', url);
+    // console.log('Attempting WebSocket connection to:', url); // Removed console.log
     this.ws = new WebSocket(url);
 
     const connectionTimeout = setTimeout(() => {
         if (this.ws && this.ws.readyState !== WebSocket.OPEN) {
-            console.log('Connection timeout, closing socket');
+            // console.log('Connection timeout, closing socket'); // Removed console.log
             this.ws.close();
         }
     }, this.connectionTimeout);
@@ -99,13 +99,18 @@ connect() {
 
     tryReconnect() {
         if (this.reconnectAttempts >= this.maxReconnectAttempts) {
-            console.error('Max reconnection attempts reached');
+            console.warn(`WebSocket: Max reconnection attempts (${this.maxReconnectAttempts}) reached. Connection will not be retried automatically.`);
+            this.emit('max_reconnect_attempts_reached', {
+                attempts: this.reconnectAttempts,
+                maxAttempts: this.maxReconnectAttempts,
+                message: 'Maximum reconnection attempts reached. Please check your internet connection.'
+            });
             return;
         }
 
         this.reconnectAttempts++;
         const delay = this.reconnectInterval * Math.pow(1.5, this.reconnectAttempts - 1); // Exponential backoff
-        // console.log(`Attempting to reconnect (${this.reconnectAttempts}/${this.maxReconnectAttempts}) in ${delay}ms...`);
+        // console.log(`WebSocket: Attempting to reconnect (${this.reconnectAttempts}/${this.maxReconnectAttempts}) in ${Math.round(delay)}ms...`); // Removed console.log
 
         setTimeout(() => {
             if (!this.connected) {
@@ -156,3 +161,4 @@ const socket = new WebSocketClient(
 socket.fetchSymbols();
 
 export default socket;
+

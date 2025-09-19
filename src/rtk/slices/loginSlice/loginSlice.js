@@ -14,7 +14,7 @@ export const loginUser = createAsyncThunk('login/loginUser', async (credentials)
         });
         
         // Log the response for debugging
-        console.log("Login Response:", response.data);
+        // console.log("Login Response:", response.data); // Removed console.log
         
         // Return the response directly if the login is successful
         return response.data;
@@ -74,3 +74,4 @@ const loginSlice = createSlice({
 export const { resetLoginFlag } = loginSlice.actions; // Export the new action
 
 export default loginSlice.reducer;
+

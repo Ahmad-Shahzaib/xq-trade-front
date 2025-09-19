@@ -585,6 +585,9 @@ const TradingViewChart2 = () => {
       seriesRef.current.setData([]);
     }
 
+    // Reset last candle reference to prevent bridging between symbols
+    lastCandleRef.current = null;
+
     socket.disconnect();                    // Close existing connection
     socket.symbols = [newSymbol];           // Set only the selected symbol
     socket.connect();
@@ -1670,6 +1673,23 @@ const TradingViewChart2 = () => {
           bottom: 0.2, // Adds space below the lowest price
         },
         borderVisible: false,
+        tickMarkFormatter: (price) => {
+          // Format price with appropriate decimal places
+          if (price >= 1000) {
+            return price.toFixed(0);
+          } else if (price >= 1) {
+            return price.toFixed(2);
+          } else {
+            return price.toFixed(4);
+          }
+        },
+        // Limit the number of price levels to maximum 10
+        mode: 1, // Normal price scale mode
+        autoScale: true,
+        entireTextOnly: false,
+        visible: true,
+        drawTicks: true,
+        alignLabels: true,
       },
       timeScale: {
         timeVisible: true,
@@ -1689,6 +1709,22 @@ const TradingViewChart2 = () => {
         },
         minMove: 0.0001,
         autoScale: true,
+        tickMarkFormatter: (price) => {
+          // Format price with appropriate decimal places
+          if (price >= 1000) {
+            return price.toFixed(0);
+          } else if (price >= 1) {
+            return price.toFixed(2);
+          } else {
+            return price.toFixed(4);
+          }
+        },
+        // Optimize price scale density
+        mode: 1, // Normal price scale mode
+        entireTextOnly: false,
+        visible: true,
+        drawTicks: true,
+        alignLabels: true,
       },
       crosshair: {
         mode: 1,
@@ -1815,7 +1851,7 @@ const TradingViewChart2 = () => {
   //  console.log(`bid of ${selectedSymbol} is ${bid}  at ${Date.now()}`)
 
   useEffect(() => {
-    if (!selectedSymbol || !symbols[selectedSymbol] || !seriesRef.current) return;
+    if (!selectedSymbol || !symbols[selectedSymbol] || !seriesRef.current || status === 'loading') return;
 
     const { bid } = symbols[selectedSymbol];
     //  console.log(`bid of ${selectedSymbol} is ${bid} at ${new Date().toLocaleTimeString()}`);

@@ -89,13 +89,22 @@ const ProfileUpdateForm = () => {
         fetch("https://restcountries.com/v3.1/all")
             .then((res) => res.json())
             .then((data) => {
-                const formattedCountries = data.map((country) => ({
-                    name: country.name.common,
-                    code: country.cca2, // cca2 is the 2-letter country code
-                }));
-                setCountries(formattedCountries);
+                // Check if data is an array before calling map
+                if (Array.isArray(data)) {
+                    const formattedCountries = data.map((country) => ({
+                        name: country.name.common,
+                        code: country.cca2, // cca2 is the 2-letter country code
+                    }));
+                    setCountries(formattedCountries);
+                } else {
+                    console.error("Error fetching countries: data is not an array", data);
+                    setCountries([]); // Set empty array as fallback
+                }
             })
-            .catch((err) => console.error("Error fetching countries:", err));
+            .catch((err) => {
+                console.error("Error fetching countries:", err);
+                setCountries([]); // Set empty array as fallback
+            });
     }, []);
 
     // Function to get country code from country name

@@ -54,7 +54,7 @@ const Wallets = () => {
     if (loading) {
         return (
             <div className="loading-overlay">
-                <Spinner color="white" size="lg" />
+                <Spinner color="light" size="sm" />
                 <p className="mt-3 text-white">{t('Loading your wallets')}...</p>
             </div>
         );
@@ -99,7 +99,7 @@ const Wallets = () => {
                             <div className="d-flex align-items-center mb-2">
                                 <span>Reff ID &nbsp;</span>
                                 <span className="me-2" style={{ color: "rgb(105, 255, 65)" }}>{user}</span>
-                                <i class="ri-file-copy-line cursor-pointer" onClick={handleCopy} ></i>
+                                <i className="ri-file-copy-line cursor-pointer" onClick={handleCopy} ></i>
                             </div>
                             <div>
                                 <h4 className='text-warning'>{t('Pending')}</h4>
@@ -110,7 +110,7 @@ const Wallets = () => {
                             <div className="d-flex align-items-center mb-2">
                                 <span>Reff ID &nbsp;</span>
                                 <span className="me-2" style={{ color: "rgb(105, 255, 65)" }}>{user}</span>
-                                <i class="ri-file-copy-line cursor-pointer" onClick={handleCopy} ></i>
+                                <i className="ri-file-copy-line cursor-pointer" onClick={handleCopy} ></i>
                             </div>
                             <div>
                                 <h4 className='text-success'>{t('Approved')}</h4>
@@ -123,7 +123,7 @@ const Wallets = () => {
                             <div className="d-flex align-items-center mb-2">
                                 {/* <span>ID</span>
                                 <span className="me-2" style={{ color: "rgb(105, 255, 65)" }}>{user}</span>
-                                <i class="ri-file-copy-line cursor-pointer" onClick={handleCopy} ></i> */}
+                               {/* <i className="ri-file-copy-line cursor-pointer" onClick={handleCopy} ></i> */}
                             </div>
                             <div>
                                 <h4 className='text-danger'>{t('Rejected')}</h4>
@@ -137,7 +137,7 @@ const Wallets = () => {
                     {!status && (
                         <div className="d-flex justify-content-end align-items-center">
                             {isLoading ? (
-                                <Spinner color="white" size="sm" />
+                                <Spinner color="light" size="sm" />
                             ) : (
                                 <Button className="depositButtonLite mb-2"
                                     style={{
@@ -153,7 +153,7 @@ const Wallets = () => {
                 <div className="d-flex align-items-center mb-2">
                     <span>{t("Reff Link")}&nbsp;</span>
                     <span className="me-2" style={{ color: "rgb(105, 255, 65)", fontSize: '11px' }}>{link ?? ""}</span>
-                    <i class="ri-file-copy-line cursor-pointer" onClick={handleCopyLink} ></i>
+                    <i className="ri-file-copy-line cursor-pointer" onClick={handleCopyLink} ></i>
                 </div>
                 <div className="page-header mb-4 p-4 text-center" style={{
                     background: "transparent",

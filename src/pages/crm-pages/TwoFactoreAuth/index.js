@@ -17,7 +17,7 @@ const Index = () => {
                 <Container fluid>
                     <Card className='bg-transparent'>
                         {/* <CardHeader className='bg-transparent'>
-                            <Row noGutters className="flex-nowrap align-items-center">
+                            <Row className="g-0 flex-nowrap align-items-center">
                                 <Col xs={12}>
                                     <h3 className="mb-0">
                                         Two Factor Authentication

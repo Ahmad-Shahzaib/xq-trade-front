@@ -170,7 +170,7 @@ const TransferForm = () => {
                         {error && <Alert color="danger">{typeof error === 'string' ? error : JSON.stringify(error)}</Alert>}
                         <form onSubmit={formik.handleSubmit}>
                             <FormGroup>
-                                <Label for="fromAccount">{t('From')}</Label>
+                                <Label htmlFor="fromAccount">{t('From')}</Label>
                                 <Select
                                     options={fromAccountOptions}
                                     onChange={(selectedOption) => {
@@ -189,7 +189,7 @@ const TransferForm = () => {
                             </FormGroup>
 
                             <FormGroup>
-                                <Label for="toAccount">{t('To')}</Label>
+                                <Label htmlFor="toAccount">{t('To')}</Label>
                                 <Select
                                     options={toAccountOptions}
                                     onChange={(selectedOption) => {
@@ -208,7 +208,7 @@ const TransferForm = () => {
                             </FormGroup>
 
                             <FormGroup>
-                                <Label for="amount">{t('Amount')}</Label>
+                                <Label htmlFor="amount">{t('Amount')}</Label>
                                 <input
                                     type="number"
                                     name="amount"

@@ -180,7 +180,7 @@ const Trades = () => {
                     <>
                         {loading && (
                             <div className="text-center my-3">
-                                <Spinner color="white" />
+                                <Spinner color="light" />
                             </div>
                         )}
                         {error && <Alert color="danger">Error: {error}</Alert>}
@@ -304,7 +304,7 @@ const Trades = () => {
                         {/* Added loading and error states for Pending tab */}
                         {loading && (
                             <div className="text-center my-3">
-                                <Spinner color="white" />
+                                <Spinner color="light" />
                             </div>
                         )}
                         {error && <Alert color="danger">Error: {error}</Alert>}

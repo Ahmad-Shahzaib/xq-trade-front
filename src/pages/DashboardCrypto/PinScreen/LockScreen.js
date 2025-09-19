@@ -24,7 +24,7 @@ export function LockScreen() {
     <Container className="d-flex flex-column align-items-center justify-content-center vh-100">
       <Card style={{ maxWidth: '400px', width: '100%' }}>
         <CardBody className="text-center">
-        <i class="ri-shield-line" style={{fontSize:'65px'}}></i>
+        <i className="ri-shield-line" style={{fontSize:'65px'}}></i>
           <h1 className="mb-3">{t('Enter PIN')}</h1>
           <p className="text-muted">{t('Please enter your PIN to unlock the app')}</p>
           <PinPad onPinSubmit={handlePinSubmit} error={error} />

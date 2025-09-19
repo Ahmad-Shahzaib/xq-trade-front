@@ -15,7 +15,7 @@ export const fetchTicketDetails = createAsyncThunk(
 
             const responseData = response.data
             const data = responseData?.data
-            console.log('ticket details', data);
+            // console.log('ticket details', data); // Removed console.log
 
             return data;
         } catch (error) {
@@ -58,7 +58,7 @@ const ticketShowSlice = createSlice({
             })
             .addCase(fetchTicketDetails.fulfilled, (state, action) => {
                 state.status = "succeeded";
-                console.log('action payload', action.payload);
+                // console.log('action payload', action.payload); // Removed console.log
 
                 state.ticket = action.payload?.ticket || null; // Ensure ticket is assigned safely
                 state.messages = action.payload?.messages || []; // Ensure messages array exists
@@ -74,3 +74,4 @@ const ticketShowSlice = createSlice({
 });
 
 export default ticketShowSlice.reducer;
+

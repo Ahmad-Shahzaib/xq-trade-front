@@ -80,7 +80,7 @@ function App() {
   const account = user ? user.account : null;
 
   function logout() {
-    console.log('Logging out due to inactivity');
+    // console.log('Logging out due to inactivity'); // Removed console.log
     handleLogout(dispatch, navigate);
   }
 
@@ -183,7 +183,7 @@ function App() {
 
   useEffect(() => {
     const { os, version } = getOSInfo();
-    console.log(`Operating System: ${os}, Version: ${version}`);
+    // console.log(`Operating System: ${os}, Version: ${version}`); // Removed console.log
     // You can also dispatch this information to your Redux store or use it as needed
   }, []);
 

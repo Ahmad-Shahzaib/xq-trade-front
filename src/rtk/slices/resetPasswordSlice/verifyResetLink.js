@@ -7,7 +7,7 @@ export const verifyResetLink = createAsyncThunk(
   async ({ email, code }, { rejectWithValue }) => {
     try {
       const res = await axiosInstance.post('/reset-verification', { email, code });
-      console.log('verifyResetLink',res.data);
+      // console.log('verifyResetLink',res.data); // Removed console.log
       
       return res.data;
     } catch (err) {
@@ -46,3 +46,4 @@ const verifyResetLinkSlice = createSlice({
 });
 
 export default verifyResetLinkSlice.reducer;
+

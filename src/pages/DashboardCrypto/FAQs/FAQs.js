@@ -34,7 +34,7 @@ const FAQs = () => {
 
                 {loading && (
                     <div className="text-center">
-                        <Spinner color="white" />
+                        <Spinner color="light" />
                         <p className="mt-2">{t('Loading FAQs')}...</p>
                     </div>
                 )}
@@ -52,7 +52,7 @@ const FAQs = () => {
                                 onClick={() => navigate(`/faq/${index}`)} // ✅ Navigate to details page
                                 style={{ cursor: "pointer" }} // ✅ Make it look clickable
                             >
-                                <i class="ri-menu-2-fill me-2"></i> <h5 className="mb-0 ">{t(faq.title)}</h5>
+                                <i className="ri-menu-2-fill me-2"></i> <h5 className="mb-0 ">{t(faq.title)}</h5>
                             </ListGroupItem>
                         ))}
                     </ListGroup>

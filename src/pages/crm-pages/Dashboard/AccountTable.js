@@ -29,7 +29,7 @@ const AccountTable = () => {
                         {status === 'loading' ? (
                             <tr>
                                 <td colSpan="7" className="text-center">
-                                    <Spinner color="white" />
+                                    <Spinner color="light" />
                                     <p>Loading...</p>
                                 </td>
                             </tr>

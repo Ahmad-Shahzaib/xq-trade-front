@@ -32,7 +32,7 @@ const Index = () => {
                 <Container fluid>
                     <Card className='bg-transparent'>
                         <CardHeader className='bg-transparent p-0 pb-2 mb-2'>
-                            <Row noGutters className="flex-nowrap align-items-center">
+                            <Row className="g-0 flex-nowrap align-items-center">
                                 <Col xs={6}>
                                     <h3 className="mb-0 fs-5">
                                         {t('Deposit Funds')}

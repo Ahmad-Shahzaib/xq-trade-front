@@ -119,6 +119,9 @@ const XQChart = () => {
       seriesRef.current.setData([]);
     }
 
+    // 🔧 Reset last candle reference to prevent bridging between symbols
+    lastCandleRef.current = null;
+
     // 🚀 Always fetch new data when symbol changes (Don't check `status`)
     dispatch(fetchMarketDataHistory({ symbol: newSymbol, timeframe: 'M1', bars: 100 }));
     // chartRef.current.timeScale().scrollToRealTime();
@@ -581,7 +584,7 @@ const XQChart = () => {
 
 
   useEffect(() => {
-    if (!selectedSymbol || !symbols[selectedSymbol] || !seriesRef.current) return;
+    if (!selectedSymbol || !symbols[selectedSymbol] || !seriesRef.current || status === 'loading') return;
 
     const { bid } = symbols[selectedSymbol];
     const currentTime = Math.floor(Date.UTC(

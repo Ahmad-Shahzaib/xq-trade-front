@@ -73,7 +73,7 @@ const ChangePassword = () => {
           }}
           validationSchema={validationSchema}
           onSubmit={(values) => {
-            console.log("Passwords:", values);
+            // console.log("Passwords:", values); // Removed console.log
           }}
         >
           {({ errors, touched }) => (
@@ -163,3 +163,4 @@ const ChangePassword = () => {
 };
 
 export default ChangePassword;
+

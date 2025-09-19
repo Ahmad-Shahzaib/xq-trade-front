@@ -43,7 +43,7 @@ const GoogleAuthenticatorOTP = () => {
                 </CardHeader>
                 <CardBody>
                     <FormGroup>
-                        <Label for="otp">{t('Google Authenticator OTP')}</Label>
+                        <Label htmlFor="otp">{t('Google Authenticator OTP')}</Label>
                         <Input
                             type="text"
                             id="otp"

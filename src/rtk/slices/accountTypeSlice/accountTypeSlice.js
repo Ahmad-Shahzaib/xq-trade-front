@@ -33,7 +33,7 @@ const accountTypeSlice = createSlice({
                 if (updatedAccount) {
                     // If balance is different, update selectedAccount in Redux and localStorage
                     if (updatedAccount.balance !== state.selectedAccount.balance) {
-                        console.log("Balance mismatch, updating selectedAccount...");
+                        // console.log("Balance mismatch, updating selectedAccount..."); // Removed console.log
                         state.selectedAccount = updatedAccount;
                         localStorage.setItem("selectedAccount", JSON.stringify(updatedAccount));
                     }
@@ -144,7 +144,7 @@ export const listenForOrderCloseUpdates = (id) => (dispatch) => {
     channel.bind("order-close", (data) => {
         // console.log(`Pusher triggered at id ${id}`);
 
-        console.log("Order Closed Event Received:", data);
+        // console.log("Order Closed Event Received:", data); // Removed console.log
         dispatch(setClosedOrder(data.order))
         dispatch(updateBalanceFromPusher({ id: data.account_id, balance: data.balance, order: data.order, }));
 
@@ -155,3 +155,4 @@ export const listenForOrderCloseUpdates = (id) => (dispatch) => {
         }
     });
 };
+

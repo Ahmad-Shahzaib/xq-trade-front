@@ -7,7 +7,7 @@ export const resetPassword = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.post('/reset', credentials);
-      console.log('reset form ', response.data);
+      // console.log('reset form ', response.data); // Removed console.log
       
       return response.data;
     } catch (error) {

@@ -7,12 +7,12 @@ import { resetLoginFlag } from "../rtk/slices/loginSlice/loginSlice";
  * @param {function} navigate - Navigation function from react-router
  */
 export const handleLogout = async (dispatch, navigate) => {
-    console.log("Logging out...");
+    // console.log("Logging out..."); // Removed console.log
 
     const token = localStorage.getItem("token");
 
     if (!token) {
-        console.log("No token found, logging out locally.");
+        // console.log("No token found, logging out locally."); // Removed console.log
         cleanUpAndRedirect(dispatch, navigate);
         return;
     }
@@ -28,7 +28,7 @@ export const handleLogout = async (dispatch, navigate) => {
             }
         );
 
-        console.log("Logout API successful:", response.data);
+        // console.log("Logout API successful:", response.data); // Removed console.log
     } catch (error) {
         console.error("Logout API failed:", error.response?.data || error.message);
     } finally {
@@ -52,5 +52,6 @@ const cleanUpAndRedirect = (dispatch, navigate) => {
     // window.location.reload();
     navigate("/login", { replace: true });
 
-    console.log("User logged out and redirected to login.");
+    // console.log("User logged out and redirected to login."); // Removed console.log
 };
+

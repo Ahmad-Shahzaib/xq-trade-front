@@ -22,11 +22,16 @@ const socketMiddleware = (store) => {
                 }, 1);
 
                 socket.on('new_data', throttledDispatch);
-                socket.on('connect', () => console.log('Socket connected'));
-                socket.on('disconnect', () => console.log('Socket disconnected'));
+                // socket.on('connect', () => console.log('Socket connected')); // Removed console.log
+                // socket.on('disconnect', () => console.log('Socket disconnected')); // Removed console.log
                 socket.on('error', (error) => {
                     console.error('Socket error:', error);
                     // Optionally dispatch an error action here if needed
+                });
+                socket.on('max_reconnect_attempts_reached', (data) => {
+                    console.warn('WebSocket connection failed permanently:', data.message);
+                    // You can dispatch a Redux action here to show a user notification
+                    // store.dispatch(showNotification({ type: 'warning', message: data.message }));
                 });
             }
         }

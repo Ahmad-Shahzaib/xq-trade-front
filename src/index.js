@@ -15,7 +15,12 @@ root.render(
     <Provider store={store}>
       <FavoriteCurrenciesProvider>
         <React.Fragment>
-          <BrowserRouter>
+          <BrowserRouter
+            future={{
+              v7_startTransition: true,
+              v7_relativeSplatPath: true
+            }}
+          >
             <App style={{
               paddingTop: 'env(safe-area-inset-top)',
               paddingBottom: 'env(safe-area-inset-bottom)',

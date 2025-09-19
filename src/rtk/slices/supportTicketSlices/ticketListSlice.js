@@ -16,7 +16,7 @@ export const fetchTickets = createAsyncThunk(
         });
         const res = response?.data
   
-        console.log("res tickets", res);
+        // console.log("res tickets", res); // Removed console.log
         return res?.data; // Returning only the tickets array
       } catch (error) {
         return rejectWithValue(error.response?.data || "Failed to fetch tickets");

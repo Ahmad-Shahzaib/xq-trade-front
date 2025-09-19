@@ -186,9 +186,9 @@ const Register = () => {
                                                         </div>
                                                         <div className="mt-3 text-center">
                                                             <div className="d-flex justify-content-center gap-2">
-                                                                <button type="button" className="btn btn-outline-secondary btn-icon">
+                                                                <div className="btn btn-outline-secondary btn-icon">
                                                                     <GoogleLoginButton />
-                                                                </button>
+                                                                </div>
                                                                 <button type="button" className="btn btn-outline-secondary btn-icon">
                                                                     <i className="ri-apple-fill" style={{ fontSize: 24 }}></i>
                                                                 </button>

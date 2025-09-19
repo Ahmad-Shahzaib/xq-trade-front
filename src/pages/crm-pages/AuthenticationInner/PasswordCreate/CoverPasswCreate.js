@@ -34,7 +34,7 @@ const CoverPasswCreate = () => {
                 .required("Confirm Password is required"),
         }),
         onSubmit: (values) => {
-            console.log(values);
+            // console.log(values); // Removed console.log
         }
     });
 

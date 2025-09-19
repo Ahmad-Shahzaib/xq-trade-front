@@ -79,7 +79,7 @@ const SymbolDetailPageMobile = () => {
 
     useEffect(() => {
         subscribeToOrderChannel(account, (data) => {
-            console.log('New order in Tradinggg:');
+            // console.log('New order in Tradinggg:'); // Removed console.log
             // Handle the order data as needed
         });
 
@@ -115,7 +115,7 @@ const SymbolDetailPageMobile = () => {
 
             dispatch(placeOrder(orderPayload)).then((response) => {
                 if (response.meta.requestStatus === 'fulfilled') {
-                    console.log("Order API response:"); // Log the successful response
+                    console.log("Order API response:"); // Log the successful response // Removed console.log
                 } else if (response.meta.requestStatus === 'rejected') {
                     console.error("Order API error:", orderError); // Log the error if it fails
                 }
@@ -265,7 +265,7 @@ const SymbolDetailPageMobile = () => {
 
             dispatch(placePendingOrder(orderPayload)).then((response) => {
                 if (response.meta.requestStatus === 'fulfilled') {
-                    console.log("Order API response:"
+                    console.log("Order API response:" // Removed console.log
                     );
                 } else if (response.meta.requestStatus === 'rejected') {
                     console.error("Order API error:", orderError);

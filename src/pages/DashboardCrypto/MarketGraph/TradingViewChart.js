@@ -16,6 +16,7 @@ import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { token } from '../../../utils/config';
 import { getAllSymbols } from "../../../rtk/slices/crm-slices/allSymbols/getAllSymbolsSlice";
+import { fetchSymbols } from "../../../rtk/slices/fetchSymbolsSlice/fetchSymbolsSlice";
 import SideCalculator from "../../../Layouts/SideCalculator";
 import { useFavoriteCurrencies } from '../../../context/FavoriteCurrenciesContext';
 import IndicatorsSettings from "./IndicatorsSettings";
@@ -610,6 +611,10 @@ const TradingViewChart2 = () => {
 
   const [selectedCategory, setSelectedCategory] = useState('Category'); // default label
   const [activeTab, setActiveTab] = useState('CURRENCIES'); // Add this line
+  
+  // Initialize favorites hook early to avoid initialization errors
+  const { addFavorite, favorites, isFavorite, removeFavorite } = useFavoriteCurrencies();
+  
   const [volumeColor1, setVolumeColor1] = useState(() => {
     const stored = localStorage.getItem('volumeColor1');
     return stored ? stored : '#26a69a';
@@ -652,6 +657,10 @@ const TradingViewChart2 = () => {
   const orderTimersRef = useRef({});
   // Track timeouts that will hide restored custom markers after their remaining time
   const markerHideTimersRef = useRef({});
+  
+  // Throttle variables for marker position updates
+  let updateMarkerThrottle = false;
+  let scrollThrottle = false;
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 520);
   const [selectedTimeframe, setSelectedTimeframe] = useState("1m");
@@ -1280,6 +1289,7 @@ const TradingViewChart2 = () => {
     const storedToken = localStorage.getItem('token');
     if (storedToken) {
       dispatch(getAllSymbols(storedToken));
+      dispatch(fetchSymbols()); // Fetch symbol names for the dropdown
     }
   }, [dispatch, token]);
 
@@ -1526,12 +1536,12 @@ const TradingViewChart2 = () => {
         .filter(symbol => {
           // Filter by active tab category
           if (activeTab === 'FAVORITES') {
-            return favoriteSymbols.includes(symbol.value);
+            return favorites.includes(symbol.value);
           }
           return symbol.category.toUpperCase() === activeTab;
         })
       : [];
-  }, [derivedSymbols, percentage, searchTerm, allSymbols, activeTab, favoriteSymbols]);
+  }, [derivedSymbols, percentage, searchTerm, allSymbols, activeTab, favorites]);
 
   // Since we're filtering by activeTab, we don't need to group anymore
   // Just use filteredOptions directly for the current category
@@ -2669,8 +2679,26 @@ const TradingViewChart2 = () => {
 
 
         if (priceCoord !== null && timeCoord !== null) {
-          marker.style.left = `${timeCoord}px`;
-          marker.style.top = `${priceCoord}px`;
+          // Get chart container bounds to constrain marker position
+          const chartBounds = chartContainerRef.current ? chartContainerRef.current.getBoundingClientRect() : null;
+          let constrainedX = timeCoord;
+          let constrainedY = priceCoord;
+          
+          if (chartBounds && chartContainerRef.current) {
+            const containerWidth = chartContainerRef.current.clientWidth;
+            const containerHeight = chartContainerRef.current.clientHeight;
+            const markerWidth = 24; // Approximate marker width
+            const markerHeight = 24; // Approximate marker height
+            
+            // Constrain X position within chart bounds
+            constrainedX = Math.max(markerWidth / 2, Math.min(timeCoord, containerWidth - markerWidth / 2));
+            
+            // Constrain Y position within chart bounds
+            constrainedY = Math.max(markerHeight, Math.min(priceCoord, containerHeight - markerHeight / 2));
+          }
+          
+          marker.style.left = `${constrainedX}px`;
+          marker.style.top = `${constrainedY}px`;
           // Reveal with entrance animation only when coordinates are ready
           marker.style.display = 'flex';
           marker.style.opacity = '0';
@@ -2805,7 +2833,29 @@ const TradingViewChart2 = () => {
     customMarkersRef.current.forEach(markerData => {
       if (markerData.updatePosition) {
         try {
-          markerData.updatePosition();
+          // Check if marker is still visible in the current time range
+          const visibleRange = chartRef.current.timeScale().getVisibleRange();
+          const markerTime = markerData.time;
+          
+          if (visibleRange && markerTime) {
+            const isInVisibleRange = markerTime >= visibleRange.from && markerTime <= visibleRange.to;
+            
+            if (isInVisibleRange) {
+              // Marker should be visible, update its position
+              markerData.updatePosition();
+              if (markerData.element) {
+                markerData.element.style.visibility = 'visible';
+              }
+            } else {
+              // Marker is outside visible range, hide it but don't remove
+              if (markerData.element) {
+                markerData.element.style.visibility = 'hidden';
+              }
+            }
+          } else {
+            // Fallback: always try to update position if no visible range info
+            markerData.updatePosition();
+          }
         } catch (error) {
           // Handle disposed chart error gracefully
           if (!error?.message?.includes("disposed")) {
@@ -2917,10 +2967,28 @@ const TradingViewChart2 = () => {
       });
     };
 
-    const handleCrosshairMove = () => updateCustomMarkerPositions();
+    const handleCrosshairMove = () => {
+      // Throttle marker updates to improve performance
+      if (!updateMarkerThrottle) {
+        updateMarkerThrottle = true;
+        requestAnimationFrame(() => {
+          updateCustomMarkerPositions();
+          updateMarkerThrottle = false;
+        });
+      }
+    };
 
     // Add more event listeners for better marker tracking
-    const handleScroll = () => updateCustomMarkerPositions();
+    const handleScroll = () => {
+      // Throttle scroll updates to prevent excessive calls
+      if (!scrollThrottle) {
+        scrollThrottle = true;
+        requestAnimationFrame(() => {
+          updateCustomMarkerPositions();
+          scrollThrottle = false;
+        });
+      }
+    };
     const handleResize = () => {
       setTimeout(() => updateCustomMarkerPositions(), 100);
     };
@@ -4207,6 +4275,27 @@ const TradingViewChart2 = () => {
           bottom: 0.2, // Adds space below the lowest price
         },
         borderVisible: false,
+        tickMarkFormatter: (price) => {
+          // Format price with appropriate decimal places
+          if (price >= 1000) {
+            return price.toFixed(0);
+          } else if (price >= 1) {
+            return price.toFixed(2);
+          } else {
+            return price.toFixed(4);
+          }
+        },
+        // Limit the number of price levels to maximum 10
+        mode: 1, // Normal price scale mode
+        autoScale: true,
+        entireTextOnly: false,
+        visible: true,
+        drawTicks: true,
+        alignLabels: true,
+        scaleMargins: {
+          top: 0.1,
+          bottom: 0.2,
+        },
       },
       timeScale: {
         timeVisible: true,
@@ -4226,6 +4315,22 @@ const TradingViewChart2 = () => {
         },
         minMove: 0.0001,
         autoScale: true,
+        tickMarkFormatter: (price) => {
+          // Format price with appropriate decimal places
+          if (price >= 1000) {
+            return price.toFixed(0);
+          } else if (price >= 1) {
+            return price.toFixed(2);
+          } else {
+            return price.toFixed(4);
+          }
+        },
+        // Optimize price scale density
+        mode: 1, // Normal price scale mode
+        entireTextOnly: false,
+        visible: true,
+        drawTicks: true,
+        alignLabels: true,
       },
       crosshair: {
         mode: 1,
@@ -4624,7 +4729,6 @@ const TradingViewChart2 = () => {
     }
   }, []);
 
-  const { addFavorite, favorites, isFavorite, removeFavorite } = useFavoriteCurrencies();
   // Handler to add currently selected symbol to favorites when FAVORITES tab is clicked
   const handleFavoritesTabClick = () => {
     setActiveTab('FAVORITES');
@@ -5346,7 +5450,7 @@ const TradingViewChart2 = () => {
             </DropdownMenu>
           </Dropdown>
 
-          <style jsx>{`
+          <style>{`
   /* Mobile responsive styles */
   @media (max-width: 768px) {
     .responsive-dropdown-menu .dropdown-container {

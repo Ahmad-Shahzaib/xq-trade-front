@@ -621,31 +621,56 @@ const TradingViewChart2 = () => {
   }
 
   const handleSelectChange = (selectedOption) => {
-    if (!selectedOption) return;
-    console.log('selected symbol options', selectedOption)
-    const newSymbol = selectedOption.value;
-    localStorage.setItem("selectedSymbol", newSymbol); // ← Save to localStorage
+    try {
+      if (!selectedOption || !selectedOption.value) {
+        console.warn('Invalid symbol selection');
+        return;
+      }
 
-    // const fullName = getSymbolFullName(selectedOption.value);
-    // document.getElementById("chart-title").innerText = fullName;
+      const newSymbol = selectedOption.value;
+      
+      // Prevent switching to the same symbol
+      if (newSymbol === selectedSymbol) {
+        return;
+      }
 
-    setbars(100);
-    visibleRangeRef.current = null;
-    dispatch(setClickedSymbolData(newSymbol));
+      console.log('selected symbol options', selectedOption)
+      localStorage.setItem("selectedSymbol", newSymbol); // ← Save to localStorage
 
-    // Clear existing chart data
-    if (seriesRef.current) {
-      seriesRef.current.setData([]);
+      // const fullName = getSymbolFullName(selectedOption.value);
+      // document.getElementById("chart-title").innerText = fullName;
+
+      setbars(100);
+      visibleRangeRef.current = null;
+      dispatch(setClickedSymbolData(newSymbol));
+
+      // Clear existing chart data
+      if (seriesRef.current) {
+        seriesRef.current.setData([]);
+      }
+
+      // Reset last candle reference to prevent bridging between symbols
+      lastCandleRef.current = null;
+
+      // Safely handle socket operations
+      if (socket && socket.connected) {
+        socket.disconnect();                    // Close existing connection
+      }
+      
+      if (socket) {
+        socket.symbols = [newSymbol];           // Set only the selected symbol
+        socket.connect();
+      }
+
+      if (selectedSeriesType !== "Line") {
+        dispatch(fetchMarketDataHistory({ symbol: newSymbol, timeframe: 'M1', bars: 100 }));
+      }
+
+    } catch (error) {
+      console.error('Error switching symbol:', error);
+      // Don't close window, just show error message
+      toast.error('Failed to switch symbol. Please try again.');
     }
-
-    socket.disconnect();                    // Close existing connection
-    socket.symbols = [newSymbol];           // Set only the selected symbol
-    socket.connect();
-
-    if (selectedSeriesType !== "Line") {
-      dispatch(fetchMarketDataHistory({ symbol: newSymbol, timeframe: 'M1', bars: 100 }));
-    }
-
   };
 
   useEffect(() => {
@@ -1726,6 +1751,23 @@ const TradingViewChart2 = () => {
           bottom: 0.2, // Adds space below the lowest price
         },
         borderVisible: false,
+        tickMarkFormatter: (price) => {
+          // Format price with appropriate decimal places
+          if (price >= 1000) {
+            return price.toFixed(0);
+          } else if (price >= 1) {
+            return price.toFixed(2);
+          } else {
+            return price.toFixed(4);
+          }
+        },
+        // Limit the number of price levels to maximum 10
+        mode: 1, // Normal price scale mode
+        autoScale: true,
+        entireTextOnly: false,
+        visible: true,
+        drawTicks: true,
+        alignLabels: true,
       },
       timeScale: {
         timeVisible: true,
@@ -1745,6 +1787,22 @@ const TradingViewChart2 = () => {
         },
         minMove: 0.0001,
         autoScale: true,
+        tickMarkFormatter: (price) => {
+          // Format price with appropriate decimal places
+          if (price >= 1000) {
+            return price.toFixed(0);
+          } else if (price >= 1) {
+            return price.toFixed(2);
+          } else {
+            return price.toFixed(4);
+          }
+        },
+        // Optimize price scale density
+        mode: 1, // Normal price scale mode
+        entireTextOnly: false,
+        visible: true,
+        drawTicks: true,
+        alignLabels: true,
       },
       crosshair: {
         mode: 1,
@@ -1871,7 +1929,7 @@ const TradingViewChart2 = () => {
   //  console.log(`bid of ${selectedSymbol} is ${bid}  at ${Date.now()}`)
 
   useEffect(() => {
-    if (!selectedSymbol || !symbols[selectedSymbol] || !seriesRef.current) return;
+    if (!selectedSymbol || !symbols[selectedSymbol] || !seriesRef.current || status === 'loading') return;
 
     const { bid } = symbols[selectedSymbol];
     //  console.log(`bid of ${selectedSymbol} is ${bid} at ${new Date().toLocaleTimeString()}`);
@@ -1921,19 +1979,20 @@ const TradingViewChart2 = () => {
       newCandle = {
         time: candleTime,
         open: lastClose,      // ✅ ONLY first candle gets this
-        high: bid,
-        low: bid,
+        high: Math.max(lastClose, bid),
+        low: Math.min(lastClose, bid),
         close: bid,
       };
     }
 
-    // New candle timeframe (but NOT first ever) — start fresh from bid
+    // New candle timeframe (but NOT first ever) — start fresh from previous close
     else if (lastCandleRef.current.time !== candleTime) {
+      const previousClose = lastCandleRef.current.close;
       newCandle = {
         time: candleTime,
-        open: bid,
-        high: bid,
-        low: bid,
+        open: previousClose,  // Use previous candle's close as new open
+        high: Math.max(previousClose, bid),
+        low: Math.min(previousClose, bid),
         close: bid,
       };
     }

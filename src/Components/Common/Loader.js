@@ -8,7 +8,7 @@ const Loader = (props) => {
     return (
         <React.Fragment>
             <div className="d-flex justify-content-center mx-2 mt-2">
-                <Spinner color="white"> Loading... </Spinner>
+                <Spinner color="light"> Loading... </Spinner>
             </div>
             {toast.error(props.error, { position: "top-right", hideProgressBar: false, progress: undefined, toastId: "" })}
         </React.Fragment>
@@ -16,3 +16,4 @@ const Loader = (props) => {
 };
 
 export default Loader;
+

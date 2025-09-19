@@ -30,7 +30,7 @@ const KYC = () => {
     const formData = form?.form_data || {};
 
 
-    console.log('errorKycForm',errorKycForm);
+    // console.log('errorKycForm',errorKycForm); // Removed console.log
     
     useEffect(() => {
         if (token) dispatch(createKyc(token));
@@ -69,7 +69,7 @@ const KYC = () => {
         validationSchema: Yup.object(validationSchemaShape),
         onSubmit: (values) => {
             const formDataToSend = new FormData();
-            console.log('Submitted KYC values:', values);
+            // console.log('Submitted KYC values:', values); // Removed console.log
             Object.entries(values).forEach(([key, value]) => {
                 if (value instanceof File) {
                     formDataToSend.append(key, value);

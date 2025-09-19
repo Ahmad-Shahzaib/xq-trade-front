@@ -23,7 +23,7 @@ const CustomHeaderModal = ({
     // console.log("CustomHeaderModal Rendered", { isOpen, pair, forecast, amount, title, subTitle, order, finalResult, buy });
     // Timer logic removed; should be handled by parent
     useEffect(() => {
-        console.log(pair, "selectedSymbol pairs");
+        // console.log(pair, "selectedSymbol pairs"); // Removed console.log
     }, [pair]); // Only logs when `pair` changes
     return (
         <Modal isOpen={isOpen} toggle={toggle} className="custom-header-modal" contentClassName="trade-order-modal"

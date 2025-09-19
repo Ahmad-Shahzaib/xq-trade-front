@@ -13,7 +13,7 @@ document.title ="500 Error | Velzon - React Admin & Dashboard Template";
             
             <div className="auth-page-wrapper py-5 d-flex justify-content-center align-items-center min-vh-100">
                 <div className="auth-page-content overflow-hidden p-0">
-                    <Container fluid={true}>
+                    <Container fluid>
                         <Row className="justify-content-center">
                             <Col xl={4} className="text-center">
                                 <div className="error-500 position-relative">

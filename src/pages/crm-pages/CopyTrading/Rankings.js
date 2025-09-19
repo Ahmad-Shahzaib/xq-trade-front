@@ -63,7 +63,7 @@ const Rankings = () => {
                             <td>${data.minimumInvestment}</td>
                             <td>{data.copiers}</td>
                             <td>
-                                <i class="ri-eye-line"></i>
+                                <i className="ri-eye-line"></i>
                             </td>
                         </tr>
                     ))}

@@ -10,11 +10,11 @@ const DemoAccountForm = () => {
     // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log({
-            accountType,
-            leverage,
-            demoBalance,
-        });
+        // console.log({
+        //     accountType,
+        //     leverage,
+        //     demoBalance,
+        // });
     };
 
 
@@ -26,7 +26,7 @@ const DemoAccountForm = () => {
                         <Row form>
                             <Col md={6}>
                                 <FormGroup>
-                                    <Label for="accountType">{t('Account Type')}</Label>
+                                    <Label htmlFor="accountType">{t('Account Type')}</Label>
                                     <div>
                                         <Input
                                             type="radio"
@@ -36,7 +36,7 @@ const DemoAccountForm = () => {
                                             checked={accountType === 'DEMO'}
                                             onChange={() => setAccountType('DEMO')}
                                         />{' '}
-                                        <Label for="demo">{t('DEMO')}</Label>
+                                        <Label htmlFor="demo">{t('DEMO')}</Label>
                                     </div>
                                 </FormGroup>
                             </Col>
@@ -45,7 +45,7 @@ const DemoAccountForm = () => {
                         <Row form>
                             <Col md={6}>
                                 <FormGroup>
-                                    <Label for="leverage">{t('Leverage')}</Label>
+                                    <Label htmlFor="leverage">{t('Leverage')}</Label>
                                     <Input
                                         type="select"
                                         id="leverage"
@@ -66,7 +66,7 @@ const DemoAccountForm = () => {
                         <Row form>
                             <Col md={6}>
                                 <FormGroup>
-                                    <Label for="demoBalance">{t('Demo Balance')}</Label>
+                                    <Label htmlFor="demoBalance">{t('Demo Balance')}</Label>
                                     <Input
                                         type="select"
                                         id="demoBalance"
@@ -96,3 +96,4 @@ const DemoAccountForm = () => {
 }
 
 export default DemoAccountForm
+

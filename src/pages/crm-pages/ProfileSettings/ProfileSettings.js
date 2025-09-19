@@ -40,7 +40,7 @@ const ProfileSettings = () => {
                 <i className="ri-user-line me-2 fs-3 pb-3"></i>
                 <div className="d-flex flex-grow-1 align-items-center pb-3 pe-3">
                   <h6 className="mb-0 fw-bold flex-grow-1">{t('Personal Information')}</h6>
-                  <i class="ri-arrow-right-s-line fw-bold fs-5"></i>
+                  <i className="ri-arrow-right-s-line fw-bold fs-5"></i>
                 </div>
               </CardBody>
             </Card>
@@ -53,7 +53,7 @@ const ProfileSettings = () => {
                 <i className="ri-mail-line me-2 fs-3 fw-bold pb-3"></i>
                 <div className="d-flex flex-grow-1 align-items-center pb-3 pe-3 ">
                   <h6 className="mb-0 fw-bold flex-grow-1">{t('Contacts')}</h6>
-                  <i class="ri-arrow-right-s-line fw-bold fs-5"></i>
+                  <i className="ri-arrow-right-s-line fw-bold fs-5"></i>
                 </div>
 
               </CardBody>
@@ -67,7 +67,7 @@ const ProfileSettings = () => {
                 <i className="ri-shield-user-line me-2 fs-3 fw-bold pb-3"></i>
                 <div className="d-flex flex-grow-1 align-items-center pb-3 pe-3">
                   <h6 className="mb-0 fw-bold flex-grow-1">{t('Account Verification')}</h6>
-                  <i class="ri-arrow-right-s-line fw-bold fs-5"></i>
+                  <i className="ri-arrow-right-s-line fw-bold fs-5"></i>
                 </div>
 
               </CardBody>
@@ -86,7 +86,7 @@ const ProfileSettings = () => {
                 <i className="ri-lock-password-line me-2 fs-3 pb-3"></i>
                 <div className="d-flex flex-grow-1 align-items-center pb-3 pe-3 ">
                   <h6 className="mb-0 fw-bold flex-grow-1">{t('Password')}</h6>
-                  <i class="ri-arrow-right-s-line fw-bold fs-5"></i>
+                  <i className="ri-arrow-right-s-line fw-bold fs-5"></i>
                 </div>
               </CardBody>
             </Card>
@@ -99,7 +99,7 @@ const ProfileSettings = () => {
                   <h6 className="mb-0 fw-bold flex-grow-1">{t('Two-factor Authentication')}</h6>
 
                   <i className="ri-error-warning-line text-warning me-2"></i>
-                  <i class="ri-arrow-right-s-line fw-bold fs-5"></i>
+                  <i className="ri-arrow-right-s-line fw-bold fs-5"></i>
                 </div>
 
               </CardBody>
@@ -111,7 +111,7 @@ const ProfileSettings = () => {
                 <i className="ri-apps-2-line me-2 fs-3 pb-3"></i>
                 <div className="d-flex flex-grow-1 align-items-center pb-3 pe-3">
                   <h6 className="mb-0 fw-bold flex-grow-1">{t('App PIN')}</h6>
-                  <i class="ri-arrow-right-s-line fw-bold fs-5"></i>
+                  <i className="ri-arrow-right-s-line fw-bold fs-5"></i>
                 </div>
               </CardBody>
             </Card>
@@ -126,7 +126,7 @@ const ProfileSettings = () => {
                 <i className="ri-settings-3-line me-2 fs-3 pb-3"></i>
                 <div className="d-flex flex-grow-1 align-items-center pb-3 pe-3">
                   <h6 className="mb-0 fw-bold flex-grow-1">{t('Trading Platform')}</h6>
-                  <i class="ri-arrow-right-s-line fw-bold fs-5"></i>
+                  <i className="ri-arrow-right-s-line fw-bold fs-5"></i>
                 </div>
               </CardBody>
             </Card>
@@ -137,7 +137,7 @@ const ProfileSettings = () => {
                 <i className="ri-layout-masonry-line me-2 fs-3 pb-3"></i>
                 <div className="d-flex flex-grow-1 align-items-center pb-3 pe-3 border-bottom">
                   <h6 className="mb-0 fw-bold flex-grow-1">{t('Appearance & Sound')}</h6>
-                  <i class="ri-arrow-right-s-line fw-bold fs-5"></i>
+                  <i className="ri-arrow-right-s-line fw-bold fs-5"></i>
                 </div>
               </CardBody>
             </Card>
@@ -148,7 +148,7 @@ const ProfileSettings = () => {
                 <i className="ri-notification-3-line me-2 fs-3 pb-3"></i>
                 <div className="d-flex flex-grow-1 align-items-center pb-3 pe-3">
                   <h6 className="mb-0 fw-bold flex-grow-1">{t('Notifications')}</h6>
-                  <i class="ri-arrow-right-s-line fw-bold fs-5"></i>
+                  <i className="ri-arrow-right-s-line fw-bold fs-5"></i>
                 </div>
               </CardBody>
             </Card>

@@ -191,8 +191,7 @@ const MobileLayout = (props) => {
           height:
             'calc(100vh - 70px)',
           background: 'linear-gradient(rgb(31, 14, 39))',
-
-          overflowY: 'hidden', padding: '20px 0px', display: 'flex', flexDirection: 'column'
+          overflowY: 'hidden', padding: '30px 0px', display: 'flex', flexDirection: 'column'
         }}>
           {props.children}
         </div>

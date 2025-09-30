@@ -4756,6 +4756,9 @@ const TradingViewChart2 = () => {
     >
       <div className="chart-wrapper" style={{
         width: '100%',
+        // overflow: isMobile ? 'hidden' : 'auto',
+        // scrollBehavior: isMobile ? 'none' : 'auto',
+        // position: isMobile ? 'fixed' : 'relative',
       }}>
         {/* {orderSuccessAlertPending && (
           <Alert
@@ -5930,9 +5933,10 @@ const TradingViewChart2 = () => {
 
           style={{
             position: 'relative',
-            height: '50%',
+            height: 
+              isMobile ? 'calc(83vh - 200px)' : 'calc(100vh - 100px)',
             width: '100%',
-            overflow: 'visible'
+            overflow: 'visible',
           }}>
 
           {/* Debug info for development */}
